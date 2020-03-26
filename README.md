@@ -73,7 +73,7 @@ ReactionTime <- 567
 wordcount <- 16785
 ```
 
-The new `variable` will be stored in R. Type the variable's name in the R console to see the value which is associated with it.
+The new `variable` will be stored in R. Type the variable's name in the R console to see the value which is associated with it:
 
 ```r
 NewVariable
@@ -82,7 +82,7 @@ NewVariable
 [1] 4
 ```
 
-You can also perform simple mathematical operations with one or more `variables`.
+You can also perform simple mathematical operations with one or more previously stored `variables`:
 
 ```r
 Bananas * 4
