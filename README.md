@@ -1,6 +1,3 @@
-## Welcome to R 4 CogPsy
-
-
 # Welcome to **R** 4 CogPsy
 
 Here you will find everything I have been learning about R and statistics. I hope my notes will be useful to other research students struggling with R and statistics.
@@ -19,38 +16,63 @@ One of the simplest and easiest things you can do in R is to use it as a calcula
 ```r
 1 + 1
 ```
+```r
+[1] 2
+```
 
 - Subtraction
 ```r
 3 - 1
+```
+```r
+[1] 2
 ```
 
 - Multiplication
 ```r
 4 * 5
 ```
+```
+[1] 20
+```
 
 - Division
 ```r
 40 / 5
 ```
+```r
+[1] 8
+```
+- Square root
+
+```r
+sqrt (9)
+```
+```
+[1] 3
+```
 
 ## Creating variables
 
-In R, you can easily create `variables` and assigning different values to them.
+In R, you can easily create `variables` and assign different values to them. You can see in the examples below that pretty much anything can be used as a variable's name.
 
 ```r
 NewVariable <- 2 + 2
+Price <- 9.99
+ReactionTime <- 567
+wordcount <- 16785
 ```
+
+The new `variable` will be stored in R. Type the variable's name in the R console to see the value which is associated with it.
 
 ```r
 NewVariable
 ```
+```r
+[1] 4
+```
 
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
 ```markdown
 Syntax highlighted code block
