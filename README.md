@@ -110,16 +110,24 @@ In order to install a package in **R**, enter the following line of code in the 
 install.packages ("rmarkdown")
 ```
 
-Each package must be installed only once. However, each time you wish to use a previously installed package in a new project, you must call that package again:
+Each package must be installed only once. However, each time you wish to use a previously installed package in a new project, you must load that package again with the `library()` function:
 
 ```r
 library(rmarkdown)
 ```
 
+### Useful R packages ###
+
+Below is a list of packages which I have been using for data analysis, data wrangling, and data visualization in R:
+
+```r
+library (tidyverse)
+library (ggplot2)
+library (powersim)
+```
 
 
-
-## Importing data files ##
+#### Importing data files ####
 
 sss
 
