@@ -3,14 +3,18 @@
 Here you will find everything I have been learning about R and statistics. I hope my notes will be useful to other research students struggling with R and statistics.
 
 
-## Download R
+## Downloading R ##
 
-Go to [rstudio.com](https://rstudio.com/products/rstudio/) to download RStudio for free.
+Go to [CRAN](https://cloud.r-project.org), the Comprehensive R Archive Network, to download **R** for free.
+
+## Downloading R Studio
+
+Go to [rstudio.com](https://rstudio.com/products/rstudio/) to download **RStudio** for free.
 
 
-## R as a calculator
+## Using R as a calculator
 
-One of the simplest and easiest things you can do in R is to use it as a calculator.
+One of the simplest and easiest things you can do in R is to use it as a calculator. Type the operation in the console pane, and then press **enter** to run it.
 
 - Addition
 ```r
@@ -98,7 +102,30 @@ Bananas + Apples
 [1] 1.39
 ```
 
+## Installing packages ##
 
+In order to install a package in **R**, enter the following line of code in the console pane with the package name you wish to install, and press enter to run it. Do not forget to use quotation marks.
+
+```r
+install.packages ("rmarkdown")
+```
+
+Each package must be installed only once. However, each time you wish to use a previously installed package in a new project, you must call that package again:
+
+```r
+library(rmarkdown)
+```
+
+
+
+
+## Importing data files ##
+
+sss
+
+## Tidying your data ##
+
+When your data is tidy, each row in your dataset is an observation (e.g., trial), whereas each column is a variable (e.g. accuracy, reaction time)
 
 
  [editor on GitHub](https://github.com/simOne3107/R4CogPsy/edit/master/README.md) 
