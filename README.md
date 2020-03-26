@@ -144,7 +144,7 @@ ggplot (data = MyDataFrame)
 ```
 At least one layer should be added to the function above, otherwise we will have an empty graph.
 
-If you want to create a scatterplot, you can use the function `geom_point()` which will add points to the previously generated coordinate system. 
+If you want to create a scatterplot, you can use the function `geom_point()` which will add points to the coordinate system. 
 
 ```r
 ggplot(data = MyDataFrame) + 
