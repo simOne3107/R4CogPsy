@@ -1,8 +1,52 @@
-## Welcome to GitHub Pages
+## Welcome to R 4 CogPsy
 
-You can use the [editor on GitHub](https://github.com/simOne3107/R4CogPsy/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+# Welcome to **R** 4 CogPsy
+
+Here you will find everything I have been learning about R and statistics. I hope my notes will be useful to other research students struggling with R and statistics.
+
+
+## Download R
+
+Go to [rstudio.com](https://rstudio.com/products/rstudio/) to download RStudio for free.
+
+
+## R as a calculator
+
+One of the simplest and easiest things you can do in R is to use it as a calculator.
+
+- Addition
+```r
+1 + 1
+```
+
+- Subtraction
+```r
+3 - 1
+```
+
+- Multiplication
+```r
+4 * 5
+```
+
+- Division
+```r
+40 / 5
+```
+
+## Creating variables
+
+In R, you can easily create `variables` and assigning different values to them.
+
+```r
+NewVariable <- 2 + 2
+```
+
+```r
+NewVariable
+```
+
 
 ### Markdown
 
@@ -26,12 +70,6 @@ Syntax highlighted code block
 [Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/simOne3107/R4CogPsy/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+ [editor on GitHub](https://github.com/simOne3107/R4CogPsy/edit/master/README.md) 
