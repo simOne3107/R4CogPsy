@@ -44,7 +44,6 @@ One of the simplest and easiest things you can do in R is to use it as a calcula
 [1] 8
 ```
 - Square root
-
 ```r
 sqrt (9)
 ```
