@@ -77,7 +77,7 @@ ReactionTime <- 567
 wordcount <- 16785
 ```
 
-The new `variable` will be stored in R. Type the variable's name in the R console to see the value which is associated with it:
+The new `variable` will be stored in R. Type the variable's name in the R console to see the value which is associated with it. Note that R is case sensitive so make sure you type any variables' names appropriately.
 
 ```r
 NewVariable
@@ -110,10 +110,10 @@ In order to install a package in **R**, enter the following line of code in the 
 install.packages ("rmarkdown")
 ```
 
-Each package must be installed only once. However, each time you wish to use a previously installed package in a new project, you must load that package again with the `library()` function:
+Each package must be installed only once. However, each time you wish to use a previously installed package in a new session, you must reload that package with the `library()` function:
 
 ```r
-library(rmarkdown)
+library (rmarkdown)
 ```
 
 ### Useful R packages ###
