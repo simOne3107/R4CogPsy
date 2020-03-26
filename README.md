@@ -43,6 +43,7 @@ One of the simplest and easiest things you can do in R is to use it as a calcula
 ```r
 [1] 8
 ```
+
 - Square root
 ```r
 sqrt (9)
@@ -51,7 +52,7 @@ sqrt (9)
 [1] 3
 ```
 
-Exponentiation
+- Exponentiation
 ```r
 4^4
 ```
@@ -66,6 +67,8 @@ In R, you can easily create `variables` and assign different values to them. You
 ```r
 NewVariable <- 2 + 2
 Price <- 9.99
+Bananas <- 0.50
+Apples <- 0.89
 ReactionTime <- 567
 wordcount <- 16785
 ```
@@ -79,6 +82,21 @@ NewVariable
 [1] 4
 ```
 
+You can also perform simple mathematical operations with one or more `variables`.
+
+```r
+Bananas * 4
+```
+```r
+[1] 2
+```
+
+```r
+Bananas + Apples
+```
+```
+[1] 1.39
+```
 
 
 
