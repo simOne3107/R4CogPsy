@@ -51,6 +51,14 @@ sqrt (9)
 [1] 3
 ```
 
+Exponentiation
+```r
+4^4
+```
+```r
+[1] 256
+```
+
 ## Creating variables
 
 In R, you can easily create `variables` and assign different values to them. You can see in the examples below that pretty much anything can be used as a variable's name.
@@ -72,24 +80,6 @@ NewVariable
 ```
 
 
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
 
 
 
