@@ -144,7 +144,7 @@ ggplot (data = MyDataFrame)
 ```
 At least one layer should be added to the function above, otherwise we will have an empty graph.
 
-If you want to create a scatterplot, you can use the function `geom_point()` which will add points to the coordinate system. 
+If you want to create a scatterplot, you can use the function `geom_point()` which will add points to the aforementioned coordinate system. 
 
 ```r
 ggplot(data = MyDataFrame) + 
@@ -152,6 +152,11 @@ ggplot(data = MyDataFrame) +
 ```
 ![](https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot.PNG)
 
+By changing or adding further levels to `aes`, the aesthetic properties of a scatterplot, we can change the size, the shape or even the colour of the points. 
 
+ggplot(data = MyDataFrame) + 
+  geom_point(mapping = aes(x = variable1, y = variable2, color = variable3))
+  
+![](https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot2.PNG)  
 
- [editor on GitHub](https://github.com/simOne3107/R4CogPsy/edit/master/README.md) 
+[editor on GitHub](https://github.com/simOne3107/R4CogPsy/edit/master/README.md) 
