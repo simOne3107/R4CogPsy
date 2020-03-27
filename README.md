@@ -154,9 +154,38 @@ ggplot(data = MyDataFrame) +
 
 By changing or adding further levels to `aes`, the aesthetic properties of a scatterplot, we can change the size, the shape or even the colour of the points. 
 
+```r
 ggplot(data = MyDataFrame) + 
   geom_point(mapping = aes(x = variable1, y = variable2, color = variable3))
-  
-![](https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot2.PNG)  
+```
+
+
+<img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot2.PNG" >
+
+
+Some of the `variables` which can be added to `aes` are:
+1. `class`
+2. `size`
+3. `alpha` (this refers to the level of transparency of the points)
+4. `shape`
+5. `colour`
+
+Below is a list with all the possible shapes which can be used in a scatterplot generated with ggplot2:
+
+<img src="http://ggplot2.tidyverse.org/reference/scale_shape-6.png" width ="500">
+Image extracted from tidyverse.org
+
+
+
+
+```r
+ggplot(data = MyDataFrame) + 
+  geom_point(mapping = aes(x = variable1, y = variable2, color = variable3), shape = 2)
+```
+
+
+<img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot3.PNG" >
+
+
 
 [editor on GitHub](https://github.com/simOne3107/R4CogPsy/edit/master/README.md) 
