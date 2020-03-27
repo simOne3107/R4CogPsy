@@ -150,5 +150,6 @@ If you want to create a scatterplot, you can use the function `geom_point()` whi
 ggplot(data = MyDataFrame) + 
   geom_point(mapping = aes(x = variable1, y = variable2))
 ```
+![](master/scatterplot.PNG)
 
  [editor on GitHub](https://github.com/simOne3107/R4CogPsy/edit/master/README.md) 
