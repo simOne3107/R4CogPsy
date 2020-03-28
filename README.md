@@ -221,7 +221,7 @@ ggplot(data = MyDataFrame) +
 ```
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot5.PNG">
 
-It is also possible to generate a plot with points and a smooth line:
+It is also possible to add points **and** a smooth line to any given scatterplot:
 
 ```r
 ggplot(data = MyDataFrame) +
@@ -230,9 +230,11 @@ ggplot(data = MyDataFrame) +
 ```
 *or*
 
+```r
 ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
   geom_point()+
   geom_smooth()
+```
 
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot6.PNG">
 
