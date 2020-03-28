@@ -110,7 +110,7 @@ In order to install a package in **R**, enter the following line of code in the 
 install.packages ("rmarkdown")
 ```
 
-Each package must be installed only once. However, each time you wish to use a previously installed package in a new session, you must reload that package with the `library()` function:
+Each package must be installed only once. However, each time you wish to use a previously installed package in a new session, you must reload that package with the `library( )` function:
 
 ```r
 library (rmarkdown)
@@ -145,7 +145,7 @@ ggplot (data = MyDataFrame)
 ```
 At least one layer should be added to the function above, otherwise we will have an empty graph.
 
-If you want to create a **scatterplot**, you can use the function `geom_point()` which will add data points to the aforementioned coordinate system. 
+If you want to create a **scatterplot**, you can use the function `geom_point( )` which will add data points to the aforementioned coordinate system. 
 
 ```r
 ggplot(data = MyDataFrame) + 
@@ -198,7 +198,7 @@ Please note the plus sign `+` should always come at the end of the line when cre
 
 
 
-In some cases, if you wish, your dataset can also be subset and subplots can be created with `ggplot2` to display each of the subsets.
+In some cases, if you wish, your dataset can also be subsetted, and you can use `ggplot2` to create subplots to display each of the subsets.
 
 ```r
 ggplot(data = MyDataFrame) + 
