@@ -169,11 +169,16 @@ Some of the `variables` which can be added to `aes` are:
 3. `alpha` (this refers to the level of transparency of the points)
 4. `shape`
 5. `colour`
+6. `stroke`
+7. `group`
+8. `fill`
 
-Below is a list with all the possible shapes which can be used in a scatterplot generated with ggplot2:
+Below is a list with the possible shapes which can be used in a scatterplot generated with `ggplot2`:
 
 <img src="http://ggplot2.tidyverse.org/reference/scale_shape-6.png" width ="500">
-Image extracted from tidyverse.org
+
+
+Image extracted from **tidyverse.org**.
 
 
 
@@ -185,6 +190,8 @@ ggplot(data = MyDataFrame) +
 
 
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot3.PNG" >
+
+
 
 
 
