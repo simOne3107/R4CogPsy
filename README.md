@@ -226,7 +226,7 @@ It is also possible to add points **and** a smooth line to any given scatterplot
 ```r
 ggplot(data = MyDataFrame) +
   geom_point(mapping = aes(x = variable1, y = variable2)) +
-  geom_smooth(mapping = aes(x = variable1, y = variable2))+
+  geom_smooth(mapping = aes(x = variable1, y = variable2))
 ```
 *or*
 
