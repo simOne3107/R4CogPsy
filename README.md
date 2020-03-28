@@ -121,9 +121,10 @@ library (rmarkdown)
 Below is a list of packages which I have been using for data analysis, data wrangling, and data visualization in R:
 
 ```r
-library (tidyverse)
 library (ggplot2)
+library (lme4)
 library (powersim)
+library (tidyverse)
 ```
 
 
@@ -207,9 +208,33 @@ ggplot(data = MyDataFrame) +
 ```
 
 `nrow` refers to the number of rows in which you would like the subplots to be displayed.
-
+'ncol' can also be used to change the number of columns in which you would like the subplots to be displayed.
 
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot4.PNG">
+
+
+Instead of generating a plot with points, we can use the function `geom_smooth` to create a plot with a smooth line fitted to our data.
+
+```r
+ggplot(data = MyDataFrame) + 
+  geom_smooth(mapping = aes(x = variable1, y = variable2))
+```
+<img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot5.PNG">
+
+It is also possible to generate a plot with points and a smooth line:
+
+```r
+ggplot(data = MyDataFrame) +
+  geom_point(mapping = aes(x = variable1, y = variable2)) +
+  geom_smooth(mapping = aes(x = variable1, y = variable2))+
+```
+*or*
+
+ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
+  geom_point()+
+  geom_smooth()
+
+<img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot6.PNG">
 
 
 [editor on GitHub](https://github.com/simOne3107/R4CogPsy/edit/master/README.md) 
