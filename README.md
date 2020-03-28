@@ -36,7 +36,7 @@ One of the simplest and easiest things you can do in R is to use it as a calcula
 ```r
 4 * 5
 ```
-```
+```r
 [1] 20
 ```
 
@@ -52,7 +52,7 @@ One of the simplest and easiest things you can do in R is to use it as a calcula
 ```r
 sqrt (9)
 ```
-```
+```r
 [1] 3
 ```
 
