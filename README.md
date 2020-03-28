@@ -137,14 +137,15 @@ When your data is tidy, each row in your dataset is an observation (e.g., trial)
 
 ## Creating plots
 
-The first function which must be used when we want to create a plot with ggplot2 is `ggplot()`. With that function, a coordinate system is created to which we can subsequently add layers. 
+The first thing we do when generating a plot with `ggplot2` is to create a coordinate system to which we can subsequently add layers.
+
 
 ```r
 ggplot (data = MyDataFrame)
 ```
 At least one layer should be added to the function above, otherwise we will have an empty graph.
 
-If you want to create a scatterplot, you can use the function `geom_point()` which will add points to the aforementioned coordinate system. 
+If you want to create a **scatterplot**, you can use the function `geom_point()` which will add data points to the aforementioned coordinate system. 
 
 ```r
 ggplot(data = MyDataFrame) + 
@@ -152,7 +153,7 @@ ggplot(data = MyDataFrame) +
 ```
 ![](https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot.PNG)
 
-By changing or adding further levels to `aes`, the aesthetic properties of a scatterplot, we can change the size, the shape or even the colour of the points. 
+By changing or adding further levels to `aes`, the aesthetic properties of a scatterplot, we can change the size, the shape or even the colour of the data points. 
 
 ```r
 ggplot(data = MyDataFrame) + 
@@ -183,6 +184,7 @@ Image extracted from **tidyverse.org**.
 
 
 
+
 ```r
 ggplot(data = MyDataFrame) + 
   geom_point(mapping = aes(x = variable1, y = variable2, color = variable3), shape = 2)
@@ -192,7 +194,22 @@ ggplot(data = MyDataFrame) +
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot3.PNG" >
 
 
+Please note the plus sign `+` should always come at the end of the line when creating `ggplot2` graphics.
 
+
+
+In some cases, if you wish, your dataset can also be subset and subplots can be created with `ggplot2` to display each of the subsets.
+
+```r
+ggplot(data = MyDataFrame) + 
+  geom_point(mapping = aes(x = variable1, y = variable2)) + 
+  facet_wrap(~ aDiscreteVariable, nrow = 3)
+```
+
+`nrow` refers to the number of rows in which you would like the subplots to be displayed.
+
+
+<img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot4.PNG">
 
 
 [editor on GitHub](https://github.com/simOne3107/R4CogPsy/edit/master/README.md) 
