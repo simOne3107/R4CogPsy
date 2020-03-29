@@ -121,6 +121,7 @@ library (rmarkdown)
 Below is a list of packages which I have been using for data analysis, data wrangling, and data visualization in R:
 
 ```r
+library (broom)
 library (ggplot2)
 library (lme4)
 library (powersim)
@@ -137,6 +138,8 @@ sss
 When your data is tidy, each row in your dataset is an observation (e.g., trial), whereas each column is a variable (e.g. accuracy, reaction time)
 
 ## Creating plots
+
+#### Scatterplots ####
 
 The first thing we do when generating a plot with `ggplot2` is to create a coordinate system to which we can subsequently add layers.
 
@@ -221,6 +224,9 @@ ggplot(data = MyDataFrame) +
 ```
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot5.PNG">
 
+To remove the confidence interval, add `se=FALSE` to the code above.
+
+
 It is also possible to add points **and** a smooth line to any given scatterplot:
 
 ```r
@@ -237,6 +243,36 @@ ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
 ```
 
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot6.PNG">
+
+
+You can also add different aesthetic values to different layers if you wish:
+
+```r
+ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
+  geom_point(mapping = aes(color = variable3)+
+  geom_smooth(color = "red")
+```
+<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/scatterplot7.PNG">
+
+
+#### Bar chart ####
+
+To generate a bar chart with `ggplot2`, we can use the function `geom_bar`.
+
+```r
+ggplot (data = MyDataFrame) +
+  geom_bar (mapping =  aes (x = variable1))
+```
+
+<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/barchart1.PNG">
+
+In the example above, the y axis displays the number (count) of occurrence of the variable in question. We can also generate a barchart with the proportion of cases in the y axis:
+
+```r
+ggplot (data = MyDataFrame) +
+  geom_bar (mapping =  aes (x = variable1, y = stat(prop), group = 1))
+```
+
 
 
 [editor on GitHub](https://github.com/simOne3107/R4CogPsy/edit/master/README.md) 
