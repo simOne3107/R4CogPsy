@@ -266,12 +266,22 @@ ggplot (data = MyDataFrame) +
 
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/barchart1.PNG">
 
-In the example above, the y axis displays the number (count) of occurrence of the variable in question. We can also generate a barchart with the proportion of cases in the y axis:
+In the example above, the y axis displays the number (count) of occurrences of the variable in question. We can also generate a barchart with the proportion of cases in the y axis:
 
 ```r
 ggplot (data = MyDataFrame) +
   geom_bar (mapping =  aes (x = variable1, y = stat(prop), group = 1))
 ```
+
+Conveniently barcharts can also be color-coded:
+
+```r
+ggplot (data = MyDataFrame) +
+geom_bar (mapping = aes (x = variable1, fill = variable1)
+
+
+<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/barchart3.PNG" >
+
 
 
 
