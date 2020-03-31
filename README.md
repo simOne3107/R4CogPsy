@@ -66,18 +66,20 @@ sqrt (9)
 
 ## Creating variables
 
-In R, you can easily create `variables` and assign different values to them. You can see in the examples below that pretty much anything can be used as a variable's name.
+In **R**, you can easily create `variables` and assign different values to them. By using the symbol `<-`, we assign the value on its right to the `variable` on its left. You can see in the examples below that pretty much anything can be used as a variable's name:
 
 ```r
 NewVariable <- 2 + 2
 Price <- 9.99
 Bananas <- 0.50
 Apples <- 0.89
-ReactionTime <- 567
-wordcount <- 16785
+reaction_time <- 567
+word.count <- 16785
 ```
+**Alt** + **-** can be used as a shortcut for `<-`
 
-The new `variable` will be stored in R. Type the variable's name in the R console to see the value which is associated with it. Note that R is case sensitive so make sure you type any variables' names appropriately.
+
+The new `variable` will be stored in **R**. Type the variable's name in the R console to inspect the value which is associated with it. Note that **R** is case sensitive so make sure you type any variables' names appropriately.
 
 ```r
 NewVariable
@@ -102,7 +104,7 @@ Bananas + Apples
 [1] 1.39
 ```
 
-## Installing packages ##
+## Installing packages in **R** ##
 
 In order to install a package in **R**, enter the following line of code in the console pane with the package name you wish to install, and press enter to run it. Do not forget to use quotation marks.
 
@@ -116,7 +118,7 @@ Each package must be installed only once. However, each time you wish to use a p
 library (rmarkdown)
 ```
 
-### Useful R packages ###
+### Useful **R** packages ###
 
 Below is a list of packages which I have been using for data analysis, data wrangling, and data visualization in R:
 
@@ -128,14 +130,129 @@ library (powersim)
 library (tidyverse)
 ```
 
+## Useful built-in **R** functions ##
+
+1. To make regular **sequences** of numbers:
+```r
+seq (10,30)
+```
+```r
+[1] 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
+```
+
+2. To view an entire dataset:
+```r
+View(MyDataFrame) # note the capitalized V in this function
+```
+
+3. To check whether a value is missing:
+```r
+is.na(variable)
+```
+
+```
+
+
+## Useful functions by package ##
+
+### Tidyverse ###
+
+
+1. To **subset** observations by their values:
+**Example 1:**
+```r
+filter(MyDataFrame, column == value)
+```
+
+```r
+> filter (diamonds, color == "E")
+# A tibble: 9,797 x 10
+   carat cut       color clarity depth table price     x     y     z
+   <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int> <dbl> <dbl> <dbl>
+ 1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+ 2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+ 3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+ 4  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
+ 5  0.2  Premium   E     SI2      60.2    62   345  3.79  3.75  2.27
+ 6  0.32 Premium   E     I1       60.9    58   345  4.38  4.42  2.68
+ 7  0.23 Very Good E     VS2      63.8    55   352  3.85  3.92  2.48
+ 8  0.23 Very Good E     VS1      60.7    59   402  3.97  4.01  2.42
+ 9  0.23 Very Good E     VS1      59.5    58   402  4.01  4.06  2.4 
+10  0.23 Good      E     VS1      64.1    59   402  3.83  3.85  2.46
+# ... with 9,787 more rows
+```
+
+**Example 2:**
+```r
+filter(MyDataFrame, column > value)
+```
+
+```r
+> filter (diamonds, price > 400)
+# A tibble: 53,689 x 10
+   carat cut       color clarity depth table price     x     y     z
+   <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int> <dbl> <dbl> <dbl>
+ 1  0.23 Very Good F     VS1      60      57   402  4     4.03  2.41
+ 2  0.23 Very Good F     VS1      59.8    57   402  4.04  4.06  2.42
+ 3  0.23 Very Good E     VS1      60.7    59   402  3.97  4.01  2.42
+ 4  0.23 Very Good E     VS1      59.5    58   402  4.01  4.06  2.4 
+ 5  0.23 Very Good D     VS1      61.9    58   402  3.92  3.96  2.44
+ 6  0.23 Good      F     VS1      58.2    59   402  4.06  4.08  2.37
+ 7  0.23 Good      E     VS1      64.1    59   402  3.83  3.85  2.46
+ 8  0.31 Good      H     SI1      64      54   402  4.29  4.31  2.75
+ 9  0.26 Very Good D     VS2      60.8    59   403  4.13  4.16  2.52
+10  0.33 Ideal     I     SI2      61.8    55   403  4.49  4.51  2.78
+# ... with 53,679 more rows
+```
+**Example 3:**
+
+```r
+filter(MyDataFrame, columnA == value1, columnB == value2)
+```
+
+```r
+> filter (diamonds, color == "E", price == 402)
+# A tibble: 6 x 10
+  carat cut       color clarity depth table price     x     y     z
+  <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int> <dbl> <dbl> <dbl>
+1  0.23 Very Good E     VS1      60.7    59   402  3.97  4.01  2.42
+2  0.23 Very Good E     VS1      59.5    58   402  4.01  4.06  2.4 
+3  0.23 Good      E     VS1      64.1    59   402  3.83  3.85  2.46
+4  0.23 Very Good E     VS2      60.8    58   402  3.98  4.02  2.43
+5  0.23 Very Good E     VS2      60.5    58   402  3.92  3.95  2.38
+6  0.23 Very Good E     VS2      60.8    58   402  3.97  4.05  2.44
+```
+
+**Example 4:**
+```r
+filter (MyDataFrame, columnA >=value1, columnB != value2)
+```
+```r
+> filter (diamonds, price >= 18790, color != "E")
+# A tibble: 10 x 10
+   carat cut       color clarity depth table price     x     y     z
+   <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int> <dbl> <dbl> <dbl>
+ 1  1.71 Premium   F     VS2      62.3    59 18791  7.57  7.53  4.7 
+ 2  2.15 Ideal     G     SI2      62.6    54 18791  8.29  8.35  5.21
+ 3  2.04 Premium   H     SI1      58.1    60 18795  8.37  8.28  4.84
+ 4  2    Premium   I     VS1      60.8    59 18795  8.13  8.02  4.91
+ 5  2.29 Premium   I     SI1      61.8    59 18797  8.52  8.45  5.24
+ 6  2    Very Good H     SI1      62.8    57 18803  7.95  8     5.01
+ 7  2.07 Ideal     G     SI2      62.5    55 18804  8.2   8.13  5.11
+ 8  1.51 Ideal     G     IF       61.7    55 18806  7.37  7.41  4.56
+ 9  2    Very Good G     SI1      63.5    56 18818  7.9   7.97  5.04
+10  2.29 Premium   I     VS2      60.8    60 18823  8.5   8.47  5.16
+```
+
+
+
+2. To reorder the rows in the dataset:
+
 
 #### Importing data files ####
 
 sss
 
-## Tidying your data ##
-
-When your data is tidy, each row in your dataset is an observation (e.g., trial), whereas each column is a variable (e.g. accuracy, reaction time)
 
 ## Creating plots
 
@@ -321,6 +438,18 @@ coord_polar ()
 ```
 
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/barchart6.PNG" >
+
+#### Box plots ####
+
+`ggplot2` also allows us to easily create boxplots with the `geom_boxplot()` function.
+
+```r
+ggplot(data = MyDataFrame) +
+geom_boxplot (mapping = aes (x = variable1, y = variable2)
+```
+
+<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/boxplot1.PNG">
+
 
 
 
