@@ -383,7 +383,7 @@ ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/scatterplot8.PNG" >
 
 
-#### Bar chart ####
+#### Bar charts ####
 
 To generate a bar chart with `ggplot2`, we can use the function `geom_bar`.
 
@@ -401,7 +401,7 @@ ggplot (data = MyDataFrame) +
   geom_bar (mapping =  aes (x = variable1, y = stat(prop), group = 1))
 ```
 
-Conveniently barcharts can also be color-coded with the `fill` argument:
+Conveniently, bar charts can also be color-coded with the `fill` argument:
 
 ```r
 ggplot (data = MyDataFrame) +
