@@ -150,7 +150,6 @@ View(MyDataFrame) # note the capitalized V in this function
 is.na(variable)
 ```
 
-```
 
 
 ## Useful functions by package ##
@@ -209,7 +208,6 @@ filter(MyDataFrame, column > value)
 ```r
 filter(MyDataFrame, columnA == value1, columnB == value2)
 ```
-
 ```r
 > filter (diamonds, color == "E", price == 402)
 # A tibble: 6 x 10
