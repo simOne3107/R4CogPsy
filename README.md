@@ -254,6 +254,17 @@ ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
 ```
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/scatterplot7.PNG">
 
+With the function `geom_jitter()` we can add some degree of noise to the datapoints:
+
+```r
+ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
+  geom_point(mapping = aes(color = variable3)+
+  geom_smooth(color = "red")+
+  geom_jitter()
+```
+
+<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/scatterplot8.PNG" >
+
 
 #### Bar chart ####
 
@@ -273,15 +284,43 @@ ggplot (data = MyDataFrame) +
   geom_bar (mapping =  aes (x = variable1, y = stat(prop), group = 1))
 ```
 
-Conveniently barcharts can also be color-coded:
+Conveniently barcharts can also be color-coded with the `fill` argument:
 
 ```r
 ggplot (data = MyDataFrame) +
 geom_bar (mapping = aes (x = variable1, fill = variable1)
-
+```
 
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/barchart3.PNG" >
 
+It may sometimes be hard to read long labels when the bars are displayed vertically, as in the example below:
+
+```r
+ggplot (data = MyDataFrame) +
+geom_bar (mapping = aes (x = variable1, fill = variable1)
+```
+
+<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/barchart4.PNG" >
+
+To solve that, you can flip your plot so that the bars are displayed horizontally rather than the vertical default.
+
+```r
+ggplot(data = MyDataFrame) +
+  geom_bar (mapping = aes(x = variable1, fill = variable1) +
+  coord_flip ()
+```
+
+<img src = "https://github.com/simOne3107/R4CogPsy/blob/master/images/barchart5.PNG" >
+
+Instead of a stacked bar chart, we can also display our data as follows:
+
+```r
+ggplot (data = MyDataFrame) +
+geom_bar (mapping = aes (x = variable1, fill = variable1) +
+coord_polar ()
+```
+
+<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/barchart6.PNG" >
 
 
 
