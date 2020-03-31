@@ -328,7 +328,7 @@ ggplot(data = MyDataFrame) +
 ```
 
 `nrow` refers to the number of rows in which you would like the subplots to be displayed.
-'ncol' can also be used to change the number of columns in which you would like the subplots to be displayed.
+`ncol` can also be used to change the number of columns in which you would like the subplots to be displayed.
 
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot4.PNG">
 
