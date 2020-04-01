@@ -150,6 +150,10 @@ View(MyDataFrame) # note the capitalized V in this function
 is.na(variable)
 ```
 
+4. To check how many values are missing:
+```r
+sum(is.na(variable))
+```
 
 
 ## Useful functions by package ##
@@ -203,6 +207,7 @@ filter(MyDataFrame, column > value)
 10  0.33 Ideal     I     SI2      61.8    55   403  4.49  4.51  2.78
 # ... with 53,679 more rows
 ```
+
 **Example 3:**
 
 ```r
@@ -222,6 +227,7 @@ filter(MyDataFrame, columnA == value1, columnB == value2)
 ```
 
 **Example 4:**
+
 ```r
 filter (MyDataFrame, columnA >=value1, columnB != value2)
 ```
@@ -242,7 +248,54 @@ filter (MyDataFrame, columnA >=value1, columnB != value2)
 10  2.29 Premium   I     VS2      60.8    60 18823  8.5   8.47  5.16
 ```
 
+**Example 5:**
 
+```r
+filter(MyDataFrame, column %in% c(value1, value2))
+```
+
+```r
+> filter(flights, carrier %in% c("AA", "DL"))
+# A tibble: 80,839 x 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay
+   <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>     <dbl>
+ 1  2013     1     1      542            540         2      923            850        33
+ 2  2013     1     1      554            600        -6      812            837       -25
+ 3  2013     1     1      558            600        -2      753            745         8
+ 4  2013     1     1      559            600        -1      941            910        31
+ 5  2013     1     1      602            610        -8      812            820        -8
+ 6  2013     1     1      606            610        -4      858            910       -12
+ 7  2013     1     1      606            610        -4      837            845        -8
+ 8  2013     1     1      615            615         0      833            842        -9
+ 9  2013     1     1      623            610        13      920            915         5
+10  2013     1     1      628            630        -2     1137           1140        -3
+# ... with 80,829 more rows, and 10 more variables: carrier <chr>, flight <int>,
+#   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+#   minute <dbl>, time_hour <dttm>
+```
+
+**Example 6:**
+```r
+filter(MyDataFrame, between(column, value1, value2))
+```
+
+```r
+> filter(mpg, between(year, 1999, 2001))
+# A tibble: 117 x 11
+   manufacturer model              displ  year   cyl trans      drv     cty   hwy fl    class  
+   <chr>        <chr>              <dbl> <int> <int> <chr>      <chr> <int> <int> <chr> <chr>  
+ 1 audi         a4                   1.8  1999     4 auto(l5)   f        18    29 p     compact
+ 2 audi         a4                   1.8  1999     4 manual(m5) f        21    29 p     compact
+ 3 audi         a4                   2.8  1999     6 auto(l5)   f        16    26 p     compact
+ 4 audi         a4                   2.8  1999     6 manual(m5) f        18    26 p     compact
+ 5 audi         a4 quattro           1.8  1999     4 manual(m5) 4        18    26 p     compact
+ 6 audi         a4 quattro           1.8  1999     4 auto(l5)   4        16    25 p     compact
+ 7 audi         a4 quattro           2.8  1999     6 auto(l5)   4        15    25 p     compact
+ 8 audi         a4 quattro           2.8  1999     6 manual(m5) 4        17    25 p     compact
+ 9 audi         a6 quattro           2.8  1999     6 auto(l5)   4        15    24 p     midsize
+10 chevrolet    c1500 suburban 2wd   5.7  1999     8 auto(l4)   r        13    17 r     suv    
+# ... with 107 more rows
+```
 
 2. To reorder the rows in the dataset:
 
