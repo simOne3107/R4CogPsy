@@ -297,8 +297,105 @@ filter(MyDataFrame, between(column, value1, value2))
 # ... with 107 more rows
 ```
 
-2. To reorder the rows in the dataset:
+2. To reorder the rows in a dataset:
 
+**Example 1:**
+```r
+arrange(MyDataFrame, column)
+```
+
+```r
+> arrange (diamonds, carat)
+# A tibble: 53,940 x 10
+   carat cut       color clarity depth table price     x     y     z
+   <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int> <dbl> <dbl> <dbl>
+ 1   0.2 Premium   E     SI2      60.2    62   345  3.79  3.75  2.27
+ 2   0.2 Premium   E     VS2      59.8    62   367  3.79  3.77  2.26
+ 3   0.2 Premium   E     VS2      59      60   367  3.81  3.78  2.24
+ 4   0.2 Premium   E     VS2      61.1    59   367  3.81  3.78  2.32
+ 5   0.2 Premium   E     VS2      59.7    62   367  3.84  3.8   2.28
+ 6   0.2 Ideal     E     VS2      59.7    55   367  3.86  3.84  2.3 
+ 7   0.2 Premium   F     VS2      62.6    59   367  3.73  3.71  2.33
+ 8   0.2 Ideal     D     VS2      61.5    57   367  3.81  3.77  2.33
+ 9   0.2 Very Good E     VS2      63.4    59   367  3.74  3.71  2.36
+10   0.2 Ideal     E     VS2      62.2    57   367  3.76  3.73  2.33
+# ... with 53,930 more rows
+```
+
+**Example 2:**
+```r
+arrange(MyDataFrame, column1, column2)
+```
+
+```r
+> arrange (diamonds, carat, depth)
+# A tibble: 53,940 x 10
+   carat cut     color clarity depth table price     x     y     z
+   <dbl> <ord>   <ord> <ord>   <dbl> <dbl> <int> <dbl> <dbl> <dbl>
+ 1   0.2 Premium E     VS2      59      60   367  3.81  3.78  2.24
+ 2   0.2 Premium E     VS2      59.7    62   367  3.84  3.8   2.28
+ 3   0.2 Ideal   E     VS2      59.7    55   367  3.86  3.84  2.3 
+ 4   0.2 Premium E     VS2      59.8    62   367  3.79  3.77  2.26
+ 5   0.2 Premium E     SI2      60.2    62   345  3.79  3.75  2.27
+ 6   0.2 Premium E     VS2      61.1    59   367  3.81  3.78  2.32
+ 7   0.2 Ideal   D     VS2      61.5    57   367  3.81  3.77  2.33
+ 8   0.2 Premium D     VS2      61.7    60   367  3.77  3.72  2.31
+ 9   0.2 Ideal   E     VS2      62.2    57   367  3.76  3.73  2.33
+10   0.2 Premium D     VS2      62.3    60   367  3.73  3.68  2.31
+# ... with 53,930 more rows
+> 
+```
+
+3. To select only the columns/variables we are interested in:
+
+**Example 1:**
+```r
+select(MyDataFrame, variable1, variable2, variable3)
+```
+
+```r
+> select (diamonds, carat, cut, color)
+# A tibble: 53,940 x 3
+   carat cut       color
+   <dbl> <ord>     <ord>
+ 1 0.23  Ideal     E    
+ 2 0.21  Premium   E    
+ 3 0.23  Good      E    
+ 4 0.290 Premium   I    
+ 5 0.31  Good      J    
+ 6 0.24  Very Good J    
+ 7 0.24  Very Good I    
+ 8 0.26  Very Good H    
+ 9 0.22  Fair      E    
+10 0.23  Very Good H    
+# ... with 53,930 more rows
+> 
+```
+
+**Example 2:**
+```r
+select(MyDataFrame, variable1:variable10)
+```
+
+```r
+> select (flights, year:carrier)
+# A tibble: 336,776 x 10
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay
+   <int> <int> <int>    <int>          <int>     <dbl>    <int>          <int>     <dbl>
+ 1  2013     1     1      517            515         2      830            819        11
+ 2  2013     1     1      533            529         4      850            830        20
+ 3  2013     1     1      542            540         2      923            850        33
+ 4  2013     1     1      544            545        -1     1004           1022       -18
+ 5  2013     1     1      554            600        -6      812            837       -25
+ 6  2013     1     1      554            558        -4      740            728        12
+ 7  2013     1     1      555            600        -5      913            854        19
+ 8  2013     1     1      557            600        -3      709            723       -14
+ 9  2013     1     1      557            600        -3      838            846        -8
+10  2013     1     1      558            600        -2      753            745         8
+# ... with 336,766 more rows, and 1 more variable: carrier <chr>
+> 
+
+```
 
 #### Importing data files ####
 
