@@ -79,7 +79,7 @@ word.count <- 16785
 **Alt** + **-** can be used as a shortcut for `<-`
 
 
-The new `variable` will be stored in **R**. Type the variable's name in the R console to inspect the value which is associated with it. Note that **R** is case sensitive so make sure you type any variables' names appropriately.
+The new `variable` will be stored in **R**. Type the variable's name in the **R** console to inspect the value which is associated with it. Note that **R** is case sensitive so make sure you type any variables' names appropriately.
 
 ```r
 NewVariable
@@ -297,7 +297,7 @@ filter(MyDataFrame, between(column, value1, value2))
 # ... with 107 more rows
 ```
 
-2. To reorder the rows in a dataset (i.e., sort by column):
+2. To **reorder** the rows in a dataset (i.e., sort by column):
 
 **Example 1:**
 ```r
@@ -424,7 +424,7 @@ select(MyDataFrame, -column) # this will select all columns but one
 
 **Example 4:**
 ```r
-select (MyDataFrame, -c(variable1, variable2))
+select (MyDataFrame, -c(variable1, variable2)) # this will select all columns but two
 ```
 
 ```r
@@ -471,7 +471,7 @@ select(MyDataFrame, starts_with("string")
 # ... with 53,930 more rows
 ```
 
-4. To rename columns/variables:
+4. To **rename** columns/variables:
 
 ```r
 rename(MyDataFrame, newname = oldname)
@@ -498,7 +498,7 @@ rename(flights, departure_time = dep_time)
 ```
 
 
-4. To move columns/variable to the start of the data frame:
+5. To **move** columns/variable to the start of the data frame:
 
 ```r
 select (diamonds, columntobemoved1, columntobemoved2, everything())
