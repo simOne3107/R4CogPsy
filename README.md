@@ -297,7 +297,7 @@ filter(MyDataFrame, between(column, value1, value2))
 # ... with 107 more rows
 ```
 
-2. To reorder the rows in a dataset:
+2. To reorder the rows in a dataset (i.e., sort by column):
 
 **Example 1:**
 ```r
@@ -396,6 +396,133 @@ select(MyDataFrame, variable1:variable10)
 > 
 
 ```
+
+**Example 3:**
+
+```r
+select(MyDataFrame, -column) # this will select all columns but one
+```
+
+```r
+> select (diamonds, -color)
+# A tibble: 53,940 x 9
+   carat cut       clarity depth table price     x     y     z
+   <dbl> <ord>     <ord>   <dbl> <dbl> <int> <dbl> <dbl> <dbl>
+ 1 0.23  Ideal     SI2      61.5    55   326  3.95  3.98  2.43
+ 2 0.21  Premium   SI1      59.8    61   326  3.89  3.84  2.31
+ 3 0.23  Good      VS1      56.9    65   327  4.05  4.07  2.31
+ 4 0.290 Premium   VS2      62.4    58   334  4.2   4.23  2.63
+ 5 0.31  Good      SI2      63.3    58   335  4.34  4.35  2.75
+ 6 0.24  Very Good VVS2     62.8    57   336  3.94  3.96  2.48
+ 7 0.24  Very Good VVS1     62.3    57   336  3.95  3.98  2.47
+ 8 0.26  Very Good SI1      61.9    55   337  4.07  4.11  2.53
+ 9 0.22  Fair      VS2      65.1    61   337  3.87  3.78  2.49
+10 0.23  Very Good VS1      59.4    61   338  4     4.05  2.39
+# ... with 53,930 more rows
+> 
+```
+
+**Example 4:**
+```r
+select (MyDataFrame, -c(variable1, variable2))
+```
+
+```r
+> select (diamonds, -c(color, price))
+# A tibble: 53,940 x 8
+   carat cut       clarity depth table     x     y     z
+   <dbl> <ord>     <ord>   <dbl> <dbl> <dbl> <dbl> <dbl>
+ 1 0.23  Ideal     SI2      61.5    55  3.95  3.98  2.43
+ 2 0.21  Premium   SI1      59.8    61  3.89  3.84  2.31
+ 3 0.23  Good      VS1      56.9    65  4.05  4.07  2.31
+ 4 0.290 Premium   VS2      62.4    58  4.2   4.23  2.63
+ 5 0.31  Good      SI2      63.3    58  4.34  4.35  2.75
+ 6 0.24  Very Good VVS2     62.8    57  3.94  3.96  2.48
+ 7 0.24  Very Good VVS1     62.3    57  3.95  3.98  2.47
+ 8 0.26  Very Good SI1      61.9    55  4.07  4.11  2.53
+ 9 0.22  Fair      VS2      65.1    61  3.87  3.78  2.49
+10 0.23  Very Good VS1      59.4    61  4     4.05  2.39
+# ... with 53,930 more rows
+> 
+```
+
+**Example 5:**
+
+```r
+select(MyDataFrame, starts_with("string")
+```
+
+```r
+
+> select (diamonds, starts_with("c"))
+# A tibble: 53,940 x 4
+   carat cut       color clarity
+   <dbl> <ord>     <ord> <ord>  
+ 1 0.23  Ideal     E     SI2    
+ 2 0.21  Premium   E     SI1    
+ 3 0.23  Good      E     VS1    
+ 4 0.290 Premium   I     VS2    
+ 5 0.31  Good      J     SI2    
+ 6 0.24  Very Good J     VVS2   
+ 7 0.24  Very Good I     VVS1   
+ 8 0.26  Very Good H     SI1    
+ 9 0.22  Fair      E     VS2    
+10 0.23  Very Good H     VS1    
+# ... with 53,930 more rows
+```
+
+4. To rename columns/variables:
+
+```r
+rename(MyDataFrame, newname = oldname)
+```
+```r
+rename(flights, departure_time = dep_time)
+# A tibble: 336,776 x 19
+    year month   day departure_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay
+   <int> <int> <int>          <int>          <int>     <dbl>    <int>          <int>     <dbl>
+ 1  2013     1     1            517            515         2      830            819        11
+ 2  2013     1     1            533            529         4      850            830        20
+ 3  2013     1     1            542            540         2      923            850        33
+ 4  2013     1     1            544            545        -1     1004           1022       -18
+ 5  2013     1     1            554            600        -6      812            837       -25
+ 6  2013     1     1            554            558        -4      740            728        12
+ 7  2013     1     1            555            600        -5      913            854        19
+ 8  2013     1     1            557            600        -3      709            723       -14
+ 9  2013     1     1            557            600        -3      838            846        -8
+10  2013     1     1            558            600        -2      753            745         8
+# ... with 336,766 more rows, and 10 more variables: carrier <chr>, flight <int>,
+#   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+#   minute <dbl>, time_hour <dttm>
+> 
+```
+
+
+4. To move columns/variable to the start of the data frame:
+
+```r
+select (diamonds, columntobemoved1, columntobemoved2, everything())
+```
+```r
+> select (diamonds, z, y, x, everything())
+# A tibble: 53,940 x 10
+       z     y     x carat cut       color clarity depth table price
+   <dbl> <dbl> <dbl> <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int>
+ 1  2.43  3.98  3.95 0.23  Ideal     E     SI2      61.5    55   326
+ 2  2.31  3.84  3.89 0.21  Premium   E     SI1      59.8    61   326
+ 3  2.31  4.07  4.05 0.23  Good      E     VS1      56.9    65   327
+ 4  2.63  4.23  4.2  0.290 Premium   I     VS2      62.4    58   334
+ 5  2.75  4.35  4.34 0.31  Good      J     SI2      63.3    58   335
+ 6  2.48  3.96  3.94 0.24  Very Good J     VVS2     62.8    57   336
+ 7  2.47  3.98  3.95 0.24  Very Good I     VVS1     62.3    57   336
+ 8  2.53  4.11  4.07 0.26  Very Good H     SI1      61.9    55   337
+ 9  2.49  3.78  3.87 0.22  Fair      E     VS2      65.1    61   337
+10  2.39  4.05  4    0.23  Very Good H     VS1      59.4    61   338
+# ... with 53,930 more rows
+> 
+```
+
+
 
 #### Importing data files ####
 
@@ -517,6 +644,7 @@ ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
   geom_point(mapping = aes(color = variable3)+
   geom_smooth(color = "red")
 ```
+
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/scatterplot7.PNG">
 
 With the function `geom_jitter()` we can add some degree of noise to the datapoints:
