@@ -346,7 +346,7 @@ arrange(MyDataFrame, column1, column2)
 > 
 ```
 
-3. To select only the columns/variables we are interested in:
+3. To **select** only the columns/variables we are interested in:
 
 **Example 1:**
 ```r
@@ -522,6 +522,91 @@ select (diamonds, columntobemoved1, columntobemoved2, everything())
 > 
 ```
 
+6. To **add** new variables/columns to a dataset:
+
+**Example 1:**
+
+```r
+mutate(MyDataFrame, 
+   newColumn = functionToBePerformed)
+```
+
+```r
+> mutate (diamonds, 
++         pricepercarat = price / carat)
+# A tibble: 53,940 x 11
+   carat cut       color clarity depth table price     x     y     z pricepercarat
+   <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int> <dbl> <dbl> <dbl>         <dbl>
+ 1 0.23  Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43         1417.
+ 2 0.21  Premium   E     SI1      59.8    61   326  3.89  3.84  2.31         1552.
+ 3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31         1422.
+ 4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63         1152.
+ 5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75         1081.
+ 6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48         1400 
+ 7 0.24  Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47         1400 
+ 8 0.26  Very Good H     SI1      61.9    55   337  4.07  4.11  2.53         1296.
+ 9 0.22  Fair      E     VS2      65.1    61   337  3.87  3.78  2.49         1532.
+10 0.23  Very Good H     VS1      59.4    61   338  4     4.05  2.39         1470.
+# ... with 53,930 more rows
+```
+
+**Example 2:**
+
+```r
+mutate (MyDataFrame,
+   newColumn = functionToBePerformed,
+   newColumn2 = newColumn + functionToBePerformed)
+```
+
+```r
+> mutate (diamonds,
++         pricepercarat = price/carat, 
++         priceDollars = pricepercarat * 1.25)
+# A tibble: 53,940 x 12
+   carat cut       color clarity depth table price     x     y     z pricepercarat priceDollars
+   <dbl> <ord>     <ord> <ord>   <dbl> <dbl> <int> <dbl> <dbl> <dbl>         <dbl>        <dbl>
+ 1 0.23  Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43         1417.        1772.
+ 2 0.21  Premium   E     SI1      59.8    61   326  3.89  3.84  2.31         1552.        1940.
+ 3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31         1422.        1777.
+ 4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63         1152.        1440.
+ 5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75         1081.        1351.
+ 6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48         1400         1750 
+ 7 0.24  Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47         1400         1750 
+ 8 0.26  Very Good H     SI1      61.9    55   337  4.07  4.11  2.53         1296.        1620.
+ 9 0.22  Fair      E     VS2      65.1    61   337  3.87  3.78  2.49         1532.        1915.
+10 0.23  Very Good H     VS1      59.4    61   338  4     4.05  2.39         1470.        1837.
+# ... with 53,930 more rows
+> 
+```
+
+7. To **create a new dataset** with columns generated from another dataset:
+
+```r
+transmute (MyDataFrame, 
+   newColumn = functionToBePerformed,
+   newColumn2 = newColumn + functionToBePerformed)
+```
+
+```r
+> transmute (diamonds,
++         pricepercarat = price/carat, 
++         priceDollars = pricepercarat * 1.25)
+# A tibble: 53,940 x 2
+   pricepercarat priceDollars
+           <dbl>        <dbl>
+ 1         1417.        1772.
+ 2         1552.        1940.
+ 3         1422.        1777.
+ 4         1152.        1440.
+ 5         1081.        1351.
+ 6         1400         1750 
+ 7         1400         1750 
+ 8         1296.        1620.
+ 9         1532.        1915.
+10         1470.        1837.
+# ... with 53,930 more rows
+
+```
 
 
 #### Importing data files ####
