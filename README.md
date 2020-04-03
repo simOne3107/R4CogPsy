@@ -155,11 +155,14 @@ is.na(variable)
 sum(is.na(variable))
 ```
 
+#### Importing data files ####
 
-## Useful functions by package ##
+sss
+
+
+## Data pre-processing ##
 
 ### Tidyverse ###
-
 
 1. To **subset** observations by their values:
 **Example 1:**
@@ -609,12 +612,10 @@ transmute (MyDataFrame,
 ```
 
 
-#### Importing data files ####
-
-sss
 
 
-## Creating plots
+
+## Data Visualization ##
 
 #### Scatterplots ####
 
