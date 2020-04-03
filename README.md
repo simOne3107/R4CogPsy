@@ -167,7 +167,9 @@ sss
 ### Tidyverse ###
 
 1. To **subset** observations by their values:
+
 **Example 1:**
+
 ```r
 filter(MyDataFrame, column == value)
 ```
@@ -191,6 +193,7 @@ filter(MyDataFrame, column == value)
 ```
 
 **Example 2:**
+
 ```r
 filter(MyDataFrame, column > value)
 ```
@@ -280,6 +283,7 @@ filter(MyDataFrame, column %in% c(value1, value2))
 ```
 
 **Example 6:**
+
 ```r
 filter(MyDataFrame, between(column, value1, value2))
 ```
@@ -305,6 +309,7 @@ filter(MyDataFrame, between(column, value1, value2))
 2. To **reorder** the rows in a dataset (i.e., sort by column):
 
 **Example 1:**
+
 ```r
 arrange(MyDataFrame, column)
 ```
@@ -328,6 +333,7 @@ arrange(MyDataFrame, column)
 ```
 
 **Example 2:**
+
 ```r
 arrange(MyDataFrame, column1, column2)
 ```
@@ -354,6 +360,7 @@ arrange(MyDataFrame, column1, column2)
 3. To **select** only the columns/variables we are interested in:
 
 **Example 1:**
+
 ```r
 select(MyDataFrame, variable1, variable2, variable3)
 ```
@@ -378,6 +385,7 @@ select(MyDataFrame, variable1, variable2, variable3)
 ```
 
 **Example 2:**
+
 ```r
 select(MyDataFrame, variable1:variable10)
 ```
@@ -403,6 +411,7 @@ select(MyDataFrame, variable1:variable10)
 ```
 
 **Example 3:**
+
 ```r
 select(MyDataFrame, -column) # this will select all columns but one
 ```
@@ -427,6 +436,7 @@ select(MyDataFrame, -column) # this will select all columns but one
 ```
 
 **Example 4:**
+
 ```r
 select (MyDataFrame, -c(variable1, variable2)) # this will select all columns but two
 ```
@@ -451,6 +461,7 @@ select (MyDataFrame, -c(variable1, variable2)) # this will select all columns bu
 ```
 
 **Example 5:**
+
 ```r
 select(MyDataFrame, starts_with("string")
 ```
@@ -611,6 +622,78 @@ transmute (MyDataFrame,
 
 ```
 
+7. To **group** the data by a given variable(s):
+
+```r
+group_by (MyDataFrame, variable1, variable2, variable3)
+```
+
+8. To **collapse** the data from multiple (repeated) rows to a single row:
+
+```r
+NewDataFrame <- group_by (MyDataFrame, variable1, variable2, variable3)
+summarise (NewDataFrame, newcolumn = mean (variable4, na.rm = TRUE)
+```
+```r
+> summarise (new_diamonds, meanPrice = mean(price, na.rm = TRUE))
+# A tibble: 276 x 4
+# Groups:   cut, color [35]
+   cut   color clarity meanPrice
+   <ord> <ord> <ord>       <dbl>
+ 1 Fair  D     I1          7383 
+ 2 Fair  D     SI2         4355.
+ 3 Fair  D     SI1         4273.
+ 4 Fair  D     VS2         4513.
+ 5 Fair  D     VS1         2921.
+ 6 Fair  D     VVS2        3607 
+ 7 Fair  D     VVS1        4473 
+ 8 Fair  D     IF          1620.
+ 9 Fair  E     I1          2095.
+10 Fair  E     SI2         4172.
+# ... with 266 more rows
+```
+
+Conveniently, 'tidyverse' allows us to perform several operations simultaneously with the pipe, `%>%`:
+
+```r
+NewDataFrame <- MyDataFrame %>%
+   group_by (column1) %>%
+   summarise (
+   newcolumn1 = functionA,
+   newcolumn2 = functionB, 
+   newcolumn3 = functionC
+   ) %>%
+   filter (condition1, condition2)
+ ```
+
+```r
+> diamonds2 <- diamonds %>%
++   group_by (cut, clarity) %>%
++   summarise (
++     count = n(),
++     averageprice = mean(price, na.rm = TRUE),
++     averagedepth = mean(depth, na.rm = TRUE)
++   ) %>%
++   filter (averageprice > 350)
+> diamonds2
+# A tibble: 40 x 5
+# Groups:   cut [5]
+   cut   clarity count averageprice averagedepth
+   <ord> <ord>   <int>        <dbl>        <dbl>
+ 1 Fair  I1        210        3704.         65.7
+ 2 Fair  SI2       466        5174.         64.4
+ 3 Fair  SI1       408        4208.         63.9
+ 4 Fair  VS2       261        4175.         63.6
+ 5 Fair  VS1       170        4165.         62.9
+ 6 Fair  VVS2       69        3350.         62.8
+ 7 Fair  VVS1       17        3871.         60.4
+ 8 Fair  IF          9        1912.         60.1
+ 9 Good  I1         96        3597.         62.1
+10 Good  SI2      1081        4580.         62.2
+# ... with 30 more rows
+> 
+```
+
 
 ## Data Visualization ##
 
@@ -666,7 +749,6 @@ Image extracted from **tidyverse.org**.
 
 
 
-
 ```r
 ggplot(data = MyDataFrame) + 
   geom_point(mapping = aes(x = variable1, y = variable2, color = variable3), shape = 2)
@@ -680,7 +762,7 @@ Please note the plus sign `+` should always come at the end of the line when cre
 
 
 
-In some cases, if you wish, your dataset can also be subsetted, and you can use `ggplot2` to create subplots to display each of the subsets.
+If you wish, you can also subset your dataset and use `ggplot2` to create subplots to display each of the subsets.
 
 ```r
 ggplot(data = MyDataFrame) + 
