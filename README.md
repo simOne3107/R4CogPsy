@@ -7,12 +7,13 @@ Here you will find everything I have been learning about R and statistics. I hop
 
 Go to [CRAN](https://cloud.r-project.org), the Comprehensive R Archive Network, to download **R** for free.
 
+
 ## Downloading R Studio
 
 Go to [rstudio.com](https://rstudio.com/products/rstudio/) to download **RStudio** for free.
 
 
-## Using R as a calculator
+## Using **R** as a calculator
 
 One of the simplest and easiest things you can do in R is to use it as a calculator. Type the operation in the console pane, and then press **enter** to run it.
 
@@ -63,6 +64,7 @@ sqrt (9)
 ```r
 [1] 256
 ```
+
 
 ## Creating variables
 
@@ -120,7 +122,7 @@ library (rmarkdown)
 
 ### Useful **R** packages ###
 
-Below is a list of packages which I have been using for data analysis, data wrangling, and data visualization in R:
+Below is a list of packages which I have been using for data analysis, data wrangling, and data visualization in **R**:
 
 ```r
 library (broom)
@@ -401,7 +403,6 @@ select(MyDataFrame, variable1:variable10)
 ```
 
 **Example 3:**
-
 ```r
 select(MyDataFrame, -column) # this will select all columns but one
 ```
@@ -450,7 +451,6 @@ select (MyDataFrame, -c(variable1, variable2)) # this will select all columns bu
 ```
 
 **Example 5:**
-
 ```r
 select(MyDataFrame, starts_with("string")
 ```
@@ -522,7 +522,7 @@ select (diamonds, columntobemoved1, columntobemoved2, everything())
  9  2.49  3.78  3.87 0.22  Fair      E     VS2      65.1    61   337
 10  2.39  4.05  4    0.23  Very Good H     VS1      59.4    61   338
 # ... with 53,930 more rows
-> 
+
 ```
 
 6. To **add** new variables/columns to a dataset:
@@ -612,10 +612,10 @@ transmute (MyDataFrame,
 ```
 
 
-
-
-
 ## Data Visualization ##
+
+
+### ggplot2 ###
 
 #### Scatterplots ####
 
