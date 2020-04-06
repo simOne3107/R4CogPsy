@@ -653,7 +653,7 @@ summarise (NewDataFrame, newcolumn = mean (variable4, na.rm = TRUE)
 # ... with 266 more rows
 ```
 
-Conveniently, 'tidyverse' allows us to perform several operations simultaneously with the pipe, `%>%`:
+Conveniently, 'tidyverse' allows us to perform several operations simultaneously with the so-called **pipe**, `%>%`:
 
 ```r
 NewDataFrame <- MyDataFrame %>%
@@ -693,6 +693,51 @@ NewDataFrame <- MyDataFrame %>%
 # ... with 30 more rows
 > 
 ```
+Please note that if we don't use the `na.rm` argument, we might end up with a lot of missing values in our dataset. Alternatively, we can also remove any missing values prior to performing any further operations on our dataset:
+
+```r
+NewDataFrame <- MyDataFrame %>%
+  filter (!is.na(column1), !is.na(column2))
+```
+
+9. To **count** values in a given dataset:
+
+```r
+NewDataFrame <- MyDataFrame %>%
+  group_by(column1) %>%
+  summarise (
+  newColumn = mean(column2, na.rm = TRUE), 
+  newColumn2 = n()
+  )
+```
+```r
+> newDiamonds <- diamonds %>%
++   group_by (cut, color, clarity) %>%
++   summarize (
++     averageprice = mean(price, na.rm = TRUE),
++     diamondCount = n()
++     
++   )
+> newDiamonds
+# A tibble: 276 x 5
+# Groups:   cut, color [35]
+   cut   color clarity averageprice diamondCount
+   <ord> <ord> <ord>          <dbl>        <int>
+ 1 Fair  D     I1             7383             4
+ 2 Fair  D     SI2            4355.           56
+ 3 Fair  D     SI1            4273.           58
+ 4 Fair  D     VS2            4513.           25
+ 5 Fair  D     VS1            2921.            5
+ 6 Fair  D     VVS2           3607             9
+ 7 Fair  D     VVS1           4473             3
+ 8 Fair  D     IF             1620.            3
+ 9 Fair  E     I1             2095.            9
+10 Fair  E     SI2            4172.           78
+# ... with 266 more rows
+> 
+```
+
+
 
 
 ## Data Visualization ##
@@ -893,6 +938,22 @@ geom_boxplot (mapping = aes (x = variable1, y = variable2)
 ```
 
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/boxplot1.PNG">
+
+
+#### Frequency polygons ####
+
+With the `geom_freqpoly` function, we can generate frequency polygons to compare the distribution across the levels of a **categorical value**:
+
+```r
+ggplot(MyDataFrame, aes (variable1, colour = variable2))+
+  geom_freqpoly (binwidth = value)
+```
+
+```r
+ggplot(diamonds, aes(price, colour = clarity)) +
+  geom_freqpoly(binwidth = 250)
+```
+<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/freqpoly.PNG" >
 
 
 
