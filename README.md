@@ -1,6 +1,6 @@
 # Welcome to **R** 4 CogPsy
 
-Here you will find everything I have been learning about R and statistics. I hope my notes will be useful to other research students struggling with R and statistics.
+Here you will find everything I have been learning about **R** and statistics. I hope my notes will be useful to other research students struggling with R and statistics.
 
 
 ## Downloading R ##
@@ -159,12 +159,23 @@ sum(is.na(variable))
 
 #### Importing data files ####
 
-sss
+You can use the `read_csv()` function from the **readr** package to open .csv files in **R**:
+
+```r
+MyDataFrame <- read_csv("myfile.csv")
+```
+
+To open a .txt file, you can use the `read_delim()` function:
+
+```r
+MyDataFrame <- read_delim ("myfile.txt")
+```
+In case you have not created a project directory with all the files you will be using in your analysis, make sure to specify the whole path where the file(s) you want to open is (e.g., "C:/Users/username/Documents/folder/myfile.csv").
 
 
 ## Data pre-processing ##
 
-With a number of different functions from the `tidyverse` package, we can appropriately pre-process our data before performing any statistical analyses. Among other things, `tidyverse` allows us to subset observations by their values, select the variables we are interested in, and group the data by variable.
+With a number of different functions from the **tidyverse** package, we can appropriately pre-process our data before performing any statistical analyses. Among other things, **tidyverse** allows us to subset observations by their values, select the variables we are interested in, and group the data by variable.
 
 1. To **subset** observations by their values:
 
@@ -485,6 +496,8 @@ select(MyDataFrame, starts_with("string")
 # ... with 53,930 more rows
 ```
 
+The main difference between `select()` and `filter()` is that `select()` allows us to keep only the **variables/columns** we specify, whereas 'filter()` allows us to keep only the **observations/rows** we specify.
+
 4. To **rename** columns/variables:
 
 ```r
@@ -742,11 +755,11 @@ NewDataFrame <- MyDataFrame %>%
 
 ## Data Visualization ##
 
-The go-to **R** package for data visualization is `ggplot2`. With `ggplot2`, we can easily create scatterplots, boxplots, bar charts and a whole range of other plots.
+The go-to **R** package for data visualization is **ggplot2**. With **ggplot2**, we can easily create scatterplots, boxplots, bar charts and a whole range of other plots.
 
 #### Scatterplots ####
 
-The first thing we do when generating a plot with `ggplot2` is to create a coordinate system to which we can subsequently add layers.
+The first thing we do when generating a plot with **ggplot2** is to create a coordinate system to which we can subsequently add layers.
 
 
 ```r
@@ -783,7 +796,7 @@ Some of the `variables` which can be added to `aes` are:
 7. `group`
 8. `fill`
 
-Below is a list with the possible shapes which can be used in a scatterplot generated with `ggplot2`:
+Below is a list with the possible shapes which can be used in a scatterplot generated with **ggplot2**:
 
 <img src="http://ggplot2.tidyverse.org/reference/scale_shape-6.png" width ="500">
 
@@ -806,7 +819,7 @@ Please note the plus sign `+` should always come at the end of the line when cre
 
 
 
-If you wish, you can also subset your dataset and use `ggplot2` to create subplots to display each of the subsets.
+If you wish, you can also subset your dataset and use **ggplot2** to create subplots to display each of the subsets.
 
 ```r
 ggplot(data = MyDataFrame) + 
@@ -876,7 +889,7 @@ ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
 
 #### Bar charts ####
 
-To generate a bar chart with `ggplot2`, we can use the function `geom_bar`.
+To generate a bar chart with **ggplot2**, we can use the function `geom_bar`.
 
 ```r
 ggplot (data = MyDataFrame) +
