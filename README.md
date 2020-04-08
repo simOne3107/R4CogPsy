@@ -881,6 +881,8 @@ ggplot (data = MyDataFrame) +
   geom_bar (mapping =  aes (x = variable1))
 ```
 
+![](images/barchart1.PNG)
+
 <img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/barchart1.PNG">
 
 In the example above, the y axis displays the number (count) of occurrences of the variable in question. We can also generate a barchart with the proportion of cases in the y axis:
