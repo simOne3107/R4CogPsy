@@ -5,19 +5,19 @@ Here you will find everything I have been learning about **R** and statistics. I
 ***************************************************************************************************************************************
 
 # Basics #
-## Downloading R ##
+### Downloading R ###
 
 Go to [CRAN](https://cloud.r-project.org), the Comprehensive R Archive Network, to download **R** for free.
 
 
 ***************************************************************************************************************************************
-## Downloading R Studio
+### Downloading R Studio ###
 
 Go to [rstudio.com](https://rstudio.com/products/rstudio/) to download **RStudio** for free.
 
 ***************************************************************************************************************************************
 
-## Using **R** as a calculator
+### Using **R** as a calculator ###
 
 
 One of the simplest and easiest things you can do in R is to use it as a calculator. Type the operation in the console pane, and then press **enter** to run it.
@@ -73,7 +73,7 @@ sqrt (9)
 
 ***************************************************************************************************************************************
 
-## Creating variables
+### Creating variables ###
 
 
 In **R**, you can easily create `variables` and assign different values to them. By using the symbol `<-`, we assign the value on its right to the `variable` on its left. You can see in the examples below that pretty much anything can be used as a variable's name:
@@ -117,7 +117,7 @@ Bananas + Apples
 
 ***************************************************************************************************************************************
 
-## Installing packages in **R** ##
+### Installing packages in **R** ###
 
    
 
@@ -153,7 +153,7 @@ library (tidyverse)
 
 ***************************************************************************************************************************************
 
-## Useful built-in **R** functions ##
+### Useful built-in **R** functions ###
 
 1. To make regular **sequences** of numbers:
 ```r
@@ -181,7 +181,7 @@ sum(is.na(variable))
 
 ***************************************************************************************************************************************
 
-## Useful built-in statistics functions in **R** ##
+### Useful built-in statistics functions in **R** ###
 
 1. Mean
 ```r
@@ -195,7 +195,7 @@ sd(variable)
 
 ***************************************************************************************************************************************
 
-## Useful shortcuts ##
+### Useful shortcuts ###
 
 1. To run the entire script in one step:
 
@@ -203,7 +203,7 @@ sd(variable)
 
 ***************************************************************************************************************************************
 
-## Importing data files ##
+### Importing data files ###
 
 You can use the `read_csv()` function from the **readr** package to open .csv files in **R**:
 
@@ -224,8 +224,9 @@ In case you have not created a project directory with all the files you will be 
 
 With a number of different functions from the **tidyverse** package, we can appropriately pre-process our data before performing any statistical analyses. Among other things, **tidyverse** allows us to subset observations by their values, select the variables we are interested in, and group the data by variable.
 
-## Subsetting ##
-1. To **subset** observations by their values:
+### Subsetting ###
+
+To **subset** observations by their values:
 
 **Example 1:**
 
@@ -363,9 +364,9 @@ filter(MyDataFrame, between(column, value1, value2))
 10 chevrolet    c1500 suburban 2wd   5.7  1999     8 auto(l4)   r        13    17 r     suv    
 # ... with 107 more rows
 ```
-## Reordering ##
+### Reordering ###
 
-2. To **reorder** the rows in a dataset (i.e., sort by column):
+To **reorder** the rows in a dataset (i.e., sort by column):
 
 **Example 1:**
 
