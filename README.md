@@ -742,8 +742,7 @@ NewDataFrame <- MyDataFrame %>%
 
 ## Data Visualization ##
 
-
-### ggplot2 ###
+The go-to **R** package for data visualization is `ggplot2`. With `ggplot2`, we can easily create scatterplots, boxplots, bar charts and a whole range of other plots.
 
 #### Scatterplots ####
 
@@ -858,7 +857,8 @@ ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
   geom_smooth(color = "red")
 ```
 
-<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/scatterplot7.PNG">
+![](images/scatterplot7.PNG)
+
 
 With the function `geom_jitter()` we can add some degree of noise to the datapoints:
 
@@ -869,7 +869,7 @@ ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
   geom_jitter()
 ```
 
-<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/scatterplot8.PNG" >
+![](images/scatterplot8.PNG)
 
 
 #### Bar charts ####
