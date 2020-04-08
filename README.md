@@ -157,7 +157,27 @@ is.na(variable)
 sum(is.na(variable))
 ```
 
-#### Importing data files ####
+## Useful built-in statistics functions in **R** ##
+
+1. Mean
+```r
+mean(variable)
+```
+
+2. Standard deviation
+```r
+sd(variable)
+```
+
+
+## Useful shortcuts ##
+
+1. To run the entire script in one step:
+
+**Ctrl** + **Shift** + **S**
+
+
+## Importing data files ##
 
 You can use the `read_csv()` function from the **readr** package to open .csv files in **R**:
 
@@ -171,6 +191,7 @@ To open a .txt file, you can use the `read_delim()` function:
 MyDataFrame <- read_delim ("myfile.txt")
 ```
 In case you have not created a project directory with all the files you will be using in your analysis, make sure to specify the whole path where the file(s) you want to open is (e.g., "C:/Users/username/Documents/folder/myfile.csv").
+
 
 
 ## Data pre-processing ##
@@ -208,7 +229,6 @@ filter(MyDataFrame, column == value)
 ```r
 filter(MyDataFrame, column > value)
 ```
-
 ```r
 > filter (diamonds, price > 400)
 # A tibble: 53,689 x 10
@@ -418,7 +438,6 @@ select(MyDataFrame, variable1:variable10)
 10  2013     1     1      558            600        -2      753            745         8
 # ... with 336,766 more rows, and 1 more variable: carrier <chr>
 > 
-
 ```
 
 **Example 3:**
@@ -478,7 +497,6 @@ select(MyDataFrame, starts_with("string")
 ```
 
 ```r
-
 > select (diamonds, starts_with("c"))
 # A tibble: 53,940 x 4
    carat cut       color clarity
@@ -523,7 +541,6 @@ rename(flights, departure_time = dep_time)
 #   minute <dbl>, time_hour <dttm>
 > 
 ```
-
 
 5. To **move** columns/variable to the start of the data frame:
 
@@ -683,7 +700,7 @@ NewDataFrame <- MyDataFrame %>%
 > diamonds2 <- diamonds %>%
 +   group_by (cut, clarity) %>%
 +   summarise (
-+     count = n(),
++     count = n(), #this returns the sample size
 +     averageprice = mean(price, na.rm = TRUE),
 +     averagedepth = mean(depth, na.rm = TRUE)
 +   ) %>%
@@ -715,6 +732,7 @@ NewDataFrame <- MyDataFrame %>%
 
 9. To **count** values in a given dataset:
 
+**Example 1:**
 ```r
 NewDataFrame <- MyDataFrame %>%
   group_by(column1) %>%
@@ -750,7 +768,24 @@ NewDataFrame <- MyDataFrame %>%
 > 
 ```
 
+**Example 2:**
 
+```r
+MyDataFrame %>%
+count(variable)
+```
+
+```r
+> flights %>%
++   count (origin)
+# A tibble: 3 x 2
+  origin      n
+  <chr>   <int>
+1 EWR    120835
+2 JFK    111279
+3 LGA    104662
+> 
+```
 
 
 ## Data Visualization ##
@@ -889,7 +924,7 @@ ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
 
 #### Bar charts ####
 
-To generate a bar chart with **ggplot2**, we can use the function `geom_bar`.
+We use bar charts to plot the distribution of a **categorical** variable. To generate a bar chart with **ggplot2**, we can use the function `geom_bar`.
 
 ```r
 ggplot (data = MyDataFrame) +
@@ -945,7 +980,7 @@ coord_polar ()
 
 #### Box plots ####
 
-`ggplot2` also allows us to easily create boxplots with the `geom_boxplot()` function.
+**ggplot2** also allows us to easily create boxplots with the `geom_boxplot()` function.
 
 ```r
 ggplot(data = MyDataFrame) +
@@ -954,10 +989,21 @@ geom_boxplot (mapping = aes (x = variable1, y = variable2)
 
 ![](images/boxplot1.PNG)
 
+#### Histograms ####
+
+We use histograms to plot the distribution of a **continuous** variable. To generate a histogram, we can use the function `geom_histogram()`.
+
+```r
+ggplot (data = MyDataFrame) +
+  geom_histogram (mapping = aes (x = variable1), binwidth = value)
+```
+![](images/histogram.PNG)
+
+
 
 #### Frequency polygons ####
 
-With the `geom_freqpoly` function, we can generate frequency polygons to compare the distribution across the levels of a **categorical value**:
+With the `geom_freqpoly()` function, we can generate frequency polygons to compare the distribution across the levels of a **categorical** variable:
 
 ```r
 ggplot(MyDataFrame, aes (variable1, colour = variable2))+
@@ -969,6 +1015,10 @@ ggplot(diamonds, aes(price, colour = clarity)) +
   geom_freqpoly(binwidth = 250)
 ```
 ![](images/freqpoly.PNG)
+
+
+## Exploratory Data Analysis ##
+
 
 
 
