@@ -937,7 +937,7 @@ ggplot(data = MyDataFrame) +
 geom_boxplot (mapping = aes (x = variable1, y = variable2)
 ```
 
-![](images.boxplot1.PNG)
+![](images/boxplot1.PNG)
 
 
 #### Frequency polygons ####
@@ -953,7 +953,7 @@ ggplot(MyDataFrame, aes (variable1, colour = variable2))+
 ggplot(diamonds, aes(price, colour = clarity)) +
   geom_freqpoly(binwidth = 250)
 ```
-![](images.freqpoly.PNG)
+![](images/freqpoly.PNG)
 
 
 
