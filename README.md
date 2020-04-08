@@ -7,11 +7,13 @@ Here you will find everything I have been learning about **R** and statistics. I
 
 Go to [CRAN](https://cloud.r-project.org), the Comprehensive R Archive Network, to download **R** for free.
 
+**********************************************************************************************************************************
 
 ## Downloading R Studio
 
 Go to [rstudio.com](https://rstudio.com/products/rstudio/) to download **RStudio** for free.
 
+**********************************************************************************************************************************
 
 ## Using **R** as a calculator
 
@@ -64,7 +66,7 @@ sqrt (9)
 ```r
 [1] 256
 ```
-
+**********************************************************************************************************************************
 
 ## Creating variables
 
@@ -106,6 +108,8 @@ Bananas + Apples
 [1] 1.39
 ```
 
+**********************************************************************************************************************************
+
 ## Installing packages in **R** ##
 
 In order to install a package in **R**, enter the following line of code in the console pane with the package name you wish to install, and press enter to run it. Do not forget to use quotation marks.
@@ -120,6 +124,8 @@ Each package must be installed only once. However, each time you wish to use a p
 library (rmarkdown)
 ```
 
+**********************************************************************************************************************************
+
 ### Useful **R** packages ###
 
 Below is a list of packages which I have been using for data analysis, data wrangling, and data visualization in **R**:
@@ -131,6 +137,8 @@ library (lme4)
 library (powersim)
 library (tidyverse)
 ```
+
+**********************************************************************************************************************************
 
 ## Useful built-in **R** functions ##
 
