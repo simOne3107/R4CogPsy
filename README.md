@@ -883,8 +883,6 @@ ggplot (data = MyDataFrame) +
 
 ![](images/barchart1.PNG)
 
-<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/barchart1.PNG">
-
 In the example above, the y axis displays the number (count) of occurrences of the variable in question. We can also generate a barchart with the proportion of cases in the y axis:
 
 ```r
@@ -899,7 +897,7 @@ ggplot (data = MyDataFrame) +
 geom_bar (mapping = aes (x = variable1, fill = variable1)
 ```
 
-<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/barchart3.PNG" >
+![](images/barchart3.PNG)
 
 It may sometimes be hard to read long labels when the bars are displayed vertically, as in the example below:
 
@@ -908,7 +906,7 @@ ggplot (data = MyDataFrame) +
 geom_bar (mapping = aes (x = variable1, fill = variable1)
 ```
 
-<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/barchart4.PNG" >
+![](images/barchart4.PNG)
 
 To solve that, you can flip your plot so that the bars are displayed horizontally rather than the vertical default.
 
@@ -918,7 +916,7 @@ ggplot(data = MyDataFrame) +
   coord_flip ()
 ```
 
-<img src = "https://github.com/simOne3107/R4CogPsy/blob/master/images/barchart5.PNG" >
+![](images/barchart5.PNG)
 
 Instead of a stacked bar chart, we can also display our data as follows:
 
@@ -928,7 +926,7 @@ geom_bar (mapping = aes (x = variable1, fill = variable1) +
 coord_polar ()
 ```
 
-<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/barchart6.PNG" >
+![](images/barchart6.PNG)
 
 #### Box plots ####
 
@@ -939,7 +937,7 @@ ggplot(data = MyDataFrame) +
 geom_boxplot (mapping = aes (x = variable1, y = variable2)
 ```
 
-<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/boxplot1.PNG">
+![](images.boxplot1.PNG)
 
 
 #### Frequency polygons ####
@@ -955,7 +953,7 @@ ggplot(MyDataFrame, aes (variable1, colour = variable2))+
 ggplot(diamonds, aes(price, colour = clarity)) +
   geom_freqpoly(binwidth = 250)
 ```
-<img src="https://github.com/simOne3107/R4CogPsy/blob/master/images/freqpoly.PNG" >
+![](images.freqpoly.PNG)
 
 
 
