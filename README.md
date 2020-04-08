@@ -760,7 +760,7 @@ If you want to create a **scatterplot**, you can use the function `geom_point( )
 ggplot(data = MyDataFrame) + 
   geom_point(mapping = aes(x = variable1, y = variable2))
 ```
-![](https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot.PNG)
+![](images/scatterplot.PNG)
 
 By changing or adding further levels to `aes`, the aesthetic properties of a scatterplot, we can change the size, the shape or even the colour of the data points. 
 
@@ -769,8 +769,8 @@ ggplot(data = MyDataFrame) +
   geom_point(mapping = aes(x = variable1, y = variable2, color = variable3))
 ```
 
+![](images/scatterplot2.PNG)
 
-<img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot2.PNG" >
 
 
 Some of the `variables` which can be added to `aes` are:
@@ -798,8 +798,8 @@ ggplot(data = MyDataFrame) +
   geom_point(mapping = aes(x = variable1, y = variable2, color = variable3), shape = 2)
 ```
 
+![](images/scatterplot3.PNG)
 
-<img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot3.PNG" >
 
 
 Please note the plus sign `+` should always come at the end of the line when creating `ggplot2` graphics.
@@ -817,7 +817,8 @@ ggplot(data = MyDataFrame) +
 `nrow` refers to the number of rows in which you would like the subplots to be displayed.
 `ncol` can also be used to change the number of columns in which you would like the subplots to be displayed.
 
-<img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot4.PNG">
+![](images/scatterplot4.PNG)
+
 
 
 Instead of generating a plot with points, we can use the function `geom_smooth` to create a plot with a smooth line fitted to our data.
@@ -826,7 +827,8 @@ Instead of generating a plot with points, we can use the function `geom_smooth` 
 ggplot(data = MyDataFrame) + 
   geom_smooth(mapping = aes(x = variable1, y = variable2))
 ```
-<img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot5.PNG">
+![](images/scatterplot5.PNG)
+
 
 To remove the confidence interval, add `se=FALSE` to the code above.
 
@@ -846,7 +848,7 @@ ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
   geom_smooth()
 ```
 
-<img src="https://github.com/simOne3107/R4CogPsy/blob/master/scatterplot6.PNG">
+![](images/scatterplot6.PNG)
 
 
 You can also add different aesthetic values to different layers if you wish:
