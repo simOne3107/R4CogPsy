@@ -4,9 +4,13 @@ Here you will find everything I have been learning about **R** and statistics. I
 
 ***************************************************************************************************************************************
 
+
 ## Downloading R ##
+<details>
+  <summary>Click to expand!</summary>
 
 Go to [CRAN](https://cloud.r-project.org), the Comprehensive R Archive Network, to download **R** for free.
+</details>
 
 ***************************************************************************************************************************************
 ## Downloading R Studio
@@ -16,6 +20,8 @@ Go to [rstudio.com](https://rstudio.com/products/rstudio/) to download **RStudio
 ***************************************************************************************************************************************
 
 ## Using **R** as a calculator
+<details>
+  <summary>Click to expand!</summary>
 
 One of the simplest and easiest things you can do in R is to use it as a calculator. Type the operation in the console pane, and then press **enter** to run it.
 
@@ -66,9 +72,13 @@ sqrt (9)
 ```r
 [1] 256
 ```
+</details>
+
 ***************************************************************************************************************************************
 
 ## Creating variables
+<details>
+  <summary>Click to expand!</summary>
 
 In **R**, you can easily create `variables` and assign different values to them. By using the symbol `<-`, we assign the value on its right to the `variable` on its left. You can see in the examples below that pretty much anything can be used as a variable's name:
 
@@ -108,9 +118,14 @@ Bananas + Apples
 [1] 1.39
 ```
 
+</details>
+
 ***************************************************************************************************************************************
 
 ## Installing packages in **R** ##
+<details>
+  <summary>Click to expand!</summary>
+   
 
 In order to install a package in **R**, enter the following line of code in the console pane with the package name you wish to install, and press enter to run it. Do not forget to use quotation marks.
 
@@ -123,10 +138,13 @@ Each package must be installed only once. However, each time you wish to use a p
 ```r
 library (rmarkdown)
 ```
+</details>
 
 ***************************************************************************************************************************************
 
 ### Useful **R** packages ###
+<details>
+  <summary>Click to expand!</summary>
 
 Below is a list of packages which I have been using for data analysis, data wrangling, and data visualization in **R**:
 
@@ -138,9 +156,13 @@ library (powersim)
 library (tidyverse)
 ```
 
+</details>
+
 ***************************************************************************************************************************************
 
 ## Useful built-in **R** functions ##
+<details>
+  <summary>Click to expand!</summary>
 
 1. To make regular **sequences** of numbers:
 ```r
@@ -164,6 +186,8 @@ is.na(variable)
 ```r
 sum(is.na(variable))
 ```
+</details>
+
 ***************************************************************************************************************************************
 
 ## Useful built-in statistics functions in **R** ##
