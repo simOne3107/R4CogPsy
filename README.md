@@ -4,7 +4,7 @@ Here you will find everything I have been learning about **R** and statistics. I
 
 ***************************************************************************************************************************************
 
-
+# Basics #
 ## Downloading R ##
 
 Go to [CRAN](https://cloud.r-project.org), the Comprehensive R Archive Network, to download **R** for free.
@@ -220,7 +220,7 @@ In case you have not created a project directory with all the files you will be 
 
 ***************************************************************************************************************************************
 
-## Data pre-processing ##
+# Data pre-processing #
 
 With a number of different functions from the **tidyverse** package, we can appropriately pre-process our data before performing any statistical analyses. Among other things, **tidyverse** allows us to subset observations by their values, select the variables we are interested in, and group the data by variable.
 
@@ -815,7 +815,7 @@ count(variable)
 
 ***************************************************************************************************************************************
 
-## Data Visualization ##
+# Data Visualization #
 
 The go-to **R** package for data visualization is **ggplot2**. With **ggplot2**, we can easily create scatterplots, boxplots, bar charts and a whole range of other plots.
 
@@ -1045,7 +1045,7 @@ ggplot(diamonds, aes(price, colour = clarity)) +
 
 ***************************************************************************************************************************************
 
-## Exploratory Data Analysis ##
+# Exploratory Data Analysis #
 
 
 
