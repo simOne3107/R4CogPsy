@@ -164,7 +164,7 @@ sss
 
 ## Data pre-processing ##
 
-### Tidyverse ###
+With a number of different functions from the `tidyverse` package, we can appropriately pre-process our data before performing any statistical analyses. Among other things, `tidyverse` allows us to subset observations by their values, select the variables we are interested in, and group the data by variable.
 
 1. To **subset** observations by their values:
 
