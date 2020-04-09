@@ -5,19 +5,19 @@ Here you will find everything I have been learning about **R** and statistics. I
 ***************************************************************************************************************************************
 
 # Basics #
-### Downloading R ###
+#### Downloading R ####
 
 Go to [CRAN](https://cloud.r-project.org), the Comprehensive R Archive Network, to download **R** for free.
 
 
 ***************************************************************************************************************************************
-### Downloading R Studio ###
+#### Downloading R Studio ####
 
 Go to [rstudio.com](https://rstudio.com/products/rstudio/) to download **RStudio** for free.
 
 ***************************************************************************************************************************************
 
-### Using **R** as a calculator ###
+#### Using **R** as a calculator ####
 
 
 One of the simplest and easiest things you can do in R is to use it as a calculator. Type the operation in the console pane, and then press **enter** to run it.
@@ -136,7 +136,7 @@ library (rmarkdown)
 
 ***************************************************************************************************************************************
 
-### Useful **R** packages ###
+#### Useful **R** packages ####
 
 
 Below is a list of packages which I have been using for data analysis, data wrangling, and data visualization in **R**:
@@ -153,7 +153,7 @@ library (tidyverse)
 
 ***************************************************************************************************************************************
 
-### Useful built-in **R** functions ###
+#### Useful built-in **R** functions ####
 
 1. To make regular **sequences** of numbers:
 ```r
@@ -181,7 +181,7 @@ sum(is.na(variable))
 
 ***************************************************************************************************************************************
 
-### Useful built-in statistics functions in **R** ###
+#### Useful built-in statistics functions in **R** ####
 
 1. Mean
 ```r
@@ -195,7 +195,7 @@ sd(variable)
 
 ***************************************************************************************************************************************
 
-### Useful shortcuts ###
+#### Useful shortcuts ####
 
 1. To run the entire script in one step:
 
@@ -203,7 +203,9 @@ sd(variable)
 
 ***************************************************************************************************************************************
 
-### Importing data files ###
+## Getting Started ##
+
+#### Importing data files ####
 
 You can use the `read_csv()` function from the **readr** package to open .csv files in **R**:
 
@@ -224,7 +226,7 @@ In case you have not created a project directory with all the files you will be 
 
 With a number of different functions from the **tidyverse** package, we can appropriately pre-process our data before performing any statistical analyses. Among other things, **tidyverse** allows us to subset observations by their values, select the variables we are interested in, and group the data by variable.
 
-### Subsetting ###
+#### Subsetting ####
 
 To **subset** observations by their values:
 
@@ -364,7 +366,7 @@ filter(MyDataFrame, between(column, value1, value2))
 10 chevrolet    c1500 suburban 2wd   5.7  1999     8 auto(l4)   r        13    17 r     suv    
 # ... with 107 more rows
 ```
-### Reordering ###
+#### Reordering ####
 
 To **reorder** the rows in a dataset (i.e., sort by column):
 
@@ -417,7 +419,8 @@ arrange(MyDataFrame, column1, column2)
 > 
 ```
 
-## Selecting ##
+#### Selecting ####
+
 3. To **select** only the columns/variables we are interested in:
 
 **Example 1:**
@@ -571,7 +574,7 @@ rename(flights, departure_time = dep_time)
 #   minute <dbl>, time_hour <dttm>
 > 
 ```
-## Moving columns ##
+#### Moving columns ####
 
 5. To **move** columns/variable to the start of the data frame:
 
@@ -597,10 +600,10 @@ select (diamonds, columntobemoved1, columntobemoved2, everything())
 
 ```
 
-## Adding new columns ##
+#### Adding new columns ####
 
 
-6. To **add** new variables/columns to a dataset:
+To **add** new variables/columns to a dataset:
 
 **Example 1:**
 
@@ -657,9 +660,9 @@ mutate (MyDataFrame,
 > 
 ```
 
-## Creating a new dataset ##
+#### Creating a new dataset ####
 
-7. To **create a new dataset** with columns generated from another dataset:
+To **create a new dataset** with columns generated from another dataset:
 
 ```r
 transmute (MyDataFrame, 
@@ -687,17 +690,17 @@ transmute (MyDataFrame,
 # ... with 53,930 more rows
 
 ```
-## Grouping ##
+#### Grouping ####
 
-8. To **group** the data by a given variable(s):
+To **group** the data by a given variable(s):
 
 ```r
 group_by (MyDataFrame, variable1, variable2, variable3)
 ```
 
-## Colapsing ##
+#### Colapsing ####
 
-9. To **collapse** the data from multiple (repeated) rows to a single row:
+To **collapse** the data from multiple (repeated) rows to a single row:
 
 ```r
 NewDataFrame <- group_by (MyDataFrame, variable1, variable2, variable3)
@@ -769,9 +772,9 @@ NewDataFrame <- MyDataFrame %>%
   filter (!is.na(column1), !is.na(column2))
 ```
 
-## Counting ##
+#### Counting ####
 
-10. To **count** values in a given dataset:
+To **count** values in a given dataset:
 
 **Example 1:**
 ```r
@@ -834,7 +837,7 @@ count(variable)
 
 The go-to **R** package for data visualization is **ggplot2**. With **ggplot2**, we can easily create scatterplots, boxplots, bar charts and a whole range of other plots.
 
-## Scatterplots ##
+#### Scatterplots ####
 
 The first thing we do when generating a plot with **ggplot2** is to create a coordinate system to which we can subsequently add layers.
 
@@ -964,7 +967,7 @@ ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
 ![](images/scatterplot8.PNG)
 
 
-## Bar charts ##
+#### Bar charts ####
 
 We use bar charts to plot the distribution of a **categorical** variable. To generate a bar chart with **ggplot2**, we can use the function `geom_bar`.
 
@@ -1020,7 +1023,7 @@ coord_polar ()
 
 ![](images/barchart6.PNG)
 
-## Box plots ##
+#### Box plots ####
 
 **ggplot2** also allows us to easily create boxplots with the `geom_boxplot()` function.
 
@@ -1031,7 +1034,7 @@ geom_boxplot (mapping = aes (x = variable1, y = variable2)
 
 ![](images/boxplot1.PNG)
 
-## Histograms ##
+#### Histograms ####
 
 We use histograms to plot the distribution of a **continuous** variable. To generate a histogram, we can use the function `geom_histogram()`.
 
@@ -1043,7 +1046,7 @@ ggplot (data = MyDataFrame) +
 
 
 
-## Frequency polygons ##
+#### Frequency polygons ####
 
 With the `geom_freqpoly()` function, we can generate frequency polygons to compare the distribution across the levels of a **categorical** variable:
 
