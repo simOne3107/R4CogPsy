@@ -17,6 +17,21 @@ Go to [rstudio.com](https://rstudio.com/products/rstudio/) to download **RStudio
 
 ***************************************************************************************************************************************
 
+#### Creating a new project ####
+
+
+Ideally, a new RStudio project should be created for each data analysis project we run. By doing so, we can have everything related to that project (i.e., scripts, plots, data files, etc) all stored in the same place.
+
+To **create a new project**, click on File > New Project > New Directory > New Project
+
+Then, assign a sensible name to the new project and choose the location in your computer in which the project should be saved.
+
+Click on File > Save
+
+Then, give your new **R** script a sensible name.
+
+***************************************************************************************************************************************
+
 #### Using **R** as a calculator ####
 
 
@@ -217,6 +232,24 @@ To open a .txt file, you can use the `read_delim()` function:
 MyDataFrame <- read_delim ("myfile.txt")
 ```
 In case you have not created a project directory with all the files you will be using in your analysis, make sure to specify the whole path where the file(s) you want to open is (e.g., "C:/Users/username/Documents/folder/myfile.csv").
+
+
+#### Exporting data files ####
+
+To save a dataframe as .csv:
+
+```r
+write_csv (MyDataFrame, "MyDataFrame.csv")
+```
+
+To save a plot as .pdf:
+
+```r
+ggsave ("MyDataFrame.pdf")
+```
+
+
+
 
 ***************************************************************************************************************************************
 
