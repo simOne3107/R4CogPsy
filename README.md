@@ -73,7 +73,7 @@ sqrt (9)
 
 ***************************************************************************************************************************************
 
-### Creating variables ###
+#### Creating variables ####
 
 
 In **R**, you can easily create `variables` and assign different values to them. By using the symbol `<-`, we assign the value on its right to the `variable` on its left. You can see in the examples below that pretty much anything can be used as a variable's name:
@@ -117,7 +117,7 @@ Bananas + Apples
 
 ***************************************************************************************************************************************
 
-### Installing packages in **R** ###
+#### Installing packages in **R** ####
 
    
 
