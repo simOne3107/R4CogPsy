@@ -203,8 +203,6 @@ sd(variable)
 
 ***************************************************************************************************************************************
 
-## Getting Started ##
-
 #### Importing data files ####
 
 You can use the `read_csv()` function from the **readr** package to open .csv files in **R**:
@@ -421,7 +419,7 @@ arrange(MyDataFrame, column1, column2)
 
 #### Selecting ####
 
-3. To **select** only the columns/variables we are interested in:
+To **select** only the columns/variables we are interested in:
 
 **Example 1:**
 
@@ -547,9 +545,9 @@ select(MyDataFrame, starts_with("string")
 # ... with 53,930 more rows
 ```
 
-The main difference between `select()` and `filter()` is that `select()` allows us to keep only the **variables/columns** we specify, whereas 'filter()` allows us to keep only the **observations/rows** we specify.
+The main difference between `select()` and `filter()` is that `select()` allows us to keep only the **variables/columns** we specify, whereas `filter()` allows us to keep only the **observations/rows** we specify.
 
-4. To **rename** columns/variables:
+To **rename** columns/variables:
 
 ```r
 rename(MyDataFrame, newname = oldname)
@@ -576,7 +574,7 @@ rename(flights, departure_time = dep_time)
 ```
 #### Moving columns ####
 
-5. To **move** columns/variable to the start of the data frame:
+To **move** columns/variable to the start of the data frame:
 
 ```r
 select (diamonds, columntobemoved1, columntobemoved2, everything())
@@ -831,23 +829,44 @@ count(variable)
 > 
 ```
 
+#### Replacing outliers with NAs ####
+
+To replace outliers with missing values:
+
+```r
+NewDataFrame <- MyDataFrame %>%
+  mutate (column = ifelse (function, outputIfTrue, outputIfFalse))
+```
+
+```r
+diamondsNewDF <- diamonds %>%
+  mutate (depth = ifelse (depth <= 44 | depth >= 78, NA, depth))
+
+> summary (diamonds$depth)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  43.00   61.00   61.80   61.75   62.50   79.00 
+> summary (diamondsNewDF$depth)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  50.80   61.00   61.80   61.75   62.50   73.60       6 
+> 
+````
+
 ***************************************************************************************************************************************
 
 # Data Visualization #
 
 The go-to **R** package for data visualization is **ggplot2**. With **ggplot2**, we can easily create scatterplots, boxplots, bar charts and a whole range of other plots.
 
-#### Scatterplots ####
-
-The first thing we do when generating a plot with **ggplot2** is to create a coordinate system to which we can subsequently add layers.
-
+The first thing we do when generating a plot with **ggplot2** is to create a coordinate system to which we can subsequently add layers:
 
 ```r
 ggplot (data = MyDataFrame)
 ```
-At least one layer should be added to the function above, otherwise we will have an empty graph.
+At least one layer should be added to the function above, otherwise we will have an empty graph. Below you will find some of the possible plots which we can generate with **ggplot2**.
 
-If you want to create a **scatterplot**, you can use the function `geom_point( )` which will add data points to the aforementioned coordinate system. 
+#### Scatterplots ####
+
+Scatterplots are useful to visualise the covariation between two **continuous** variables. If you want to create a **scatterplot**, you can use the function `geom_point( )` which will add data points to the aforementioned coordinate system. 
 
 ```r
 ggplot(data = MyDataFrame) + 
@@ -876,7 +895,9 @@ Some of the `variables` which can be added to `aes` are:
 7. `group`
 8. `fill`
 
+
 Below is a list with the possible shapes which can be used in a scatterplot generated with **ggplot2**:
+
 
 <img src="http://ggplot2.tidyverse.org/reference/scale_shape-6.png" width ="500">
 
@@ -1023,16 +1044,30 @@ coord_polar ()
 
 ![](images/barchart6.PNG)
 
-#### Box plots ####
+#### Boxplots ####
 
-**ggplot2** also allows us to easily create boxplots with the `geom_boxplot()` function.
+Boxplots can be used to display the distribution of a continuous variable broken down by a categorical variable. **ggplot2**  allows us to easily create boxplots with the `geom_boxplot()` function.
 
 ```r
 ggplot(data = MyDataFrame) +
-geom_boxplot (mapping = aes (x = variable1, y = variable2)
+  geom_boxplot (mapping = aes (x = variable1, y = variable2)
 ```
 
 ![](images/boxplot1.PNG)
+
+The order in which the boxplots are displayed can also be changed in order to reveal interesting patterns:
+
+```r
+ggplot(data = myDataFrame) +
+  geom_boxplot(mapping = aes(x=reorder (variable1, variable2, FUN = median), y = variable2))
+```
+
+![](images/boxplot2.PNG)
+
+
+Below is an illustration extracted from ![R for Data Science](https://r4ds.had.co.nz/) showing how to interpret boxplots:
+
+<img src = "https://d33wubrfki0l68.cloudfront.net/153b9af53b33918353fda9b691ded68cd7f62f51/5b616/images/eda-boxplot.png">
 
 #### Histograms ####
 
@@ -1060,6 +1095,14 @@ ggplot(diamonds, aes(price, colour = clarity)) +
   geom_freqpoly(binwidth = 250)
 ```
 ![](images/freqpoly.PNG)
+
+We can also display the **density** rather than the default **count** in the y axis:
+
+```r
+ggplot(diamonds, aes(x = variable1, y =..density..)) +
+  geom_freqpoly(mapping = aes (colour = variable2), binwidth = value)
+```
+
 
 ***************************************************************************************************************************************
 
