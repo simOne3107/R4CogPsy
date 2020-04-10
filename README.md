@@ -164,7 +164,7 @@ library (powersim)
 library (tidyverse)
 ```
 
-
+When sharing a script with others, it is generally recommended to include all the packages needed to run your code. 
 
 ***************************************************************************************************************************************
 
@@ -915,6 +915,44 @@ diamondsNewDF <- diamonds %>%
   50.80   61.00   61.80   61.75   62.50   73.60       6 
 > 
 ````
+
+#### Making a dataset narrower and longer ####
+
+To make a dataset tidy, sometimes we need to **drop** some columns and **increase** the number of rows.
+
+```r
+MyTibble %>%
+  pivot_longer(c(column1, column2), names_to = "newcolumn1", values_to = "newcolumn2")
+```
+
+
+#### Making a dataset wider and shorter ####
+
+To make a dataset tidy, sometimes we need to **add** some columns and **decrease** the number of rows.
+
+```r
+MyTibble %>%
+  pivot_wider (names_from = column1, values_from = column2)
+```
+
+#### Separating values from a given column and spreading them into two columns ####
+
+To **separate** the values found in a single column and spread them into two new columns:
+
+```r
+MyTibble %>%
+ separate (columntobeseparated, into = c("newcolumn1", "newcolumn2", sep ="/", convert = TRUE) #if a backlash is the separator
+```
+
+#### Combining multiple columns into a single column ####
+
+To **combine** the values from two existing columns into a new column:
+
+```r
+MyTibble %>%
+ unite (newColumn, existingColumn1, existingColumn2, sep = "") #otherwise an underscore will be placed between the values
+```
+
 
 ***************************************************************************************************************************************
 
