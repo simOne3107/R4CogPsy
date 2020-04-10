@@ -212,7 +212,7 @@ sd(variable)
 
 #### Useful shortcuts ####
 
-1. To run the entire script in one step:
+To run the entire script in one step:
 
 **Ctrl** + **Shift** + **S**
 
@@ -220,17 +220,26 @@ sd(variable)
 
 #### Importing data files ####
 
-You can use the `read_csv()` function from the **readr** package to open .csv files in **R**:
+You can use the `read_csv()` function from the **readr** package to open **comma delimited files** (.csv) in **R**:
 
 ```r
 MyDataFrame <- read_csv("myfile.csv")
 ```
 
-To open a .txt file, you can use the `read_delim()` function:
+To open a **tab delimited file** (.txt), you can use the `read_tsv()` function:
+
+```r
+MyDataFrame <- read_tsv ("myfile.txt")
+```
+
+To open files with any delimiter, you can use the `read_delim()` function:
 
 ```r
 MyDataFrame <- read_delim ("myfile.txt")
 ```
+
+If your data file does not contain column names, by adding `col_names = FALSE` to your line of code, the first row in the data frame will not be treated as headings.
+
 In case you have not created a project directory with all the files you will be using in your analysis, make sure to specify the whole path where the file(s) you want to open is (e.g., "C:/Users/username/Documents/folder/myfile.csv").
 
 
@@ -240,6 +249,12 @@ To save a dataframe as .csv:
 
 ```r
 write_csv (MyDataFrame, "MyDataFrame.csv")
+```
+
+To save a dataframe as .txt:
+
+```r
+write_tsv (MyDataFrame, "MyDataFrame.txt")
 ```
 
 To save a plot as .pdf:
@@ -255,7 +270,24 @@ ggsave ("MyDataFrame.pdf")
 
 # Data pre-processing #
 
-With a number of different functions from the **tidyverse** package, we can appropriately pre-process our data before performing any statistical analyses. Among other things, **tidyverse** allows us to subset observations by their values, select the variables we are interested in, and group the data by variable.
+With a number of different functions from the **tidyverse** package, we can tidy up and our dataset before performing any statistical analyses. Among other things, **tidyverse** allows us to subset observations by their values, select the variables we are interested in, and group the data by variable.
+
+#### Creating tibbles ####
+
+For best results, it is best to convert our data frames to **tibbles**. Tibbles are an improved type of data frame used in all **tidyverse** packages. Each column name in a tribble is also accompanied by its type.
+
+```r
+as_tibble (MyDataFrame)
+```
+
+Note that, in case one of your tibble's column name does not start with a letter, you will need to surround the column name with backticks in your code.
+
+If needed, a tibble can always be converted back to a data frame as follows:
+
+```r
+as.data.frame(MyTibble)
+```
+
 
 #### Subsetting ####
 
@@ -264,7 +296,7 @@ To **subset** observations by their values:
 **Example 1:**
 
 ```r
-filter(MyDataFrame, column == value)
+filter(MyTibble, column == value)
 ```
 
 ```r
@@ -288,7 +320,7 @@ filter(MyDataFrame, column == value)
 **Example 2:**
 
 ```r
-filter(MyDataFrame, column > value)
+filter(MyTibble, column > value)
 ```
 ```r
 > filter (diamonds, price > 400)
@@ -311,7 +343,7 @@ filter(MyDataFrame, column > value)
 **Example 3:**
 
 ```r
-filter(MyDataFrame, columnA == value1, columnB == value2)
+filter(MyTibble, columnA == value1, columnB == value2)
 ```
 ```r
 > filter (diamonds, color == "E", price == 402)
@@ -329,7 +361,7 @@ filter(MyDataFrame, columnA == value1, columnB == value2)
 **Example 4:**
 
 ```r
-filter (MyDataFrame, columnA >=value1, columnB != value2)
+filter (MyTibble, columnA >=value1, columnB != value2)
 ```
 ```r
 > filter (diamonds, price >= 18790, color != "E")
@@ -351,7 +383,7 @@ filter (MyDataFrame, columnA >=value1, columnB != value2)
 **Example 5:**
 
 ```r
-filter(MyDataFrame, column %in% c(value1, value2))
+filter(MyTibble, column %in% c(value1, value2))
 ```
 
 ```r
