@@ -409,7 +409,7 @@ filter(MyTibble, column %in% c(value1, value2))
 **Example 6:**
 
 ```r
-filter(MyDataFrame, between(column, value1, value2))
+filter(MyTibble, between(column, value1, value2))
 ```
 
 ```r
@@ -436,7 +436,7 @@ To **reorder** the rows in a dataset (i.e., sort by column):
 **Example 1:**
 
 ```r
-arrange(MyDataFrame, column)
+arrange(MyTibble, column)
 ```
 
 ```r
@@ -460,7 +460,7 @@ arrange(MyDataFrame, column)
 **Example 2:**
 
 ```r
-arrange(MyDataFrame, column1, column2)
+arrange(MyTibble, column1, column2)
 ```
 
 ```r
@@ -489,7 +489,7 @@ To **select** only the columns/variables we are interested in:
 **Example 1:**
 
 ```r
-select(MyDataFrame, variable1, variable2, variable3)
+select(MyTibble, variable1, variable2, variable3)
 ```
 
 ```r
@@ -514,7 +514,7 @@ select(MyDataFrame, variable1, variable2, variable3)
 **Example 2:**
 
 ```r
-select(MyDataFrame, variable1:variable10)
+select(MyTibble, variable1:variable10)
 ```
 
 ```r
@@ -539,7 +539,7 @@ select(MyDataFrame, variable1:variable10)
 **Example 3:**
 
 ```r
-select(MyDataFrame, -column) # this will select all columns but one
+select(MyTibble, -column) # this will select all columns but one
 ```
 
 ```r
@@ -564,7 +564,7 @@ select(MyDataFrame, -column) # this will select all columns but one
 **Example 4:**
 
 ```r
-select (MyDataFrame, -c(variable1, variable2)) # this will select all columns but two
+select (MyTibble, -c(variable1, variable2)) # this will select all columns but two
 ```
 
 ```r
@@ -589,7 +589,7 @@ select (MyDataFrame, -c(variable1, variable2)) # this will select all columns bu
 **Example 5:**
 
 ```r
-select(MyDataFrame, starts_with("string")
+select(MyTibble, starts_with("string")
 ```
 
 ```r
@@ -612,10 +612,11 @@ select(MyDataFrame, starts_with("string")
 
 The main difference between `select()` and `filter()` is that `select()` allows us to keep only the **variables/columns** we specify, whereas `filter()` allows us to keep only the **observations/rows** we specify.
 
+
 To **rename** columns/variables:
 
 ```r
-rename(MyDataFrame, newname = oldname)
+rename(MyTibble, newname = oldname)
 ```
 ```r
 rename(flights, departure_time = dep_time)
@@ -637,13 +638,44 @@ rename(flights, departure_time = dep_time)
 #   minute <dbl>, time_hour <dttm>
 > 
 ```
+
+To **rename** observations:
+
+```r
+MyTibble2 <- MyTibble %>%
+  mutate (names_from = stringr::str_replace (columnWhereTheObservationsAre, "previousName", "newName"))
+```
+
+```r
+> who2 <- who1 %>%
++   mutate (names_from = stringr::str_replace(key, "new", "old"))
+> who2
+# A tibble: 76,046 x 7
+   country     iso2  iso3   year key          cases names_from  
+   <chr>       <chr> <chr> <int> <chr>        <int> <chr>       
+ 1 Afghanistan AF    AFG    1997 new_sp_m014      0 old_sp_m014 
+ 2 Afghanistan AF    AFG    1997 new_sp_m1524    10 old_sp_m1524
+ 3 Afghanistan AF    AFG    1997 new_sp_m2534     6 old_sp_m2534
+ 4 Afghanistan AF    AFG    1997 new_sp_m3544     3 old_sp_m3544
+ 5 Afghanistan AF    AFG    1997 new_sp_m4554     5 old_sp_m4554
+ 6 Afghanistan AF    AFG    1997 new_sp_m5564     2 old_sp_m5564
+ 7 Afghanistan AF    AFG    1997 new_sp_m65       0 old_sp_m65  
+ 8 Afghanistan AF    AFG    1997 new_sp_f014      5 old_sp_f014 
+ 9 Afghanistan AF    AFG    1997 new_sp_f1524    38 old_sp_f1524
+10 Afghanistan AF    AFG    1997 new_sp_f2534    36 old_sp_f2534
+# ... with 76,036 more rows
+> 
+```
+
+
 #### Moving columns ####
 
 To **move** columns/variable to the start of the data frame:
 
 ```r
-select (diamonds, columntobemoved1, columntobemoved2, everything())
+select (MyTibble, columntobemoved1, columntobemoved2, everything())
 ```
+
 ```r
 > select (diamonds, z, y, x, everything())
 # A tibble: 53,940 x 10
@@ -671,7 +703,7 @@ To **add** new variables/columns to a dataset:
 **Example 1:**
 
 ```r
-mutate(MyDataFrame, 
+mutate(MyTibble, 
    newColumn = functionToBePerformed)
 ```
 
@@ -697,7 +729,7 @@ mutate(MyDataFrame,
 **Example 2:**
 
 ```r
-mutate (MyDataFrame,
+mutate (MyTibble,
    newColumn = functionToBePerformed,
    newColumn2 = newColumn + functionToBePerformed)
 ```
@@ -728,7 +760,7 @@ mutate (MyDataFrame,
 To **create a new dataset** with columns generated from another dataset:
 
 ```r
-transmute (MyDataFrame, 
+transmute (MyTibble, 
    newColumn = functionToBePerformed,
    newColumn2 = newColumn + functionToBePerformed)
 ```
@@ -758,7 +790,7 @@ transmute (MyDataFrame,
 To **group** the data by a given variable(s):
 
 ```r
-group_by (MyDataFrame, variable1, variable2, variable3)
+group_by (MyTibble, variable1, variable2, variable3)
 ```
 
 #### Colapsing ####
@@ -766,7 +798,7 @@ group_by (MyDataFrame, variable1, variable2, variable3)
 To **collapse** the data from multiple (repeated) rows to a single row:
 
 ```r
-NewDataFrame <- group_by (MyDataFrame, variable1, variable2, variable3)
+NewDataFrame <- group_by (MyTibble, variable1, variable2, variable3)
 summarise (NewDataFrame, newcolumn = mean (variable4, na.rm = TRUE)
 ```
 ```r
@@ -791,7 +823,7 @@ summarise (NewDataFrame, newcolumn = mean (variable4, na.rm = TRUE)
 Conveniently, 'tidyverse' allows us to perform several operations simultaneously with the so-called **pipe**, `%>%`:
 
 ```r
-NewDataFrame <- MyDataFrame %>%
+NewDataFrame <- MyTibble %>%
    group_by (column1) %>%
    summarise (
    newcolumn1 = functionA,
@@ -831,7 +863,7 @@ NewDataFrame <- MyDataFrame %>%
 Please note that if we don't use the `na.rm` argument, we might end up with a lot of missing values in our dataset. Alternatively, we can also remove any missing values prior to performing any further operations on our dataset:
 
 ```r
-NewDataFrame <- MyDataFrame %>%
+NewTibble <- MyTibble %>%
   filter (!is.na(column1), !is.na(column2))
 ```
 
@@ -841,7 +873,7 @@ To **count** values in a given dataset:
 
 **Example 1:**
 ```r
-NewDataFrame <- MyDataFrame %>%
+NewTibble <- MyTibble %>%
   group_by(column1) %>%
   summarise (
   newColumn = mean(column2, na.rm = TRUE), 
@@ -878,7 +910,7 @@ NewDataFrame <- MyDataFrame %>%
 **Example 2:**
 
 ```r
-MyDataFrame %>%
+MyTibble %>%
 count(variable)
 ```
 
@@ -899,7 +931,7 @@ count(variable)
 To replace outliers with missing values:
 
 ```r
-NewDataFrame <- MyDataFrame %>%
+NewTibble <- MyTibble %>%
   mutate (column = ifelse (function, outputIfTrue, outputIfFalse))
 ```
 
@@ -963,7 +995,7 @@ The go-to **R** package for data visualization is **ggplot2**. With **ggplot2**,
 The first thing we do when generating a plot with **ggplot2** is to create a coordinate system to which we can subsequently add layers:
 
 ```r
-ggplot (data = MyDataFrame)
+ggplot (data = MyTibble)
 ```
 At least one layer should be added to the function above, otherwise we will have an empty graph. Below you will find some of the possible plots which we can generate with **ggplot2**.
 
@@ -972,7 +1004,7 @@ At least one layer should be added to the function above, otherwise we will have
 Scatterplots are useful to visualise the covariation between two **continuous** variables. If you want to create a **scatterplot**, you can use the function `geom_point( )` which will add data points to the aforementioned coordinate system. 
 
 ```r
-ggplot(data = MyDataFrame) + 
+ggplot(data = MyTibble) + 
   geom_point(mapping = aes(x = variable1, y = variable2))
 ```
 ![](images/scatterplot.PNG)
@@ -980,7 +1012,7 @@ ggplot(data = MyDataFrame) +
 By changing or adding further levels to `aes`, the aesthetic properties of a scatterplot, we can change the size, the shape or even the colour of the data points. 
 
 ```r
-ggplot(data = MyDataFrame) + 
+ggplot(data = MyTibble) + 
   geom_point(mapping = aes(x = variable1, y = variable2, color = variable3))
 ```
 
@@ -1011,7 +1043,7 @@ Image extracted from **tidyverse.org**.
 
 
 ```r
-ggplot(data = MyDataFrame) + 
+ggplot(data = MyTibble) + 
   geom_point(mapping = aes(x = variable1, y = variable2, color = variable3), shape = 2)
 ```
 
@@ -1026,7 +1058,7 @@ Please note the plus sign `+` should always come at the end of the line when cre
 If you wish, you can also subset your dataset and use **ggplot2** to create subplots to display each of the subsets.
 
 ```r
-ggplot(data = MyDataFrame) + 
+ggplot(data = MyTibble) + 
   geom_point(mapping = aes(x = variable1, y = variable2)) + 
   facet_wrap(~ aDiscreteVariable, nrow = 3)
 ```
@@ -1041,7 +1073,7 @@ ggplot(data = MyDataFrame) +
 Instead of generating a plot with points, we can use the function `geom_smooth` to create a plot with a smooth line fitted to our data.
 
 ```r
-ggplot(data = MyDataFrame) + 
+ggplot(data = MyTibble) + 
   geom_smooth(mapping = aes(x = variable1, y = variable2))
 ```
 ![](images/scatterplot5.PNG)
@@ -1053,14 +1085,14 @@ To remove the confidence interval, add `se=FALSE` to the code above.
 It is also possible to add points **and** a smooth line to any given scatterplot:
 
 ```r
-ggplot(data = MyDataFrame) +
+ggplot(data = MyTibble) +
   geom_point(mapping = aes(x = variable1, y = variable2)) +
   geom_smooth(mapping = aes(x = variable1, y = variable2))
 ```
 *or*
 
 ```r
-ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
+ggplot(data = MyTibble, mapping = aes (x = variable1, y= variable2) +
   geom_point()+
   geom_smooth()
 ```
@@ -1071,7 +1103,7 @@ ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
 You can also add different aesthetic values to different layers if you wish:
 
 ```r
-ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
+ggplot(data = MyTibble, mapping = aes (x = variable1, y= variable2) +
   geom_point(mapping = aes(color = variable3)+
   geom_smooth(color = "red")
 ```
@@ -1082,7 +1114,7 @@ ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
 With the function `geom_jitter()` we can add some degree of noise to the datapoints:
 
 ```r
-ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
+ggplot(data = MyTibble, mapping = aes (x = variable1, y= variable2) +
   geom_point(mapping = aes(color = variable3)+
   geom_smooth(color = "red")+
   geom_jitter()
@@ -1096,7 +1128,7 @@ ggplot(data = MyDataFrame, mapping = aes (x = variable1, y= variable2) +
 We use bar charts to plot the distribution of a **categorical** variable. To generate a bar chart with **ggplot2**, we can use the function `geom_bar`.
 
 ```r
-ggplot (data = MyDataFrame) +
+ggplot (data = MyTibble) +
   geom_bar (mapping =  aes (x = variable1))
 ```
 
@@ -1105,14 +1137,14 @@ ggplot (data = MyDataFrame) +
 In the example above, the y axis displays the number (count) of occurrences of the variable in question. We can also generate a barchart with the proportion of cases in the y axis:
 
 ```r
-ggplot (data = MyDataFrame) +
+ggplot (data = MyTibble) +
   geom_bar (mapping =  aes (x = variable1, y = stat(prop), group = 1))
 ```
 
 Conveniently, bar charts can also be color-coded with the `fill` argument:
 
 ```r
-ggplot (data = MyDataFrame) +
+ggplot (data = MyTibble) +
 geom_bar (mapping = aes (x = variable1, fill = variable1)
 ```
 
@@ -1121,7 +1153,7 @@ geom_bar (mapping = aes (x = variable1, fill = variable1)
 It may sometimes be hard to read long labels when the bars are displayed vertically, as in the example below:
 
 ```r
-ggplot (data = MyDataFrame) +
+ggplot (data = MyTibble) +
 geom_bar (mapping = aes (x = variable1, fill = variable1)
 ```
 
@@ -1140,7 +1172,7 @@ ggplot(data = MyDataFrame) +
 Instead of a stacked bar chart, we can also display our data as follows:
 
 ```r
-ggplot (data = MyDataFrame) +
+ggplot (data = MyTibble) +
 geom_bar (mapping = aes (x = variable1, fill = variable1) +
 coord_polar ()
 ```
@@ -1152,7 +1184,7 @@ coord_polar ()
 Boxplots can be used to display the distribution of a continuous variable broken down by a categorical variable. **ggplot2**  allows us to easily create boxplots with the `geom_boxplot()` function.
 
 ```r
-ggplot(data = MyDataFrame) +
+ggplot(data = MyTibble) +
   geom_boxplot (mapping = aes (x = variable1, y = variable2)
 ```
 
@@ -1161,7 +1193,7 @@ ggplot(data = MyDataFrame) +
 The order in which the boxplots are displayed can also be changed in order to reveal interesting patterns:
 
 ```r
-ggplot(data = myDataFrame) +
+ggplot(data = MyTibble) +
   geom_boxplot(mapping = aes(x=reorder (variable1, variable2, FUN = median), y = variable2))
 ```
 
@@ -1177,7 +1209,7 @@ Below is an illustration extracted from ![R for Data Science](https://r4ds.had.c
 We use histograms to plot the distribution of a **continuous** variable. To generate a histogram, we can use the function `geom_histogram()`.
 
 ```r
-ggplot (data = MyDataFrame) +
+ggplot (data = MyTibble) +
   geom_histogram (mapping = aes (x = variable1), binwidth = value)
 ```
 ![](images/histogram.PNG)
@@ -1189,7 +1221,7 @@ ggplot (data = MyDataFrame) +
 With the `geom_freqpoly()` function, we can generate frequency polygons to compare the distribution across the levels of a **categorical** variable:
 
 ```r
-ggplot(MyDataFrame, aes (variable1, colour = variable2))+
+ggplot(MyTibble, aes (variable1, colour = variable2))+
   geom_freqpoly (binwidth = value)
 ```
 
