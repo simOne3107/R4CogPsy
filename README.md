@@ -157,7 +157,6 @@ str_length (variable1)
 #### Installing packages in **R** ####
 
    
-
 In order to install a package in **R**, enter the following line of code in the console pane with the package name you wish to install, and press enter to run it. Do not forget to use quotation marks.
 
 ```r
@@ -170,6 +169,8 @@ Each package must be installed only once. However, each time you wish to use a p
 library (rmarkdown)
 ```
 
+
+When sharing a script with others, it is generally recommended to include all the packages needed to run your code. 
 
 ***************************************************************************************************************************************
 
@@ -186,13 +187,11 @@ library (powersim)
 library (tidyverse)
 ```
 
-When sharing a script with others, it is generally recommended to include all the packages needed to run your code. 
-
 ***************************************************************************************************************************************
 
 #### Useful built-in **R** functions ####
 
-1. To make regular **sequences** of numbers:
+- To make regular **sequences** of numbers:
 ```r
 seq (10,30)
 ```
@@ -200,17 +199,17 @@ seq (10,30)
 [1] 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
 ```
 
-2. To view an entire dataset:
+- To **view** an entire dataset:
 ```r
 View(MyDataFrame) # note the capitalized V in this function
 ```
 
-3. To check whether a value is missing:
+- To check whether a value is **missing**:
 ```r
 is.na(variable)
 ```
 
-4. To check how many values are missing:
+- To check **how many** values are **missing**:
 ```r
 sum(is.na(variable))
 ```
@@ -220,12 +219,12 @@ sum(is.na(variable))
 
 #### Useful built-in statistics functions in **R** ####
 
-1. Mean
+Mean
 ```r
 mean(variable)
 ```
 
-2. Standard deviation
+Standard deviation
 ```r
 sd(variable)
 ```
@@ -268,19 +267,19 @@ In case you have not created a project directory with all the files you will be 
 
 #### Exporting data files ####
 
-To save a dataframe as .csv:
+To save a dataframe as **.csv**:
 
 ```r
-write_csv (MyDataFrame, "MyDataFrame.csv")
+write_csv(MyDataFrame, "MyDataFrame.csv")
 ```
 
-To save a dataframe as .txt:
+To save a dataframe as **.txt**:
 
 ```r
-write_tsv (MyDataFrame, "MyDataFrame.txt")
+write_tsv(MyDataFrame, "MyDataFrame.txt")
 ```
 
-To save a plot as .pdf:
+To save a plot as **.pdf**:
 
 ```r
 ggsave ("MyDataFrame.pdf")
@@ -302,8 +301,6 @@ For best results, it is best to convert our data frames to **tibbles**. Tibbles 
 ```r
 as_tibble (MyDataFrame)
 ```
-
-Note that, in case one of your tibble's column name does not start with a letter, you will need to surround the column name with backticks in your code.
 
 If needed, a tibble can always be converted back to a data frame as follows:
 
