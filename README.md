@@ -20,7 +20,7 @@ Go to [rstudio.com](https://rstudio.com/products/rstudio/) to download **RStudio
 #### Creating a new project ####
 
 
-Ideally, a new RStudio project should be created for each data analysis project we run. By doing so, we can have everything related to that project (i.e., scripts, plots, data files, etc) all stored in the same place.
+Ideally, a new **RStudio** project should be created for each data analysis project we run. By doing so, we can have everything related to that project (i.e., scripts, plots, data files, etc) all stored in the same place.
 
 To **create a new project**, click on File > New Project > New Directory > New Project
 
@@ -129,6 +129,28 @@ Bananas + Apples
 [1] 1.39
 ```
 
+In addition to integers, variables can also contain letters in **R**. Note that quotations marks must be used when creating strings in **R**:
+
+```r
+variable1 <- "This entire sentence is a variable."
+```
+
+```r
+> variable1
+[1] "This entire sentence is a variable."
+```
+
+If you would like to find out the number of characters in a given string, you can use the `str_length()` function:
+
+```r
+str_length (variable1)
+```
+
+```r
+> str_length (variable1)
+[1] 35
+> 
+```
 
 ***************************************************************************************************************************************
 
@@ -242,6 +264,7 @@ If your data file does not contain column names, by adding `col_names = FALSE` t
 
 In case you have not created a project directory with all the files you will be using in your analysis, make sure to specify the whole path where the file(s) you want to open is (e.g., "C:/Users/username/Documents/folder/myfile.csv").
 
+***************************************************************************************************************************************
 
 #### Exporting data files ####
 
@@ -270,7 +293,7 @@ ggsave ("MyDataFrame.pdf")
 
 # Data pre-processing #
 
-With a number of different functions from the **tidyverse** package, we can tidy up and our dataset before performing any statistical analyses. Among other things, **tidyverse** allows us to subset observations by their values, select the variables we are interested in, and group the data by variable.
+With a number of different functions from the **tidyverse** package, we can tidy up our dataset before performing any statistical analyses. Among other things, **tidyverse** allows us to subset observations by their values, select the variables we are interested in, and group the data by variable.
 
 #### Creating tibbles ####
 
