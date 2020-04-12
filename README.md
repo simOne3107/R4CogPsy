@@ -136,7 +136,6 @@ variable1 <- "This entire sentence is a variable."
 ```
 
 ```r
-> variable1
 [1] "This entire sentence is a variable."
 ```
 
@@ -147,9 +146,7 @@ str_length (variable1)
 ```
 
 ```r
-> str_length (variable1)
 [1] 35
-> 
 ```
 
 ***************************************************************************************************************************************
