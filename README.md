@@ -28,14 +28,14 @@ Then, assign a sensible name to the new project and choose the location in your 
 
 Click on File > Save
 
-Then, give your new **R** script a sensible name.
+You should then give your new **R** script a sensible name.
 
 ***************************************************************************************************************************************
 
 #### Using **R** as a calculator ####
 
 
-One of the simplest and easiest things you can do in R is to use it as a calculator. Type the operation in the console pane, and then press **enter** to run it.
+One of the simplest and easiest things you can do in **R** is to use it as a calculator. Type the operation in the console pane, and then press **enter** to run it.
 
 - Addition
 ```r
@@ -91,7 +91,7 @@ sqrt (9)
 #### Creating variables ####
 
 
-In **R**, you can easily create `variables` and assign different values to them. By using the symbol `<-`, we assign the value on its right to the `variable` on its left. You can see in the examples below that pretty much anything can be used as a variable's name:
+In **R**, you can easily create `variables` and assign different values to them. By using the symbol `<-`, we assign the value on the right to the `variable` on the left. You can see in the examples below that pretty much anything can be used as a variable's name:
 
 ```r
 NewVariable <- 2 + 2
@@ -104,7 +104,7 @@ word.count <- 16785
 **Alt** + **-** can be used as a shortcut for `<-`
 
 
-The new `variable` will be stored in **R**. Type the variable's name in the **R** console to inspect the value which is associated with it. Note that **R** is case sensitive so make sure you type any variables' names appropriately.
+The new `variable` will be stored in **R**. Type the variable's name in the **R** console to inspect the value which is associated with it. Note that **R** is case sensitive so make sure that any variables' names are properly typed.
 
 ```r
 NewVariable
@@ -154,7 +154,7 @@ str_length (variable1)
 #### Installing packages in **R** ####
 
    
-In order to install a package in **R**, enter the following line of code in the console pane with the package name you wish to install, and press enter to run it. Do not forget to use quotation marks.
+In order to install a package in **R**, enter the following line of code with the package name you wish to install, and press enter to run it. Do not forget to use quotation marks.
 
 ```r
 install.packages ("rmarkdown")
@@ -216,12 +216,12 @@ sum(is.na(variable))
 
 #### Useful built-in statistics functions in **R** ####
 
-Mean
+- Mean
 ```r
 mean(variable)
 ```
 
-Standard deviation
+- Standard deviation
 ```r
 sd(variable)
 ```
@@ -281,8 +281,6 @@ To save a plot as **.pdf**:
 ```r
 ggsave ("MyDataFrame.pdf")
 ```
-
-
 
 
 ***************************************************************************************************************************************
