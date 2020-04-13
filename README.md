@@ -181,6 +181,7 @@ library (broom)
 library (ggplot2)
 library (lme4)
 library (powersim)
+library (rmarkdown)
 library (tidyverse)
 ```
 
@@ -276,11 +277,36 @@ To save a dataframe as **.txt**:
 write_tsv(MyDataFrame, "MyDataFrame.txt")
 ```
 
-To save a plot as **.pdf**:
+To save the most recent plot as **.pdf**:
 
 ```r
 ggsave ("MyDataFrame.pdf")
 ```
+
+
+***************************************************************************************************************************************
+
+
+# R Markdown #
+
+With an **R Markdown** document, we can easily share our code, results, and comments with other researchers. **R Markdown** can be used to produce HTML and PDF documents, among other types of output.
+
+To create a new **R Markdown** file, select File > New File > R Markdown.
+
+Insert chunks of code in your **R Markdown** by typing three backticks followed by an **r** inside curly brackets **{}**. Each chunk of code can also be given an optional name. For example:
+```r 
+```{r setup, include = FALSE} 
+library (ggplot2)
+library (tidyverse)
+```
+
+If you want to run a given code, but do not want to display the code or the results in the final document, make sure to include a `include = FALSE`.
+
+If you do not want a given chunk of code to be run (e.g., when you wish to share an example code), make sure to include `eval = FALSE` in your **R Markdown**.
+
+If you want to display the results in the **R Markdown** document but not the underlying code, make sure to include `echo = FALSE`.
+
+If you have long computations in your code, it is a good idea to include `cache = TRUE` to save time when re-running a given chunk.
 
 
 ***************************************************************************************************************************************
@@ -1024,7 +1050,7 @@ ggplot(data = MyTibble) +
 ```
 ![](images/scatterplot.PNG)
 
-By changing or adding further levels to `aes`, the aesthetic properties of a scatterplot, we can change the size, the shape or even the colour of the data points. 
+By changing or adding further levels to `aes`, i.e., the aesthetic properties of a scatterplot, we can change the size, the shape or even the colour of the data points. 
 
 ```r
 ggplot(data = MyTibble) + 
@@ -1136,6 +1162,23 @@ ggplot(data = MyTibble, mapping = aes (x = variable1, y= variable2) +
 ```
 
 ![](images/scatterplot8.PNG)
+
+
+We can also add a **title**, a **subtitle**, and a **caption** to any plot with the `labs()` function and/or change the default legend titles in the x and/or y axis.
+
+```r
+ggplot(data = MyTibble, mapping = aes (x = variable1, y= variable2) +
+  geom_point(mapping = aes(color = variable3)+
+  geom_smooth(color = "red")+
+  labs(
+    title = "Whatever title you wish",
+    subtitle = "Additional detail which will be added below the title",
+    caption = "Further text which will be added at the bottom right of the plot",
+    x = "New legend for the x axis",
+    y = "New legend for the y axis"
+```
+
+
 
 
 #### Bar charts ####
