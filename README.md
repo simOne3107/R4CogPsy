@@ -1,6 +1,6 @@
 # Welcome to **R** 4 CogPsy
 
-Here you will find everything I have been learning about **R** and statistics. I hope my notes will be useful to other research students struggling with R and statistics.
+Here you will find everything I have been learning about **R** and statistics. I hope my notes will be useful to other research students struggling with **R** and statistics.
 
 ***************************************************************************************************************************************
 
@@ -35,7 +35,7 @@ You should then give your new **R** script a sensible name.
 #### Using **R** as a calculator ####
 
 
-One of the simplest and easiest things you can do in **R** is to use it as a calculator. Type the operation in the console pane, and then press **enter** to run it.
+One of the simplest and easiest things you can do in **R** is to use it as a calculator. Type the operation in the console or in the editor window, and then press **enter** to run it.
 
 - Addition
 ```r
@@ -85,6 +85,7 @@ sqrt (9)
 [1] 256
 ```
 
+Note that working in the **editor** window rather than in the **console** pane in **R** allows us to save codes and commands which we can then recycle for future use.
 
 ***************************************************************************************************************************************
 
@@ -100,11 +101,13 @@ Bananas <- 0.50
 Apples <- 0.89
 reaction_time <- 567
 word.count <- 16785
+odd_numbers <- c(1,3,5,7)
 ```
 **Alt** + **-** can be used as a shortcut for `<-`
 
+`c()` is the **concatenate** function, which allows us to group things together.
 
-The new `variable` will be stored in **R**. Type the variable's name in the **R** console to inspect the value which is associated with it. Note that **R** is case sensitive so make sure that any variables' names are properly typed.
+The new `variable` will be stored in **R**. Type the variable's name in the **R** console to inspect the value which is associated with it. Note that **R** is case sensitive so be careful when typing any variables' names or commands.
 
 ```r
 NewVariable
@@ -113,7 +116,7 @@ NewVariable
 [1] 4
 ```
 
-You can also perform simple mathematical operations with one or more previously stored `variables`:
+We can also perform simple mathematical operations with one or more previously stored `variables`:
 
 ```r
 Bananas * 4
@@ -129,7 +132,7 @@ Bananas + Apples
 [1] 1.39
 ```
 
-In addition to integers, variables can also contain letters in **R**. Note that quotations marks must be used when creating strings in **R**:
+In addition to integers, variables can also contain non-numeric elements in **R**. To create strings in **R**, we must use quotation marks:
 
 ```r
 variable1 <- "This entire sentence is a variable."
@@ -139,7 +142,9 @@ variable1 <- "This entire sentence is a variable."
 [1] "This entire sentence is a variable."
 ```
 
-If you would like to find out the number of characters in a given string, you can use the `str_length()` function:
+Note that if we place numeric values in quotes, **R** will treat them as text rather than as numbers.
+
+If we would like to find out the number of characters in a given string, we can use the `str_length()` function:
 
 ```r
 str_length (variable1)
@@ -166,8 +171,16 @@ Each package must be installed only once. However, each time you wish to use a p
 library (rmarkdown)
 ```
 
+Occasionally two different packages may have used the same name for two different functions. If you have both packages loaded in a given session, you need to specify from which package you would like the function to come from. You can do so with the following line of code:
+
+```r
+packagename::functionname()
+```
+
+
 
 When sharing a script with others, it is generally recommended to include all the packages needed to run your code. 
+ 
 
 ***************************************************************************************************************************************
 
@@ -257,9 +270,9 @@ To open files with any delimiter, you can use the `read_delim()` function:
 MyDataFrame <- read_delim ("myfile.txt")
 ```
 
-If your data file does not contain column names, by adding `col_names = FALSE` to your line of code, the first row in the data frame will not be treated as headings.
+If our data file does not contain column names, by adding `col_names = FALSE` to our line of code, the first row in the data frame will not be treated as a heading.
 
-In case you have not created a project directory with all the files you will be using in your analysis, make sure to specify the whole path where the file(s) you want to open is (e.g., "C:/Users/username/Documents/folder/myfile.csv").
+In case a project directory with all the files we will be using in our analysis has not been created, we need to make sure to specify the whole path where the file(s) we want to open is (e.g., "C:/Users/username/Documents/folder/myfile.csv").
 
 ***************************************************************************************************************************************
 
