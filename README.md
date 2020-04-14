@@ -1238,7 +1238,21 @@ ggplot (data = MyTibble) +
   geom_bar (mapping =  aes (x = variable1, y = stat(prop), group = 1))
 ```
 
-We can also add
+We can also easily add **error bars** to bar charts in **R**. To do that, we need to add the `stat_summary()` function to our code. Instead of having graphs with the raw values displayed, by adding the `stat_summary()` function to our code, we can have the mean, median, etc in our plots.
+
+```r
+ggplot (data = MyTibble, aes (variable1, variable2)) +
+ stat_summary (fun.y = mean, geom = "bar", fill = "whateverColor", color = "whateverColor") +
+ stat_summary (fun.data = mean_cl_normal, geom = "errorbar")
+```
+```r
+ggplot (data = experimental, aes (participant, RT)) +
+  stat_summary (fun.y = mean, geom = "bar", fill = "white", color = "black") +
+  stat_summary (fun.data = mean_cl_normal, geom = "errorbar")
+```
+![](images/errorbar.PNG)
+
+Note that `fun.y` is a function specified for individual points, whereas `fun.data` refers to the entire dataset. Also, instead of an **errorbar**, we can add a **pointrange** to our bar chart.
 
 
 Conveniently, bar charts can also be color-coded with the `fill` argument:
