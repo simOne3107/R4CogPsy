@@ -1252,7 +1252,7 @@ ggplot (data = experimental, aes (participant, RT)) +
 ```
 ![](images/errorbar.PNG)
 
-Note that `fun.y` is a function specified for individual points, whereas `fun.data` refers to the entire dataset. Also, instead of an **errorbar**, we can add a **pointrange** to our bar chart.
+Note that `fun.y` is a function specified for individual points, whereas `fun.data` refers to the entire dataset. Also, instead of an **errorbar**, we can add a **pointrange** to our bar chart. Additionally, if you do not want the the error bars to be as wide as the bars, add a `width = 0.2` to the second `stat_summary()` layer above.
 
 
 Conveniently, bar charts can also be color-coded with the `fill` argument:
@@ -1264,7 +1264,45 @@ geom_bar (mapping = aes (x = variable1, fill = variable1)
 
 ![](images/barchart3.PNG)
 
-It may sometimes be hard to read long labels when the bars are displayed vertically, as in the example below:
+
+We can also have a bar chart in which a third variable determines the colors of the bars:
+
+```r
+ggplot (data = MyTibble, aes (variable1, variable2, fill = variable3))+
+ stat_summary (fun.y = mean, geom = "bar", position = "dodge") +
+ stat_summary (fun.data = mean_cl_normal, geom = "errorbar", position = position_dodge (width = 0.90), width = 0.2)
+```
+
+```r
+ggplot (data = experimental2, aes (participant, RT, fill = gender)) +
+  stat_summary (fun.y = mean, geom = "bar", position = "dodge") +
+  stat_summary (fun.data = mean_cl_normal, geom = "errorbar", position = position_dodge(width=0.90), width = 0.2)
+```
+
+![](images/errorbar2.PNG)
+
+In the example above, `position = "dodge"` ensures that the bars representing the third variable are displayed **side-by-side** rather than behind each other.
+
+
+Another way to display the above graphically is to add the third variable as a facet rather than as an aesthetic value:
+
+```r
+ggplot (MyTibble, aes (variable1, variable2, fill = variable1)) +
+  stat_summary (fun.y = mean, geom = "bar") +
+  stat_summary (fun.data = mean_cl_normal, geom = "errorbar", width = 0.2) +
+  facet_wrap (~variable3)
+```
+
+```r
+ggplot (experimental2, aes (participant, RT, fill = participant)) +
+  stat_summary (fun.y = mean, geom = "bar") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2) +
+  facet_wrap(~gender)
+```
+
+![](images/errorbar3.PNG)
+
+It may sometimes be hard to read **long labels** when the bars are displayed vertically, as in the example below:
 
 ```r
 ggplot (data = MyTibble) +
