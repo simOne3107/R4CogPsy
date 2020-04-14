@@ -284,7 +284,7 @@ MyDataFrame <- read_delim ("myfile.txt")
 
 If our data file does not contain any column names, by adding `col_names = FALSE` to our line of code, the first row in the data frame will not be treated as a heading.
 
-In case a project directory with all the files we will be using in our analysis has not been created, we need to make sure to specify the whole path where the file(s) we want to open is (e.g., "C:/Users/username/Documents/folder/myfile.csv").
+In case you have not created a project directory with all the files you will be using in your analysis, you need to make sure to specify the whole path where the file(s) you want to open is/are (e.g., "C:/Users/username/Documents/folder/myfile.csv").
 
 If you do not wish to use **readr** to import files, **R** also has built-in functions which allow us to open files with any delimiter:
 
@@ -293,7 +293,7 @@ MyDataFrame <- read.csv("myfile.csv", header = TRUE)
 ```
 
 ```r
-MyDataFrame <- read.delim ("myfile.txt, header = TRUE)
+MyDataFrame <- read.delim ("myfile.txt", header = TRUE)
 ```
 
 
@@ -331,9 +331,10 @@ To create a new **R Markdown** file, select File > New File > R Markdown.
 
 Insert chunks of code in your **R Markdown** by typing three backticks followed by an **r** inside curly brackets **{}**. Each chunk of code can also be given an optional name. For example:
 ```r 
-```{r setup, include = FALSE} 
+'''{r setup, include = FALSE} 
 library (ggplot2)
 library (tidyverse)
+'''
 ```
 
 If you want to run a given code, but do not want to display the code or the results in the final document, make sure to include a `include = FALSE`.
@@ -1223,7 +1224,7 @@ ggplot(data = MyTibble, mapping = aes (x = variable1, y= variable2) +
 
 #### Line graphs ####
 
-Below you will find an example of a line graph for **one** independent variable:
+Line graphs are a very useful tool to display progression of a variable over time. Below you will find an example of a line graph for **one** independent variable created with **ggplot2**:
 
 ```r
 ggplot (MyTibble, aes (variable1, variable2)) +
