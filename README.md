@@ -37,7 +37,7 @@ You should then give your new **R** script a sensible name.
 
 One of the simplest and easiest things you can do in **R** is to use it as a calculator. Type the operation in the console or in the editor window, and then press **enter** to run it.
 
-- Addition
+Addition:
 ```r
 1 + 1
 ```
@@ -45,7 +45,7 @@ One of the simplest and easiest things you can do in **R** is to use it as a cal
 [1] 2
 ```
 
-- Subtraction
+Subtraction:
 ```r
 3 - 1
 ```
@@ -53,7 +53,7 @@ One of the simplest and easiest things you can do in **R** is to use it as a cal
 [1] 2
 ```
 
-- Multiplication
+Multiplication:
 ```r
 4 * 5
 ```
@@ -61,7 +61,7 @@ One of the simplest and easiest things you can do in **R** is to use it as a cal
 [1] 20
 ```
 
-- Division
+Division:
 ```r
 40 / 5
 ```
@@ -69,7 +69,7 @@ One of the simplest and easiest things you can do in **R** is to use it as a cal
 [1] 8
 ```
 
-- Square root
+Square root:
 ```r
 sqrt (9)
 ```
@@ -77,7 +77,7 @@ sqrt (9)
 [1] 3
 ```
 
-- Exponentiation
+Exponentiation:
 ```r
 4^4
 ```
@@ -192,6 +192,7 @@ Below is a list of packages which I have been using for data analysis, data wran
 ```r
 library (broom)
 library (ggplot2)
+library (Hmisc)
 library (lme4)
 library (powersim)
 library (rmarkdown)
@@ -251,6 +252,10 @@ sd(variable)
 To run the entire script in one step:
 
 **Ctrl** + **Shift** + **S**
+
+To generate a `<-`:
+
+**Alt** + **-**
 
 ***************************************************************************************************************************************
 
@@ -1232,6 +1237,9 @@ In the example above, the y axis displays the number (count) of occurrences of t
 ggplot (data = MyTibble) +
   geom_bar (mapping =  aes (x = variable1, y = stat(prop), group = 1))
 ```
+
+We can also add
+
 
 Conveniently, bar charts can also be color-coded with the `fill` argument:
 
