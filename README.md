@@ -132,7 +132,7 @@ Bananas + Apples
 [1] 1.39
 ```
 
-In addition to integers, variables can also contain non-numeric elements in **R**. To create strings in **R**, we must use quotation marks:
+In addition to integers, variables can also contain non-numeric elements in **R**. To create string variables in **R**, we must use quotation marks:
 
 ```r
 variable1 <- "This entire sentence is a variable."
@@ -202,7 +202,7 @@ library (tidyverse)
 
 #### Useful built-in **R** functions ####
 
-- To make regular **sequences** of numbers:
+To make regular **sequences** of numbers:
 ```r
 seq (10,30)
 ```
@@ -210,32 +210,36 @@ seq (10,30)
 [1] 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
 ```
 
-- To **view** an entire dataset:
+To **view** an entire dataset:
 ```r
 View(MyDataFrame) # note the capitalized V in this function
 ```
 
-- To check whether a value is **missing**:
+To check whether a value is **missing**:
 ```r
 is.na(variable)
 ```
-
-- To check **how many** values are **missing**:
+To check **how many** values are **missing**:
 ```r
 sum(is.na(variable))
 ```
+Note that, in **R**, `NA` stands for "Not Available".
 
+To generate a sequence of **repeated** numbers:
+```r
+rep (numberToRepeat, howManyRepetitions)
+```
 
 ***************************************************************************************************************************************
 
 #### Useful built-in statistics functions in **R** ####
 
-- Mean
+Mean
 ```r
 mean(variable)
 ```
 
-- Standard deviation
+Standard deviation
 ```r
 sd(variable)
 ```
@@ -270,9 +274,20 @@ To open files with any delimiter, you can use the `read_delim()` function:
 MyDataFrame <- read_delim ("myfile.txt")
 ```
 
-If our data file does not contain column names, by adding `col_names = FALSE` to our line of code, the first row in the data frame will not be treated as a heading.
+If our data file does not contain any column names, by adding `col_names = FALSE` to our line of code, the first row in the data frame will not be treated as a heading.
 
 In case a project directory with all the files we will be using in our analysis has not been created, we need to make sure to specify the whole path where the file(s) we want to open is (e.g., "C:/Users/username/Documents/folder/myfile.csv").
+
+If you do not wish to use **readr** to import files, **R** also has built-in functions which allow us to open files with any delimiter:
+
+```r
+MyDataFrame <- read.csv("myfile.csv", header = TRUE)
+```
+
+```r
+MyDataFrame <- read.delim ("myfile.txt, header = TRUE)
+```
+
 
 ***************************************************************************************************************************************
 
@@ -293,7 +308,7 @@ write_tsv(MyDataFrame, "MyDataFrame.txt")
 To save the most recent plot as **.pdf**:
 
 ```r
-ggsave ("MyDataFrame.pdf")
+ggsave ("MyDataFrame.pdf") # or .png, .jpeg
 ```
 
 
@@ -326,11 +341,17 @@ If you have long computations in your code, it is a good idea to include `cache 
 
 # Data pre-processing #
 
-With a number of different functions from the **tidyverse** package, we can tidy up our dataset before performing any statistical analyses. Among other things, **tidyverse** allows us to subset observations by their values, select the variables we are interested in, and group the data by variable.
+
+**R** has a number of built-in functions which conveniently allows us to pre-process our data. However, some of the most useful **R** packages for data pre-processing can be found in the **tidyverse**, a powerful collection of packages for data science. With a number of different functions from the **tidyverse** package, we can tidy up our dataset before performing any statistical analyses. Among other things, **tidyverse** allows us to subset observations by their values, select the variables we are interested in, and group the data by variable.
+
+
+![](images/tidyverse.PNG)
+Image extracted from [medium.com](https://medium.com/@kadek/how-to-install-the-tidyverse-r-via-homebrew-macos-10-14-d749d2136cf1)
+
 
 #### Creating tibbles ####
 
-For best results, it is best to convert our data frames to **tibbles**. Tibbles are an improved type of data frame used in all **tidyverse** packages. Each column name in a tribble is also accompanied by its type.
+For best results, it is best to convert our data frames to **tibbles**. Tibbles are an improved type of data frame used in all **tidyverse** packages. Each column name in a tibble is also accompanied by its type.
 
 ```r
 as_tibble (MyDataFrame)
@@ -1055,7 +1076,7 @@ At least one layer should be added to the function above, otherwise we will have
 
 #### Scatterplots ####
 
-Scatterplots are useful to visualise the covariation between two **continuous** variables. If you want to create a **scatterplot**, you can use the function `geom_point( )` which will add data points to the aforementioned coordinate system. 
+Scatterplots are useful to visualise the relationship between two **continuous** variables. If you want to create a **scatterplot**, you can use the function `geom_point( )` which will add data points to the aforementioned coordinate system. 
 
 ```r
 ggplot(data = MyTibble) + 
@@ -1271,7 +1292,7 @@ ggplot(data = MyTibble) +
 ![](images/boxplot2.PNG)
 
 
-Below is an illustration extracted from ![R for Data Science](https://r4ds.had.co.nz/) showing how to interpret boxplots:
+Below is an illustration extracted from [R for Data Science](https://r4ds.had.co.nz/) showing how to interpret boxplots:
 
 <img src = "https://d33wubrfki0l68.cloudfront.net/153b9af53b33918353fda9b691ded68cd7f62f51/5b616/images/eda-boxplot.png">
 
