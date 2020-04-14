@@ -7,7 +7,7 @@ Here you will find everything I have been learning about **R** and statistics. I
 # Basics #
 #### Downloading R ####
 
-Go to [CRAN](https://cloud.r-project.org), the Comprehensive R Archive Network, to download **R** for free.
+Go to [CRAN](https://cloud.r-project.org), the **C**omprehensive **R** **A**rchive **N**etwork, to download **R** for free.
 
 
 ***************************************************************************************************************************************
@@ -20,7 +20,7 @@ Go to [rstudio.com](https://rstudio.com/products/rstudio/) to download **RStudio
 #### Creating a new project ####
 
 
-Ideally, a new **RStudio** project should be created for each data analysis project we run. By doing so, we can have everything related to that project (i.e., scripts, plots, data files, etc) all stored in the same place.
+Ideally, a new **RStudio** project should be created for each data analysis project we run. By doing so, we can have everything related to that project (i.e., scripts, plots, data files, etc) all stored in the same location.
 
 To **create a new project**, click on File > New Project > New Directory > New Project
 
@@ -191,10 +191,13 @@ Below is a list of packages which I have been using for data analysis, data wran
 
 ```r
 library (broom)
+library (car)
 library (ggplot2)
 library (Hmisc)
 library (lme4)
+library (pastecs)
 library (powersim)
+library (psych)
 library (rmarkdown)
 library (tidyverse)
 ```
@@ -356,7 +359,7 @@ Image extracted from [medium.com](https://medium.com/@kadek/how-to-install-the-t
 
 #### Creating tibbles ####
 
-For best results, it is best to convert our data frames to **tibbles**. Tibbles are an improved type of data frame used in all **tidyverse** packages. Each column name in a tibble is also accompanied by its type.
+For best results, it is best to convert our data frames to **tibbles**. Tibbles are an improved type of data frame used in all **tidyverse** packages. Unlike regular data frames, each column name in a tibble is also accompanied by its type.
 
 ```r
 as_tibble (MyDataFrame)
@@ -1218,6 +1221,30 @@ ggplot(data = MyTibble, mapping = aes (x = variable1, y= variable2) +
 ```
 
 
+#### Line graphs ####
+
+Below you will find an example of a line graph for **one** independent variable:
+
+```r
+ggplot (MyTibble, aes (variable1, variable2)) +
+ stat_summary (fun.y = mean, geom = "point") +
+ stat_summary (fun.y = mean, geom = "line", aes (group = 1), colour = "whateverColour", linetype = "whateverType")+
+ stat_summary (fun.data = mean_cl_normal, geom = "errorbar", width = 0.2) +
+ labs (x = "Variable1", y = "Variable2)
+```
+
+```r
+ggplot (Blocks, aes (block, RT)) +
+  stat_summary (fun.y = mean, geom = "point") +
+  stat_summary (fun.y = mean, geom = "line", aes (group = 1), colour = "Blue", linetype = "dashed") +
+  stat_summary (fun.data = mean_cl_normal, geom = "errorbar", width = 0.2) +
+  labs (x = "Block", y = "Reaction Time")
+```
+
+![](images/linegraph.PNG)
+
+Note that for categorical variables to be plotted in **R** with the **ggplot2** package, we need to first convert that variable to a **factor** with the `factor()` function.
+
 
 
 #### Bar charts ####
@@ -1393,7 +1420,7 @@ ggplot(diamonds, aes(x = variable1, y =..density..)) +
 
 ***************************************************************************************************************************************
 
-# Exploratory Data Analysis #
+# Proper Stats #
 
 
 
