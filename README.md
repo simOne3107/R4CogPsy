@@ -26,11 +26,70 @@ To **create a new project**, click on File > New Project > New Directory > New P
 
 Then, assign a sensible name to the new project and choose the location in your computer in which the project should be saved.
 
-Click on File > Save
+Click on File > Save to save your new **R** script.
 
-You should then give your new **R** script a sensible name.
 
 ***************************************************************************************************************************************
+
+#### Installing packages in **R** ####
+
+   
+In order to install a package in **R**, enter the following line of code with the package name you wish to install, and press enter to run it. Do not forget to use quotation marks.
+
+```r
+install.packages ("rmarkdown")
+```
+
+Each package must be installed only once. However, each time you wish to use a previously installed package in a new session, you must reload that package with the `library( )` function:
+
+```r
+library (rmarkdown)
+```
+
+Occasionally two different packages may have used the same name for two different functions. If you have both packages loaded in a given session, you need to specify from which package you would like the function to come from. You can do so with the following line of code:
+
+```r
+packagename::functionname()
+```
+
+
+When sharing a script with others, it is generally recommended to include all the packages needed to run your code. 
+ 
+
+***************************************************************************************************************************************
+
+#### Useful **R** packages ####
+
+
+Below is a list of packages which I have been using for data analysis, data wrangling, and data visualization in **R**:
+
+```r
+library (broom)
+library (car)
+library (ggplot2)
+library (Hmisc)
+library (lme4)
+library (pastecs)
+library (powersim)
+library (psych)
+library (rmarkdown)
+library (tidyverse)
+```
+
+***************************************************************************************************************************************
+
+
+#### Updating packages in **R** ####
+
+To update all installed **R** packages at once:
+
+```r
+update.packages()
+```
+
+
+***************************************************************************************************************************************
+
 
 #### Using **R** as a calculator ####
 
@@ -156,53 +215,6 @@ str_length (variable1)
 
 ***************************************************************************************************************************************
 
-#### Installing packages in **R** ####
-
-   
-In order to install a package in **R**, enter the following line of code with the package name you wish to install, and press enter to run it. Do not forget to use quotation marks.
-
-```r
-install.packages ("rmarkdown")
-```
-
-Each package must be installed only once. However, each time you wish to use a previously installed package in a new session, you must reload that package with the `library( )` function:
-
-```r
-library (rmarkdown)
-```
-
-Occasionally two different packages may have used the same name for two different functions. If you have both packages loaded in a given session, you need to specify from which package you would like the function to come from. You can do so with the following line of code:
-
-```r
-packagename::functionname()
-```
-
-
-
-When sharing a script with others, it is generally recommended to include all the packages needed to run your code. 
- 
-
-***************************************************************************************************************************************
-
-#### Useful **R** packages ####
-
-
-Below is a list of packages which I have been using for data analysis, data wrangling, and data visualization in **R**:
-
-```r
-library (broom)
-library (car)
-library (ggplot2)
-library (Hmisc)
-library (lme4)
-library (pastecs)
-library (powersim)
-library (psych)
-library (rmarkdown)
-library (tidyverse)
-```
-
-***************************************************************************************************************************************
 
 #### Useful built-in **R** functions ####
 
@@ -295,7 +307,6 @@ MyDataFrame <- read.csv("myfile.csv", header = TRUE)
 ```r
 MyDataFrame <- read.delim ("myfile.txt", header = TRUE)
 ```
-
 
 ***************************************************************************************************************************************
 
