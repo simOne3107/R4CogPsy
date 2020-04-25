@@ -330,6 +330,26 @@ To save the most recent plot as **.pdf**:
 ggsave ("MyDataFrame.pdf") # or .png, .jpeg
 ```
 
+***************************************************************************************************************************************
+
+#### Combining multiple CSV files ####
+
+In **R**, we can easily combine multiple **.csv** files with only a couple of lines of code:
+
+First, make sure all the files you wish to combine have identical column names. Second, all the **.csv** files you wish to combine must all be stored in the same working directory. Note that there should be no other **.csv** files in that directory. 
+
+```r 
+csvFiles <- list.files (pattern="*.csv")
+combined.csvFiles <- do.call ("rbind", lapply(csvFiles, read.csv, header = TRUE, fill = TRUE))
+```
+
+As previously explained, you can export the combined data as a single **.csv** file:
+
+```r
+write.csv (combined.csvFiles, "combinedcsvFiles.csv", row.names=FALSE)
+```
+
+
 
 ***************************************************************************************************************************************
 
