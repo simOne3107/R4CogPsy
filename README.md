@@ -1455,6 +1455,68 @@ ggplot(diamonds, aes(x = variable1, y =..density..)) +
 # Proper Stats #
 
 
+#### Testing assumptions ####
+
+The assumptions of parametric tests are:
+
+1. Normally distributed data
+2. Homogeneity of variance
+3. Interval data
+4. Independence
+
+Let's start with the first assumption (i.e., whether the data are normally distributed). One of the ways in which we can check whether that assumption has been met is through visual inspection. There are two graphs which we can generate to perform visual inspection of our data. The first one is a **histogram**:
+
+```r
+MyHistogram <- ggplot (MyTibble, aes (variable1)) + opts (legend.position = "none") +
+geom_histogram (aes(y = ..density..), colour = "black", fill = "white")+
+labs (x = "Whatever label you wish", y = "Density")
+```
+
+We must add the `aes(y=..density..)` above because we want a **density** rather than a **frequency** plot. Then we can add the ""normal curve"" to the histogram above with the `stat_function` command and the `dnorm()` function:
+
+```r
+MyHistogram + stat_function (fun = dnorm, args = list (mean = mean(MyTibble$variable1, na.rm = TRUE), sd = sd(MyTibble$variable1, na.rm = TRUE)), colour = "black", size = 1)
+```
+
+```r
+hist.depth <- ggplot(data = diamonds, aes (depth)) +
+  geom_histogram(aes(y = ..density..), colour = "black", fill = "white")+
+  labs (x = "Price", y = "Density") +
+  stat_function(fun = dnorm, args = list(mean(diamonds$depth, na.rm= TRUE), sd = sd(diamonds$depth, na.rm = TRUE)),colour = "black", size = 1)
+```
+
+![](images/histogram2.PNG)
+
+
+The second graph we can generate to visually inspect whether our data are normally distributed is a **Q-Q plot**. In a **Q-Q plot**, any values deviating away from the diagonal of the plot indicate deviations from normality.
+
+
+```r
+MyqqPlot <- qplot(sample= MyTibble$variable1, stat = "qq")
+```
+
+![](images/qqplot.PNG)
+
+We can also look at measures of **skewness** and **kurtosis** to check whether our data are normally distributed. Values which are very close to zero suggest that the data come from a normal distribution. We can use the `describe()` function from the **psych** package to get the skew and kurtosis values of a given variable:
+
+```r
+describe(MyTibble$variable1)
+``
+
+```r
+> describe(diamonds$depth)
+   vars     n  mean   sd median trimmed  mad min max range  skew kurtosis   se
+X1    1 53940 61.75 1.43   61.8   61.78 1.04  43  79    36 -0.08     5.74 0.01
+
+> describe(diamonds$price)
+   vars     n   mean      sd median trimmed     mad min   max range skew kurtosis    se
+X1    1 53940 3932.8 3989.44   2401 3158.99 2475.94 326 18823 18497 1.62     2.18 17.18
+> 
+```
+
+<img src = "https://www.excelr.com/assets/admin/ckfinder/userfiles/images/news/icons/mind%20map/blogs/blogs1/blogs2/blogs3/blogs4/1_8.jpg">
+
+Image extracted from [www.excel.r.com](https://www.excelr.com/assets/admin/ckfinder/userfiles/images/news/icons/mind%20map/blogs/blogs1/blogs2/blogs3/blogs4/1_8.jpg)
 
 
 
