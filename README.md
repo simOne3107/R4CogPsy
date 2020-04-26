@@ -1472,17 +1472,19 @@ geom_histogram (aes(y = ..density..), colour = "black", fill = "white")+
 labs (x = "Whatever label you wish", y = "Density")
 ```
 
-We must add the `aes(y=..density..)` above because we want a **density** rather than a **frequency** plot. Then we can add the ""normal curve"" to the histogram above with the `stat_function` command and the `dnorm()` function:
+We must add the `aes(y=..density..)` above because we want a **density** rather than a **frequency** plot. Then we can add the **normal curve** to the histogram above with the `stat_function` command and the `dnorm()` function:
 
 ```r
-MyHistogram + stat_function (fun = dnorm, args = list (mean = mean(MyTibble$variable1, na.rm = TRUE), sd = sd(MyTibble$variable1, na.rm = TRUE)), colour = "black", size = 1)
+MyHistogram + stat_function (fun = dnorm, args = list (mean = mean(MyTibble$variable1, na.rm = TRUE), 
+sd = sd(MyTibble$variable1, na.rm = TRUE)), colour = "black", size = 1)
 ```
 
 ```r
 hist.depth <- ggplot(data = diamonds, aes (depth)) +
   geom_histogram(aes(y = ..density..), colour = "black", fill = "white")+
   labs (x = "Price", y = "Density") +
-  stat_function(fun = dnorm, args = list(mean(diamonds$depth, na.rm= TRUE), sd = sd(diamonds$depth, na.rm = TRUE)),colour = "black", size = 1)
+  stat_function(fun = dnorm, args = list(mean(diamonds$depth, na.rm= TRUE), 
+  sd = sd(diamonds$depth, na.rm = TRUE)),colour = "black", size = 1)
 ```
 
 ![](images/histogram2.PNG)
@@ -1501,7 +1503,7 @@ We can also look at measures of **skewness** and **kurtosis** to check whether o
 
 ```r
 describe(MyTibble$variable1)
-``
+```
 
 ```r
 > describe(diamonds$depth)
