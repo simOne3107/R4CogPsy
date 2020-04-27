@@ -235,6 +235,7 @@ To check whether a value is **missing**:
 ```r
 is.na(variable)
 ```
+
 To check **how many** values are **missing**:
 ```r
 sum(is.na(variable))
@@ -245,6 +246,12 @@ To generate a sequence of **repeated** numbers:
 ```r
 rep (numberToRepeat, howManyRepetitions)
 ```
+
+To **create** or **change** an old variable:
+```r
+ifelse(conditionalArgument, whatToDoIfTrue, WhatToDoIfFalse)
+```
+
 
 ***************************************************************************************************************************************
 
@@ -908,6 +915,7 @@ To **group** the data by a given variable(s):
 group_by (MyTibble, variable1, variable2, variable3)
 ```
 
+
 #### Colapsing ####
 
 To **collapse** the data from multiple (repeated) rows to a single row:
@@ -917,6 +925,7 @@ NewDataFrame <- group_by (MyTibble, variable1, variable2, variable3)
 summarise (NewDataFrame, newcolumn = mean (variable4, na.rm = TRUE)
 ```
 ```r
+> new_diamonds <- group_by (diamonds, cut, color, clarity)
 > summarise (new_diamonds, meanPrice = mean(price, na.rm = TRUE))
 # A tibble: 276 x 4
 # Groups:   cut, color [35]
@@ -1105,7 +1114,7 @@ MyTibble %>%
 
 # Data Visualization #
 
-The go-to **R** package for data visualization is **ggplot2**. With **ggplot2**, we can easily create scatterplots, boxplots, bar charts and a whole range of other plots.
+Most statisticians would probably agree that it is generally a good idea to inspect our data visually prior to performing any statistical analysis on them. The go-to **R** package for data visualization is **ggplot2**. With **ggplot2**, we can easily create scatterplots, boxplots, bar charts and a whole range of other plots.
 
 The first thing we do when generating a plot with **ggplot2** is to create a coordinate system to which we can subsequently add layers:
 
@@ -1464,7 +1473,7 @@ The assumptions of parametric tests are:
 3. Interval data
 4. Independence
 
-Let's start with the first assumption (i.e., whether the data are normally distributed). One of the ways in which we can check whether that assumption has been met is through visual inspection. There are two graphs which we can generate to perform visual inspection of our data. The first one is a **histogram**:
+One of the ways in which we can check whether whether our data are normally distributed is through visual inspection. There are two graphs which we can generate to perform visual inspection of our data. The first one is a **histogram**:
 
 ```r
 MyHistogram <- ggplot (MyTibble, aes (variable1)) + opts (legend.position = "none") +
@@ -1490,7 +1499,7 @@ hist.depth <- ggplot(data = diamonds, aes (depth)) +
 ![](images/histogram2.PNG)
 
 
-The second graph we can generate to visually inspect whether our data are normally distributed is a **Q-Q plot**. In a **Q-Q plot**, any values deviating away from the diagonal of the plot indicate deviations from normality.
+The second graph we can generate to visually inspect whether our data are **normally distributed** is a **Q-Q plot**. In a **Q-Q plot**, any values deviating away from the diagonal of the plot indicate deviations from normality. Ideally, the data points should fall along a straight line.
 
 
 ```r
@@ -1499,7 +1508,7 @@ MyqqPlot <- qplot(sample= MyTibble$variable1, stat = "qq")
 
 ![](images/qqplot.PNG)
 
-We can also look at measures of **skewness** and **kurtosis** to check whether our data are normally distributed. Values which are very close to zero suggest that the data come from a normal distribution. We can use the `describe()` function from the **psych** package to get the skew and kurtosis values of a given variable:
+We can also look at measures of **skewness** and **kurtosis** to check whether our data are **normally distributed**. Values which are very close to zero suggest that the data come from a normal distribution. We can use the `describe()` function from the **psych** package to get the skew and kurtosis values of a given variable:
 
 ```r
 describe(MyTibble$variable1)
@@ -1516,10 +1525,64 @@ X1    1 53940 3932.8 3989.44   2401 3158.99 2475.94 326 18823 18497 1.62     2.1
 > 
 ```
 
-<img src = "https://www.excelr.com/assets/admin/ckfinder/userfiles/images/news/icons/mind%20map/blogs/blogs1/blogs2/blogs3/blogs4/1_8.jpg">
-
-Image extracted from [www.excel.r.com](https://www.excelr.com/assets/admin/ckfinder/userfiles/images/news/icons/mind%20map/blogs/blogs1/blogs2/blogs3/blogs4/1_8.jpg)
+To test whether a distribution is normal, we can also perform a **Shapiro-Wilk** test in **R** with the `shapiro.test()` function. If the test yields a **non-significant** *p* value, then we can conclude that the distribution in question is **not** significantly different from a **normal distribution**. If, on the other hand, the test yields a significant *p* value, then the distribution in question is significantly different from a normal distribution. 
 
 
+```r
+shapiro.test(MyTibble$variable1)
+```
+
+Note that the `shapiro.test()` function only works with sample sizes < 5000. This is because we are likely to get significant results when we have larger sample sizes.
+
+
+The second assumption for the use of parametric tests is **homogeneity of variance**. To test whether the variances in different groups of data are homogeneous, we can use the **Levene's test**, which in **R** can be performed with the `leveneTest()` function from the **car** package. If the output of a Levene's test is a significant *p* value, then we can conclude that the variances are **not** homogeneous.
+
+```r
+leveneTest(MyTibble$outcomeVariable, groupingVariable)
+```
+
+#### Correlations ####
+
+There are three main functions in **R** which we can use to compute correlation coefficients, namely `cor()`, `cor.test()`, and `rcorr()` (from the **Hmisc** package).
+
+**Example 1:**
+```r
+cor(MyTibble$variable1, MyTibble$variable2, use = "what to do with missing values", method = "correlation type")
+```
+
+The parameters which we can use in the `use` argument above are:
+* "everything" --> an `NA` will be outputted in case there are missing values in the data
+* "all.obs" --> an error message will be returned in case there are missing values in the data
+* "complete.obs" --> only complete cases for all variables will be included in the computation
+* "pairwise.complete.obs" --> computations will only be performed when cases are complete for the two variables in question
+
+The parameters which we can use in the `method` argument above are:
+* "pearson"
+* "spearman" --> this should be used when the data have violated parametric assumptions
+* "kendall"
+
+**Example 2:**
+
+```r
+rcorr(variable1, variable2, type = "pearson or spearman")
+```
+
+**Example 3:**
+```r
+cor.test(variable1, variable2, alternative = "one or two tailed", type = "correlation type", conf.level = 0.95)
+```
+
+The parameters which we can use in the `alternative` argument above are:
+* "two.sided" --> this will perform a two-tailed test
+* "less" --> this will perform a one-tailed test (if you predict a negative relationship)
+* "greater" --> this will perform a one-tailed test (if you predict a positive relationship)
+
+
+
+**R<sup>2</sup>** --> this is a measure of the amount of variability in one variable which is also shared by the other variable. To compute in **R<sup>2</sup>** **R**:
+
+```r
+cor(MyTibble$variable1, MyTibble$variable2)^2
+```
 
 [editor on GitHub](https://github.com/simOne3107/R4CogPsy/edit/master/README.md) 
