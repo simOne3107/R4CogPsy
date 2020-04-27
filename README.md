@@ -1543,7 +1543,7 @@ leveneTest(MyTibble$outcomeVariable, groupingVariable)
 
 #### Correlations ####
 
-There are three main functions in **R** which we can use to compute correlation coefficients, namely `cor()`, `cor.test()`, and `rcorr()` (from the **Hmisc** package).
+The relationship between two variables can be measured using **correlation coeficients**. There are three main functions in **R** which we can use to compute correlation coefficients, namely `cor()`, `cor.test()`, and `rcorr()` (from the **Hmisc** package).
 
 **Example 1:**
 ```r
@@ -1559,7 +1559,7 @@ The parameters which we can use in the `use` argument above are:
 The parameters which we can use in the `method` argument above are:
 * "pearson"
 * "spearman" --> this should be used when the data have violated parametric assumptions
-* "kendall"
+* "kendall" --> this should be used when the data have violated parametric assumptions, and it is best for very small sample sizes
 
 **Example 2:**
 
@@ -1579,7 +1579,7 @@ The parameters which we can use in the `alternative` argument above are:
 
 
 
-**R<sup>2</sup>** --> this is a measure of the amount of variability in one variable which is also shared by the other variable. To compute in **R<sup>2</sup>** **R**:
+**R<sup>2</sup>** --> this is a measure of the amount of variability in one variable which is also shared by the other variable. To compute **R<sup>2</sup>** in **R**:
 
 ```r
 cor(MyTibble$variable1, MyTibble$variable2)^2
