@@ -252,6 +252,17 @@ To **create** or **change** an old variable:
 ifelse(conditionalArgument, whatToDoIfTrue, WhatToDoIfFalse)
 ```
 
+To **compute the frequency** of a variable:
+```r
+table(MyTibble$variable)
+```
+
+To **calculate the proportion** of different variables:
+```r
+FrequencyofVariablesXandY <- table(MyTibble$variable)
+prop.table(FrequencyofVariablesXandY)
+```
+
 
 ***************************************************************************************************************************************
 
@@ -268,6 +279,36 @@ sd(variable)
 ```
 
 ***************************************************************************************************************************************
+
+#### Creating our own functions in **R** ####
+
+If there is not a function readily available in **R** or in any of the available packages to do something we need, we can write our own function. The general format for functions is as follows:
+
+```r
+nameOfOurNewFunction <- function(inputObject1, inputObject2, etc)
+{ 
+   the commands which will do what you want to the input object(s) listed above
+   the commands which specify the output of the function
+}
+```
+
+**Example:**
+```r
+XmultipliedbyX <- function(variable)
+{
+  xmultiplied <- variable*variable
+  cat("X multiplied by x = ", xmultiplied)
+}
+```
+
+```r
+> XmultipliedbyX (10)
+X multiplied by x =  100
+```
+
+
+***************************************************************************************************************************************
+
 
 #### Useful shortcuts ####
 
@@ -1540,6 +1581,7 @@ The second assumption for the use of parametric tests is **homogeneity of varian
 ```r
 leveneTest(MyTibble$outcomeVariable, groupingVariable)
 ```
+***************************************************************************************************************************************
 
 #### Correlations ####
 
@@ -1583,6 +1625,53 @@ The parameters which we can use in the `alternative` argument above are:
 
 ```r
 cor(MyTibble$variable1, MyTibble$variable2)^2
+```
+
+***************************************************************************************************************************************
+
+#### Regression ####
+
+In **regression analysis**, we fit a linear model to our data, and use that model to predict values of our dependent variable based upon our independent variable(s). If we are trying to predict an outcome variable from only one predictor variable, we talk about **simple regression**. If, on the other hand, we are trying to predict an outcome variable from several predictor variables, then we talk about **multiple regression**. Since the model we try to fit in regression analysis is linear, our data can be summarized with one straight line (of many). Through the so-called **method of least squares**, we can establish which line best summarizes the data we collected. The best line will be the one which crosses or approaches as many data points as possible. This can be calculated by measuring the vertical distance (i.e., **residuals**) between all the possible lines and each data point in the set.
+
+Each line has a **slope**, which can be positive or negative, and an **intercept**, which is the point at which the line crosses the y axis of the graph.
+
+To run a regression analysis in **R**, we can use the `lm()` function. 
+
+```r
+myModel <- lm(outcomeVariable ~ predictorVariable(s), data = myTibble)
+```
+
+```r
+myModel <- lm(price ~ depth, data = diamonds)
+```
+We can then inspect the results of our analysis with the `summary()` function.
+
+```r
+summary(myModel)
+```
+
+```r
+> summary(myModel)
+
+Call:
+lm(formula = price ~ depth, data = diamonds)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+ -3766  -2986  -1521   1396  14937 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  5763.67     740.56   7.783 7.21e-15 ***
+depth         -29.65      11.99  -2.473   0.0134 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3989 on 53938 degrees of freedom
+Multiple R-squared:  0.0001134,	Adjusted R-squared:  9.483e-05 
+F-statistic: 6.115 on 1 and 53938 DF,  p-value: 0.0134
+
+
 ```
 
 [editor on GitHub](https://github.com/simOne3107/R4CogPsy/edit/master/README.md) 
