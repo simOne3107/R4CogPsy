@@ -1670,8 +1670,16 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 Residual standard error: 3989 on 53938 degrees of freedom
 Multiple R-squared:  0.0001134,	Adjusted R-squared:  9.483e-05 
 F-statistic: 6.115 on 1 and 53938 DF,  p-value: 0.0134
-
-
 ```
+
+# How have I been learning R?*
+
+Below you will find a list of the resources I have been using to learn **R**:
+
+[Discovering statistics with R](https://uk.sagepub.com/en-gb/eur/discovering-statistics-using-r/book236067)
+
+[R for Data Science](https://r4ds.had.co.nz/)
+
+
 
 [editor on GitHub](https://github.com/simOne3107/R4CogPsy/edit/master/README.md) 
