@@ -72,6 +72,7 @@ library (lme4)
 library (pastecs)
 library (powersim)
 library (psych)
+library (QuantPsyc)
 library (rmarkdown)
 library (tidyverse)
 ```
@@ -946,7 +947,6 @@ transmute (MyTibble,
  9         1532.        1915.
 10         1470.        1837.
 # ... with 53,930 more rows
-
 ```
 #### Grouping ####
 
@@ -1621,7 +1621,7 @@ The parameters which we can use in the `alternative` argument above are:
 
 
 
-**R<sup>2</sup>** --> this is a measure of the amount of variability in one variable which is also shared by the other variable. To compute **R<sup>2</sup>** in **R**:
+**R<sup>2</sup>** --> this is a measure of the amount of variability in one variable which is also shared by the other variable. In other words, **R<sup>2</sup>** tells us how much variance is explained by the model compared to how much variance there is to explain in the first place. To compute **R<sup>2</sup>** in **R**:
 
 ```r
 cor(MyTibble$variable1, MyTibble$variable2)^2
@@ -1631,14 +1631,14 @@ cor(MyTibble$variable1, MyTibble$variable2)^2
 
 #### Regression ####
 
-In **regression analysis**, we fit a linear model to our data, and use that model to predict values of our dependent variable based upon our independent variable(s). If we are trying to predict an outcome variable from only one predictor variable, we talk about **simple regression**. If, on the other hand, we are trying to predict an outcome variable from several predictor variables, then we talk about **multiple regression**. Since the model we try to fit in regression analysis is linear, our data can be summarized with one straight line (of many). Through the so-called **method of least squares**, we can establish which line best summarizes the data we collected. The best line will be the one which crosses or approaches as many data points as possible. This can be calculated by measuring the vertical distance (i.e., **residuals**) between all the possible lines and each data point in the set.
+In **regression analysis**, we fit a linear model to our data, and use that model to predict values of our dependent variable based upon our independent variable(s). If we are trying to predict an outcome variable from only one predictor variable, we use **simple regression**. If, on the other hand, we are trying to predict an outcome variable from several predictor variables, we use **multiple regression**. Since the model we try to fit in regression analysis is linear, our data can be summarized with one straight line (of many). Through the so-called **method of least squares**, we can establish which line best summarizes the data we collected. The best line will be the one which crosses or approaches as many data points as possible. This can be calculated by measuring the vertical distance (i.e., **residuals**) between all the possible lines and each data point in the set. Residuals represent the differences between the values of the outcome predicted by the model and the values of the outcome observed in the sample. If a model fits the sample data well, then all residuals will be small. Conversely, the residuals will be larger whenever a model is a poor fit to the sample data.
 
-Each line has a **slope**, which can be positive or negative, and an **intercept**, which is the point at which the line crosses the y axis of the graph.
+In regression analysis, each line has a **slope**, which can be positive or negative, and an **intercept**, which is the point at which the line crosses the y axis of the graph.
 
-To run a regression analysis in **R**, we can use the `lm()` function. 
+To run a simple regression analysis in **R**, we can use the `lm()` function. 
 
 ```r
-myModel <- lm(outcomeVariable ~ predictorVariable(s), data = myTibble)
+myModel <- lm(outcomeVariable ~ predictorVariable, data = myTibble)
 ```
 
 ```r
@@ -1672,9 +1672,46 @@ Multiple R-squared:  0.0001134,	Adjusted R-squared:  9.483e-05
 F-statistic: 6.115 on 1 and 53938 DF,  p-value: 0.0134
 ```
 
-# How have I been learning R?*
+If a given variable is said to significantly predict an outcome, then the beta value should be significantly different from zero. The beta value represents the change in the outcome resulting from a unit change in the predictor. In the example above, the beta value is `5763.67`, which is significantly different from zero, as can be seen in the output of the t-statistic: `7.21e-15`.
 
-Below you will find a list of the resources I have been using to learn **R**:
+The F-statistic shown in the output above tells us how much variability the model can explain relative to how much the model can't explain.
+
+Multiple **R<sup>2</sup>** indicates how well a model predicts the observed data. Large values of multiple **R<sup>2</sup>** represent a large correlation between the predicted and observed values of the outcome (which is the opposite of what is happening in the example above). When the model yields a multiple **R<sup>2</sup>** of 1, then we have a model which perfectly predicts the observed data. 
+
+Models can be extended by including several other variables. It is the combination of all these variables that will be used to predict the outcome variable. The more variables we add to a model, the higher the **R<sup>2</sup>** will be. Note that when deciding on which variables to include in a model, we should do our best to prevent two things from happening: 1) **over-fitting**, which essentially means having too many variables in the model that in turn contribute little to predicting the outcome; and 2) **under-fitting**, which is what happens when important predictors are left out of the model.
+
+
+To run a multiple regression analysis in **R**, we can use the following:
+
+```r
+MyModel <- lm(outcomeVariable ~ predictorVariable1 + predictorVariable2, data = MyTibble)`
+```
+
+To compare whether different variables have similar degrees of importance in a model, we can use the `lm.beta()` function from the **QuantPsyc** package:
+
+```r
+lm.beta(myModel)
+```
+The above will yield standardized beta values measured in standard deviation units.
+
+If a model is a good fit to the data, that model will have very small confidence intervals. A model that is **not** a good fit will have confidence intervals which cross zero. With the `confint()` function, we can get the confidence intervals for a model:
+
+```r
+confint(myModel)
+```
+
+To compare two or more different models, we can use the `anova()` function:
+
+```r
+anova(myModel1,myModel2)
+```
+
+
+
+
+# **Where my notes come from**
+
+Below you will find a list of some of the resources I have been using to learn **R**:
 
 [Discovering statistics with R](https://uk.sagepub.com/en-gb/eur/discovering-statistics-using-r/book236067)
 
