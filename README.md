@@ -1707,6 +1707,9 @@ anova(myModel1,myModel2)
 ```
 
 
+#### Logistic regression ####
+
+chapter 8 (pg312)
 
 
 # **Where my notes come from**
