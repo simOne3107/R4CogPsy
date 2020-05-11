@@ -232,6 +232,15 @@ To **view** an entire dataset:
 View(MyDataFrame) # note the capitalized V in this function
 ```
 
+To check the **first six rows** in a dataset:
+```r
+head(MyDataFrame)
+```
+To check the **last six rows** in a dataset:
+```r
+tail(MyDataFrame)
+```
+
 To check whether a value is **missing**:
 ```r
 is.na(variable)
@@ -1709,8 +1718,44 @@ anova(myModel1,myModel2)
 
 #### Logistic regression ####
 
-chapter 8 (pg312)
+**Logistic regression** is a type of multiple regression in which the outcome variable is a categorical variable, and the predictor variables are either continuous or categorical variables.
+We can use log-likelihood statistic to assess the fit of a logistic regression model. The log-likelihood statistic indicates how much unexplained information there is after the model has been fitted in. The larger the value of the log-likelihood, the more unexplained observations there are in the model.
 
+In **R**, we can do logistic regression with the generalized linear model function `glm()`.
+
+```r
+myModel <- glm(outcome ~ predictorVariable, data = MyTibble, family = binomial())
+```
+
+In the example above, other possible values for the `family` argument would be Gaussian, poisson, gamma.
+
+```r
+Call:
+glm(formula = cut ~ price, family = binomial(), data = diamonds, 
+    weights = carat)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-5.8148   0.1771   0.2407   0.2881   0.5370  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) 3.132e+00  3.991e-02  78.477   <2e-16 ***
+price       1.154e-05  5.311e-06   2.173   0.0298 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 14219  on 53939  degrees of freedom
+Residual deviance: 14214  on 53938  degrees of freedom
+AIC: 14602
+
+Number of Fisher Scoring iterations: 6
+```
+In the output above, `null deviance` = deviance of the model that contains no predictors other than the constant, whereas `residual deviance` = the deviance for the model. In general, the value for the residual deviance should be less than the value associated with the null deviance.
+
+chapter 9 - pg 363
 
 # **Where my notes come from**
 
