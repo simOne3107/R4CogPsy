@@ -966,7 +966,7 @@ group_by (MyTibble, variable1, variable2, variable3)
 ```
 
 
-#### Colapsing ####
+#### Collapsing ####
 
 To **collapse** the data from multiple (repeated) rows to a single row:
 
@@ -1358,6 +1358,8 @@ ggplot (data = MyTibble) +
 
 We can also easily add **error bars** to bar charts in **R**. To do that, we need to add the `stat_summary()` function to our code. Instead of having graphs with the raw values displayed, by adding the `stat_summary()` function to our code, we can have the mean, median, etc in our plots.
 
+Note that when **error bars** don't overlap, we can be confident that our experimental manipulation has been successful. In such cases, it is highly likely that the samples did not come from the same population.
+
 ```r
 ggplot (data = MyTibble, aes (variable1, variable2)) +
  stat_summary (fun.y = mean, geom = "bar", fill = "whateverColor", color = "whateverColor") +
@@ -1377,7 +1379,7 @@ Conveniently, bar charts can also be color-coded with the `fill` argument:
 
 ```r
 ggplot (data = MyTibble) +
-geom_bar (mapping = aes (x = variable1, fill = variable1)
+geom_bar (mapping = aes (x = variable1, fill = variable1))
 ```
 
 ![](images/barchart3.PNG)
@@ -1513,6 +1515,22 @@ ggplot(diamonds, aes(x = variable1, y =..density..)) +
 
 # Proper Stats #
 
+All statistical procedures are a version of the following:
+
+outcome<sub>i</sub> = (model) + error<sub>i</sub>
+
+**Sampling distributions:**
+
+- if the population is normally distributed, so is the sampling distribution;
+- if the samples contain more than about 50 scores, the sampling distribution should be normally distributed;
+- mean of the sampling distribution = mean of the population
+- the standard deviation of the sampling distribution = standard deviation of the population divided by the square root of the number of observations in the sample --> standard error
+
+Means vary from sample to sample. When two samples come from the same population, their means should be roughly equal. 
+
+We can use the **standard error** as an indicator of the variability between sample means (small standard errors = similar means; large standard errors = large differences in sample means). The **standard error** is the standard deviation of the sampling distribution.
+
+-----
 
 #### Testing assumptions ####
 
@@ -1709,12 +1727,16 @@ If a model is a good fit to the data, that model will have very small confidence
 confint(myModel)
 ```
 
+Confidence intervals give us the range of the difference that we would expect to include the true difference on 95% of the time (i.e., if we were to re-run the experiment 100 times).
+
+
 To compare two or more different models, we can use the `anova()` function:
 
 ```r
 anova(myModel1,myModel2)
 ```
 
+***************************************************************************************************************************************
 
 #### Logistic regression ####
 
@@ -1755,8 +1777,41 @@ Number of Fisher Scoring iterations: 6
 ```
 In the output above, `null deviance` = deviance of the model that contains no predictors other than the constant, whereas `residual deviance` = the deviance for the model. In general, the value for the residual deviance should be less than the value associated with the null deviance.
 
-chapter 9 - pg 363
+***************************************************************************************************************************************
 
+#### t-test ####
+
+
+We can use a **t-test** to test whether two group means are different.
+
+- **independent-samples t-test**: used when there are two experimental conditions and different participants assigned to each condition.
+- **paired-samples t-test**: used when there are two experimental conditions and the same participants took part in both conditions of the experiment.
+
+
+To run a **t-test** in **R**, we can use the `t.test()` function. We can add the option `paired=TRUE` to treat the date as dependent, or `paired=FALSE` to treat it as independent.
+
+If the data for the different groups are stored in **one column**, run the following:
+
+```r
+newModel <- t.test (outcomeVariable ~ predictorVariable, data = MyTibble, paired = FALSE/TRUE)
+```
+
+If the data for the different groups are stored in **two columns**, run the following instead:
+
+```r
+newModel <- t.test (group1scores, group2scores, paired = FALSE/TRUE)
+```
+***************************************************************************************************************************************
+
+#### ANOVA ####
+
+We can use an **ANOVA** to test whether three or more means are the same.
+
+
+pg 400
+
+
+***************************************************************************************************************************************
 # **Where my notes come from**
 
 Below you will find a list of some of the resources I have been using to learn **R**:
