@@ -1515,7 +1515,7 @@ ggplot(diamonds, aes(x = variable1, y =..density..)) +
 
 # Proper Stats #
 
-All statistical procedures are a version of the following:
+All statistical procedures are a version of the following equation:
 
 outcome<sub>i</sub> = (model) + error<sub>i</sub>
 
@@ -1807,8 +1807,10 @@ newModel <- t.test (group1scores, group2scores, paired = FALSE/TRUE)
 
 We can use an **ANOVA** to test whether three or more means are the same.
 
+We use **ANOVA** to compare the ratio of systematic variance to unsystematic variance in an experimental study (i.e., the F-ratio).
 
-pg 400
+
+pg 417
 
 
 ***************************************************************************************************************************************
@@ -1819,6 +1821,9 @@ Below you will find a list of some of the resources I have been using to learn *
 [Discovering statistics with R](https://uk.sagepub.com/en-gb/eur/discovering-statistics-using-r/book236067)
 
 [R for Data Science](https://r4ds.had.co.nz/)
+
+
+***************************************************************************************************************************************
 
 
 
