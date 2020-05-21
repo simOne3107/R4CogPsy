@@ -66,6 +66,7 @@ Below is a list of packages which I have been using for data analysis, data wran
 ```r
 library (broom)
 library (car)
+library (devtools)
 library (ggplot2)
 library (Hmisc)
 library (lme4)
