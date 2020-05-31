@@ -34,7 +34,7 @@ Click on File > Save to save your new **R** script.
 #### Installing packages in **R** ####
 
    
-In order to install a package in **R**, enter the following line of code with the package name you wish to install, and press enter to run it. Do not forget to use quotation marks.
+In order to install a package in **R**, enter the following line of code with the package name you wish to install in the console, and press **enter** to run it. Do not forget to use quotation marks.
 
 ```r
 install.packages ("rmarkdown")
@@ -46,15 +46,14 @@ Each package must be installed only once. However, each time you wish to use a p
 library (rmarkdown)
 ```
 
-Occasionally two different packages may have used the same name for two different functions. If you have both packages loaded in a given session, you need to specify from which package you would like the function to come from. You can do so with the following line of code:
+Occasionally, two different packages may have used the same name for two different functions. If you have both packages loaded in a given session, you need to specify from which package you would like the function to come from. You can do so with the following line of code:
 
 ```r
 packagename::functionname()
 ```
 
 
-When sharing a script with others, it is generally recommended to include all the packages needed to run your code. 
- 
+
 
 ***************************************************************************************************************************************
 
@@ -78,6 +77,21 @@ library (rmarkdown)
 library (tidyverse)
 ```
 
+When sharing a script with others, it is generally recommended to include all the packages needed to run your code. 
+
+To retrieve the **citation information** for a package:
+
+```r
+citation("package")$textVersion
+```
+
+```r
+> citation('lme4')$textVersion
+[1] "Douglas Bates, Martin Maechler, Ben Bolker, Steve Walker (2015). Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical Software, 67(1), 1-48. doi:10.18637/jss.v067.i01."
+> 
+```
+
+
 ***************************************************************************************************************************************
 
 
@@ -96,7 +110,7 @@ update.packages()
 #### Using **R** as a calculator ####
 
 
-One of the simplest and easiest things you can do in **R** is to use it as a calculator. Type the operation in the console or in the editor window, and then press **enter** to run it.
+One of the simplest and easiest things you can do in **R** is to use it as a calculator. Type the operation in the console, and then press **enter** to run it. If you prefer, you can add the operation to your script/editor window, and press **ALT** + **enter** to run it.
 
 Addition:
 ```r
@@ -153,7 +167,7 @@ Note that working in the **editor** window rather than in the **console** pane i
 #### Creating variables ####
 
 
-In **R**, you can easily create `variables` and assign different values to them. By using the symbol `<-`, we assign the value on the right to the `variable` on the left. You can see in the examples below that pretty much anything can be used as a variable's name:
+In **R**, you can easily create `variables` and assign different values to them. By using the symbol `<-`, we assign the value on the right to the `variable` on the left. **Alt** + **-** (minus) can be used as a shortcut for `<-` You can see in the examples below that pretty much anything can be used as a variable's name:
 
 ```r
 NewVariable <- 2 + 2
@@ -164,9 +178,11 @@ reaction_time <- 567
 word.count <- 16785
 odd_numbers <- c(1,3,5,7)
 ```
-**Alt** + **-** can be used as a shortcut for `<-`
+
+In the last example above, `odd_numbers` is called a **vector**, which in **R** refers to a list of numbers.
 
 `c()` is the **concatenate** function, which allows us to group things together.
+
 
 The new `variable` will be stored in **R**. Type the variable's name in the **R** console to inspect the value which is associated with it. Note that **R** is case sensitive so be careful when typing any variables' names or commands.
 
@@ -274,7 +290,15 @@ FrequencyofVariablesXandY <- table(MyTibble$variable)
 prop.table(FrequencyofVariablesXandY)
 ```
 
+To **check the difference between the minimum and maximum values in a range**:
+```r
+diff(range(myTibble))
+```
 
+To **check all the files in a given directory**:
+```r
+list.files() # no argument is needed here
+```
 ***************************************************************************************************************************************
 
 #### Useful built-in statistics functions in **R** ####
@@ -347,7 +371,13 @@ To open a **tab delimited file** (.txt), you can use the `read_tsv()` function:
 MyDataFrame <- read_tsv ("myfile.txt")
 ```
 
-To open files with any delimiter, you can use the `read_delim()` function:
+We can also use the `read.table()` function to open a **.txt** file:
+
+```r
+MyDataFrame <- read.table ("myfile.txt", sep = "\t", header = TRUE)
+```
+
+To open **files with any delimiter**, you can use the `read_delim()` function:
 
 ```r
 MyDataFrame <- read_delim ("myfile.txt")
@@ -995,7 +1025,7 @@ summarise (NewDataFrame, newcolumn = mean (variable4, na.rm = TRUE)
 # ... with 266 more rows
 ```
 
-Conveniently, 'tidyverse' allows us to perform several operations simultaneously with the so-called **pipe**, `%>%`:
+Conveniently, 'tidyverse' allows us to perform several operations simultaneously with the so-called **pipe**, `%>%`. A shortcut for the **pipe** is **Ctrl** + **shift** + **m**:
 
 ```r
 NewDataFrame <- MyTibble %>%
@@ -1822,6 +1852,8 @@ Below you will find a list of some of the resources I have been using to learn *
 [Discovering statistics with R](https://uk.sagepub.com/en-gb/eur/discovering-statistics-using-r/book236067)
 
 [R for Data Science](https://r4ds.had.co.nz/)
+
+`library (swirl)` # this is an interactive **R** package that teaches you **R** inside **R**
 
 
 ***************************************************************************************************************************************
