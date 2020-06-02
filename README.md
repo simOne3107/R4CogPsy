@@ -1,6 +1,6 @@
 # Welcome to **R** 4 CogPsy
 
-Here you will find everything I have been learning about **R** and statistics. I hope my notes will be useful to other research students struggling with **R** and statistics.
+Here you will find everything I have been learning about **R** and statistics. Even though these are my own personal notes, I hope they can also be useful to other research students who may be struggling with **R** and statistics.
 
 ***************************************************************************************************************************************
 
@@ -480,10 +480,10 @@ Image extracted from [medium.com](https://medium.com/@kadek/how-to-install-the-t
 
 #### Creating tibbles ####
 
-For best results, it is best to convert our data frames to **tibbles**. Tibbles are an improved type of data frame used in all **tidyverse** packages. Unlike regular data frames, each column name in a tibble is also accompanied by its type.
+For best results, it is best to convert our data frames to **tibbles**. Tibbles are an improved type of data frame used in all **tidyverse** packages. Unlike regular data frames, each column name in a tibble is also accompanied by its vector class (i.e., *character vector*, *numeric vector*). When inspecting a tibble, we also get information on its row and column numbers without the need of using `nrow()` or `ncol()`.
 
 ```r
-as_tibble (MyDataFrame)
+MyDataFrame <- as_tibble (MyDataFrame)
 ```
 
 If needed, a tibble can always be converted back to a data frame as follows:
@@ -495,7 +495,7 @@ as.data.frame(MyTibble)
 
 #### Subsetting ####
 
-To **subset** observations by their values:
+To **subset** observations by their values/**rows**:
 
 **Example 1:**
 
@@ -635,7 +635,7 @@ filter(MyTibble, between(column, value1, value2))
 ```
 #### Reordering ####
 
-To **reorder** the rows in a dataset (i.e., sort by column):
+To **reorder** the rows in a dataset (i.e., sort by column) in **ascending order**:
 
 **Example 1:**
 
@@ -686,9 +686,31 @@ arrange(MyTibble, column1, column2)
 > 
 ```
 
+To **reorder** the rows in a dataset (i.e., sort by column) in **descending order**:
+
+**Example 3:**
+
+```r
+arrange (MyTibble, desc(column1))
+```
+
+```r
+> arrange(preds_minimal, desc(time))
+       time         x         y trial
+1  3301.810 0.4427083 0.8773148    12
+2  3243.145 0.4296875 0.8298611    12
+3  3188.690 0.4765625 0.9525463    12
+4  3162.170 0.7005208 0.7500000    12
+5  3140.205 0.4748264 0.9814815    12
+>
+```
+
+
 #### Selecting ####
 
-To **select** only the columns/variables we are interested in:
+
+
+To **select** only the **columns**/variables we are interested in:
 
 **Example 1:**
 
@@ -739,6 +761,8 @@ select(MyTibble, variable1:variable10)
 # ... with 336,766 more rows, and 1 more variable: carrier <chr>
 > 
 ```
+
+- To **exclude a column**, we should place a minus sign (-) in front of that column's name:
 
 **Example 3:**
 
