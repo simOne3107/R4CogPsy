@@ -471,6 +471,7 @@ If you have long computations in your code, it is a good idea to include `cache 
 # Data pre-processing #
 
 
+It is generally recommended that you leave your raw data file untouched, and perform any necessary data wrangling within **R**.
 **R** has a number of built-in functions which conveniently allows us to pre-process our data. However, some of the most useful **R** packages for data pre-processing can be found in the **tidyverse**, a powerful collection of packages for data science. With a number of different functions from the **tidyverse** package, we can tidy up our dataset before performing any statistical analyses. Among other things, **tidyverse** allows us to subset observations by their values, select the variables we are interested in, and group the data by variable.
 
 
@@ -707,7 +708,6 @@ arrange (MyTibble, desc(column1))
 
 
 #### Selecting ####
-
 
 
 To **select** only the **columns**/variables we are interested in:
@@ -1027,7 +1027,7 @@ To **collapse** the data from multiple (repeated) rows to a single row:
 
 ```r
 NewDataFrame <- group_by (MyTibble, variable1, variable2, variable3)
-summarise (NewDataFrame, newcolumn = mean (variable4, na.rm = TRUE)
+   summarise (NewDataFrame, newcolumn = mean (variable4, na.rm = TRUE)
 ```
 ```r
 > new_diamonds <- group_by (diamonds, cut, color, clarity)
@@ -1215,6 +1215,18 @@ MyTibble %>%
 ```
 
 
+#### Merging two data files together ####
+
+To **merge** two tibbles together, we can use the `left_join()` function:
+
+```r
+MyMergedTibble <- left_join (MyTibble1, MyTibble2)
+```
+
+In the example above, the second tibble is added to the side of the first tibble. If there are any columns which can be found in both tibbles, then only one of these will be included in the new merged tibble.
+
+
+
 ***************************************************************************************************************************************
 
 # Data Visualization #
@@ -1226,7 +1238,7 @@ The first thing we do when generating a plot with **ggplot2** is to create a coo
 ```r
 ggplot (data = MyTibble)
 ```
-At least one layer should be added to the function above, otherwise we will have an empty graph. Below you will find some of the possible plots which we can generate with **ggplot2**.
+At least one layer should be added to the function above, otherwise we will have an empty graph. Below you will find some of the possible plots which we can generate with **ggplot2**. As you will see below, each type of graph has their own `geom`, or **geometric object**. 
 
 #### Scatterplots ####
 
@@ -1248,6 +1260,7 @@ ggplot(data = MyTibble) +
 ![](images/scatterplot2.PNG)
 
 
+Note that **aesthetic mappings** can be added either inside the `geom____()` or to the main `ggplot()` function.
 
 Some of the `variables` which can be added to `aes` are:
 1. `class`
@@ -1260,7 +1273,7 @@ Some of the `variables` which can be added to `aes` are:
 8. `fill`
 
 
-Below is a list with the possible shapes which can be used in a scatterplot generated with **ggplot2**:
+Below is a list with some of the possible shapes which can be used in a scatterplot generated with **ggplot2**:
 
 
 <img src="http://ggplot2.tidyverse.org/reference/scale_shape-6.png" width ="500">
@@ -1365,6 +1378,22 @@ ggplot(data = MyTibble, mapping = aes (x = variable1, y= variable2) +
     x = "New legend for the x axis",
     y = "New legend for the y axis"
 ```
+
+
+Instead of data points, we can also use the `geom_text() function to have a plot in each labels referring to the data points are added onto the coordinate system:
+
+```r
+ggplot(data = MyTibble, mapping = aes (x=variable1, y = variable2, label = variable3)) +
+   geom_text()
+```
+
+```r
+ggplot(nettle) +
+  geom_text (mapping = aes(x = MGS, y = Langs, label = Country))
+```
+
+
+![](images/text.PNG)
 
 
 #### Line graphs ####
@@ -1563,6 +1592,34 @@ We can also display the **density** rather than the default **count** in the y a
 ```r
 ggplot(diamonds, aes(x = variable1, y =..density..)) +
   geom_freqpoly(mapping = aes (colour = variable2), binwidth = value)
+```
+
+
+#### Arranging two plots together ####
+
+With the `grid.arrange()` function from the **gridExtra** package, we can display two different plots side by side:
+
+```r
+grid.arrange(plot1, plot2, ncol = 2)
+```
+
+```r
+grid.arrange (B1Plot, B2Plot, ncol=2)
+```
+
+![](images/sidebyside.PNG)
+
+
+#### Removing gridlines from the plots ####
+
+For a clean-looking plot, you can add the `theme_minimal()` function.
+
+
+#### Adding a line to the plot ####
+
+To add a vertical line to the plot, you can add the `geom_vline()` function as follows:
+```r
+geom_vline(aes(xintercept = 0, linetype = 2) # linetype=2 makes the line a dashed one
 ```
 
 
@@ -1876,6 +1933,8 @@ Below you will find a list of some of the resources I have been using to learn *
 [Discovering statistics with R](https://uk.sagepub.com/en-gb/eur/discovering-statistics-using-r/book236067)
 
 [R for Data Science](https://r4ds.had.co.nz/)
+
+[Statistics for Linguists: An Introduction Using R](http://www.bodowinter.com/blog/book-release-statistics-for-linguists)
 
 `library (swirl)` # this is an interactive **R** package that teaches you **R** inside **R**
 
