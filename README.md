@@ -68,6 +68,7 @@ library (car)
 library (devtools)
 library (ggplot2)
 library (Hmisc)
+library (knitr)
 library (lme4)
 library (pastecs)
 library (powersim)
@@ -445,17 +446,20 @@ write.csv (combined.csvFiles, "combinedcsvFiles.csv", row.names=FALSE)
 
 # R Markdown #
 
-With an **R Markdown** document, we can easily share our code, results, and comments with other researchers. **R Markdown** can be used to produce HTML and PDF documents, among other types of output.
+With an **R Markdown** document, we can easily share our code, results, and comments with other researchers. **R Markdown** can be used to produce HTML and PDF documents, among other types of output. We can easily combine plain text with **R** code in **R** markdown documents.
 
-To create a new **R Markdown** file, select File > New File > R Markdown.
+To create a new **R Markdown** file, select 'File' > 'New File' > 'R Markdown'.
 
 Insert chunks of code in your **R Markdown** by typing three backticks followed by an **r** inside curly brackets **{}**. Each chunk of code can also be given an optional name. For example:
+
 ```r 
 '''{r setup, include = FALSE} 
 library (ggplot2)
 library (tidyverse)
 '''
 ```
+Note that any codes included outside the code chunks are **not** executed when we knit the **R** markdown file.
+
 
 If you want to run a given code, but do not want to display the code or the results in the final document, make sure to include a `include = FALSE`.
 
@@ -465,7 +469,17 @@ If you want to display the results in the **R Markdown** document but not the un
 
 If you have long computations in your code, it is a good idea to include `cache = TRUE` to save time when re-running a given chunk.
 
+```r
+''' {r message = FALSE, cache = TRUE}
+r code
+'''
+```
+In the example above, `message = FALSE` will prevent warning messages from being printed in the output. 
 
+To display **titles** in Markdown documents, we can use single hashtags `#` or double hashtags `##`.
+To display text in **bold**, we must enclose the text by two stars `**`
+To display text in **italic**, we must enclose the text by one star `*`
+To include **bullet points**, we must begin the text with a hyphen `-`
 ***************************************************************************************************************************************
 
 # Data pre-processing #
@@ -1089,12 +1103,36 @@ NewDataFrame <- MyTibble %>%
 # ... with 30 more rows
 > 
 ```
-Please note that if we don't use the `na.rm` argument, we might end up with a lot of missing values in our dataset. Alternatively, we can also remove any missing values prior to performing any further operations on our dataset:
+Please note that if we don't use the `na.rm` argument, we might end up with a lot of missing values in our dataset. Alternatively, we can also remove any **missing values** prior to performing any further operations on our dataset:
 
 ```r
 NewTibble <- MyTibble %>%
   filter (!is.na(column1), !is.na(column2))
 ```
+
+```r
+both %>% filter (!is.na (Modality))
+```
+```r
+# A tibble: 407 x 9
+   Word      POS       Iconicity Modality  Sight Touch Sound  Taste  Smell
+   <chr>     <chr>         <dbl> <chr>     <dbl> <dbl> <dbl>  <dbl>  <dbl>
+ 1 abrasive  Adjective     1.31  Haptic     2.89 3.68  1.68  0.579  0.579 
+ 2 absorbent Adjective     0.923 Visual     4.14 3.14  0.714 0.476  0.476 
+ 3 aching    Verb          0.25  Haptic     2.05 3.67  0.667 0.0476 0.0952
+ 4 acidic    Adjective     1     Gustatory  2.19 1.14  0.476 4.19   2.90  
+ 5 acrid     Adjective     0.615 Olfactory  1.12 0.625 0.375 3      3.5   
+ 6 adhesive  Noun          1.33  Haptic     3.67 4.33  1.19  0.905  1.76  
+ 7 alcoholic Noun          0.417 Gustatory  2.85 0.35  0.75  4.35   4.3   
+ 8 alive     Adjective     1.38  Visual     4.57 3.81  4.10  1.57   2.38  
+ 9 amber     Noun          0     Visual     4.48 0.524 0.143 0.571  0.857 
+10 angular   Adjective     1.71  Visual     4.29 4.10  0.25  0.0476 0.0476
+# ... with 397 more rows
+>
+```
+
+
+
 
 #### Counting ####
 
@@ -1537,7 +1575,7 @@ coord_polar ()
 
 #### Boxplots ####
 
-Boxplots can be used to display the distribution of a continuous variable broken down by a categorical variable. **ggplot2**  allows us to easily create boxplots with the `geom_boxplot()` function.
+Boxplots can be used to display the distribution of a continuous variable broken down by a categorical variable. The categorical variable is displayed on the x axis. **ggplot2**  allows us to easily create boxplots with the `geom_boxplot()` function.
 
 ```r
 ggplot(data = MyTibble) +
@@ -1546,7 +1584,7 @@ ggplot(data = MyTibble) +
 
 ![](images/boxplot1.PNG)
 
-The order in which the boxplots are displayed can also be changed in order to reveal interesting patterns:
+The **order** in which the boxplots are displayed can also be changed in order to reveal interesting patterns:
 
 ```r
 ggplot(data = MyTibble) +
@@ -1554,6 +1592,16 @@ ggplot(data = MyTibble) +
 ```
 
 ![](images/boxplot2.PNG)
+
+
+```r
+ggplot(both, aes (x = reorder(Modality, Iconicity, FUN = median), y = Iconicity, fill = Modality)) +
+  geom_boxplot() +
+  theme_minimal()
+```
+
+![](images/boxplot3.PNG)
+
 
 
 Below is an illustration extracted from [R for Data Science](https://r4ds.had.co.nz/) showing how to interpret boxplots:
