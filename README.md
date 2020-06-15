@@ -1883,9 +1883,15 @@ cor(MyTibble$variable1, MyTibble$variable2)^2
 
 #### Regression ####
 
-In **regression analysis**, we fit a linear model to our data, and use that model to predict values of our dependent variable based upon our independent variable(s). If we are trying to predict an outcome variable from only one predictor variable, we use **simple regression**. If, on the other hand, we are trying to predict an outcome variable from several predictor variables, we use **multiple regression**. Since the model we try to fit in regression analysis is linear, our data can be summarized with one straight line (of many). Through the so-called **method of least squares**, we can establish which line best summarizes the data we collected. The best line will be the one which crosses or approaches as many data points as possible. This can be calculated by measuring the vertical distance (i.e., **residuals**) between all the possible lines and each data point in the set. Residuals represent the differences between the values of the outcome predicted by the model and the values of the outcome observed in the sample. If a model fits the sample data well, then all residuals will be small. Conversely, the residuals will be larger whenever a model is a poor fit to the sample data.
+In **regression analysis**, we fit a linear model to our data, and use that model to predict values of our dependent variable based upon our independent variable(s). If we are trying to predict an outcome variable from only one predictor variable, we use **simple regression**. If, on the other hand, we are trying to predict an outcome variable from several predictor variables, we use **multiple regression**. Since the model we try to fit in regression analysis is linear, our data can be summarized with one straight line (of many). Through the so-called **method of least squares**, we can establish which line best summarizes the data we collected. The best line will be the one which crosses or approaches as many data points as possible. This can be calculated by measuring the vertical distance (i.e., **residuals**) between all the possible lines and each data point in the set. **Residuals** represent the differences between the values of the outcome predicted by the model and the values of the outcome observed in the sample. If a model fits the sample data well, then all residuals will be small. Conversely, the residuals will be larger whenever a model is a poor fit to the sample data. In sum, the residuals represent "the information that is left over after removing the effect of the explanatory variable" (Zuur, Ieno, Walker, Saveliev, & Smith (2009:20):
 
-In regression analysis, each line has a **slope**, which can be positive or negative, and an **intercept**, which is the point at which the line crosses the y axis of the graph.
+- residuals **=** observed values **-** fitted values
+
+Note that if a given regression model satisfies the normality assumption, then its residuals will be normally distributed.
+
+In regression analysis, each line has a **slope**, which can be positive or negative, and an **intercept**, which is the point at which the line crosses the y axis of the graph (or the point where the line starts on the y axis). The intercept and the slope are **coefficients** of the regression model.
+
+In **simple linear regression**, we model a single continuous variable as a response of a predictor variable.
 
 To run a simple regression analysis in **R**, we can use the `lm()` function. 
 
@@ -1927,6 +1933,8 @@ F-statistic: 6.115 on 1 and 53938 DF,  p-value: 0.0134
 If a given variable is said to significantly predict an outcome, then the beta value should be significantly different from zero. The beta value represents the change in the outcome resulting from a unit change in the predictor. In the example above, the beta value is `5763.67`, which is significantly different from zero, as can be seen in the output of the t-statistic: `7.21e-15`.
 
 The F-statistic shown in the output above tells us how much variability the model can explain relative to how much the model can't explain.
+
+**R<sup>2</sup>** is a standardized measure of model fit. It measures the variance described by a model. If we have an **R<sup>2</sup>** of `0.68`, for example, then 68% of the variation in the data can be explained by the model, whereas the remainder occurs due to chance. **R<sup>2</sup>** can also be said to be a measure of **effect size**.
 
 Multiple **R<sup>2</sup>** indicates how well a model predicts the observed data. Large values of multiple **R<sup>2</sup>** represent a large correlation between the predicted and observed values of the outcome (which is the opposite of what is happening in the example above). When the model yields a multiple **R<sup>2</sup>** of 1, then we have a model which perfectly predicts the observed data. 
 
