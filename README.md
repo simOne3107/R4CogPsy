@@ -254,6 +254,7 @@ To check the **first six rows** in a dataset:
 ```r
 head(MyDataFrame)
 ```
+
 To check the **last six rows** in a dataset:
 ```r
 tail(MyDataFrame)
@@ -268,11 +269,29 @@ To check **how many** values are **missing**:
 ```r
 sum(is.na(variable))
 ```
-Note that, in **R**, `NA` stands for "Not Available".
+- Note that, in **R**, `NA` stands for "Not Available".
 
 To generate a sequence of **repeated** numbers:
 ```r
 rep (numberToRepeat, howManyRepetitions)
+```
+
+To generate **random normally distributed data** with a mean of 0 and standard deviation of 1 by default:
+
+```r
+rnorm (numberOfValuesYouWantToGenerate) # the default mean and sd can be overridden if you add mean = value1, sd = value2
+```
+
+To generate **continuous random numbers** within the interval 0 to 1:
+
+```r
+runif(numberOfValuesYouWantToGenerate)
+```
+
+To generate **continuous random numbers** within a specified interval:
+
+```r
+runif(numberOfValuesYouWantToGenerate, min = value1, max = value2)
 ```
 
 To **create** or **change** an old variable:
@@ -304,12 +323,18 @@ list.files() # no argument is needed here
 
 #### Useful built-in statistics functions in **R** ####
 
-Mean
+**Mean**
 ```r
 mean(variable)
 ```
 
-Standard deviation
+**Median**
+
+```r
+median(variable)
+```
+
+**Standard deviation**
 ```r
 sd(variable)
 ```
@@ -1608,6 +1633,9 @@ Below is an illustration extracted from [R for Data Science](https://r4ds.had.co
 
 <img src = "https://d33wubrfki0l68.cloudfront.net/153b9af53b33918353fda9b691ded68cd7f62f51/5b616/images/eda-boxplot.png">
 
+
+
+
 #### Histograms ####
 
 We use histograms to plot the distribution of a **continuous** variable. To generate a histogram, we can use the function `geom_histogram()`.
@@ -1619,6 +1647,27 @@ ggplot (data = MyTibble) +
 ![](images/histogram.PNG)
 
 
+#### Density graphs ####
+
+With the `geom_density()` function, we can generate a density plot.
+
+
+```r
+ggplot(MyTibble, aes(x = variable1)) +
+  geom_density(fill = 'colour') +
+  geom_vline(aes(xintercept = mean(variable1)))
+```
+
+```r
+ggplot(df, aes(x = Val)) +
+  geom_density(fill = 'steelblue') +
+  geom_vline(aes(xintercept = mean(Val)))
+```
+
+![](images/densityplot.PNG)
+
+
+In the example above, we plotted the mean as a vertical line using `geom_vline()`.
 
 #### Frequency polygons ####
 
@@ -1675,9 +1724,25 @@ geom_vline(aes(xintercept = 0, linetype = 2) # linetype=2 makes the line a dashe
 
 # Proper Stats #
 
-All statistical procedures are a version of the following equation:
+Since we can't generally test the entire population, we deal with a subset of the population instead (i.e., samples), and use statistical models to estimate characteristics of the general population which we are interested in. Samples are, therefore, drawn so we can estimate population parameters.
+
+In sum, all statistical procedures are a version of the following equation:
 
 outcome<sub>i</sub> = (model) + error<sub>i</sub>
+
+The **mean**, for instance, can be seen as a model of a given sample/dataset.
+
+
+
+**The Normal Distribution**
+
+- one of the most common distributions in statistics;
+- also known as the **Gaussian distribution**;
+- distribution for continuous data, centered symmetrically around the mean;
+- the bulk of data lies close to the mean;
+- distributions with large standard deviations = flatter histograms
+
+
 
 **Sampling distributions:**
 
