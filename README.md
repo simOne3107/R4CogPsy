@@ -113,7 +113,7 @@ update.packages()
 
 One of the simplest and easiest things you can do in **R** is to use it as a calculator. Type the operation in the console, and then press **enter** to run it. If you prefer, you can add the operation to your script/editor window, and press **ALT** + **enter** to run it.
 
-Addition:
+**Addition**:
 ```r
 1 + 1
 ```
@@ -121,7 +121,7 @@ Addition:
 [1] 2
 ```
 
-Subtraction:
+**Subtraction**:
 ```r
 3 - 1
 ```
@@ -129,7 +129,7 @@ Subtraction:
 [1] 2
 ```
 
-Multiplication:
+**Multiplication**:
 ```r
 4 * 5
 ```
@@ -137,7 +137,7 @@ Multiplication:
 [1] 20
 ```
 
-Division:
+**Division**:
 ```r
 40 / 5
 ```
@@ -145,7 +145,7 @@ Division:
 [1] 8
 ```
 
-Square root:
+**Square root**:
 ```r
 sqrt (9)
 ```
@@ -153,7 +153,7 @@ sqrt (9)
 [1] 3
 ```
 
-Exponentiation:
+**Exponentiation**:
 ```r
 4^4
 ```
@@ -502,9 +502,13 @@ r code
 In the example above, `message = FALSE` will prevent warning messages from being printed in the output. 
 
 To display **titles** in Markdown documents, we can use single hashtags `#` or double hashtags `##`.
+
 To display text in **bold**, we must enclose the text by two stars `**`
+
 To display text in **italic**, we must enclose the text by one star `*`
+
 To include **bullet points**, we must begin the text with a hyphen `-`
+
 ***************************************************************************************************************************************
 
 # Data pre-processing #
@@ -525,6 +529,13 @@ For best results, it is best to convert our data frames to **tibbles**. Tibbles 
 ```r
 MyDataFrame <- as_tibble (MyDataFrame)
 ```
+
+If you have data available in different dataframes, you can merge them into a tibble as follows:
+
+```r
+MyTibble <- tibble(dataframe1, dataframe2)
+```
+
 
 If needed, a tibble can always be converted back to a data frame as follows:
 
@@ -1759,7 +1770,7 @@ We can use the **standard error** as an indicator of the variability between sam
 
 #### Testing assumptions ####
 
-The assumptions of parametric tests are:
+Statistical models, in general, rely on assumptions. The assumptions of parametric tests are:
 
 1. Normally distributed data
 2. Homogeneity of variance
@@ -1936,10 +1947,16 @@ The F-statistic shown in the output above tells us how much variability the mode
 
 **R<sup>2</sup>** is a standardized measure of model fit. It measures the variance described by a model. If we have an **R<sup>2</sup>** of `0.68`, for example, then 68% of the variation in the data can be explained by the model, whereas the remainder occurs due to chance. **R<sup>2</sup>** can also be said to be a measure of **effect size**.
 
-Multiple **R<sup>2</sup>** indicates how well a model predicts the observed data. Large values of multiple **R<sup>2</sup>** represent a large correlation between the predicted and observed values of the outcome (which is the opposite of what is happening in the example above). When the model yields a multiple **R<sup>2</sup>** of 1, then we have a model which perfectly predicts the observed data. 
+Multiple **R<sup>2</sup>** indicates how well a model predicts the observed data. Large values of multiple **R<sup>2</sup>** represent a large correlation between the predicted and observed values of the outcome (which is the opposite of what is happening in the example above). When the model yields a multiple **R<sup>2</sup>** of 1, then we have a model which perfectly predicts the observed data. In the example above, the model **does not** provide a good description of the data.
 
 Models can be extended by including several other variables. It is the combination of all these variables that will be used to predict the outcome variable. The more variables we add to a model, the higher the **R<sup>2</sup>** will be. Note that when deciding on which variables to include in a model, we should do our best to prevent two things from happening: 1) **over-fitting**, which essentially means having too many variables in the model that in turn contribute little to predicting the outcome; and 2) **under-fitting**, which is what happens when important predictors are left out of the model.
 
+
+We can use the `coef()` function To retrieve only the coefficients of a linear model:
+
+```r
+coef(myModel)
+```
 
 To run a multiple regression analysis in **R**, we can use the following:
 
