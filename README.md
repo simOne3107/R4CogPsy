@@ -464,7 +464,38 @@ As previously explained, you can export the combined data as a single **.csv** f
 write.csv (combined.csvFiles, "combinedcsvFiles.csv", row.names=FALSE)
 ```
 
+***************************************************************************************************************************************
 
+#### Combining multiple xlsx files ####
+
+First, make sure you set your working directory as the folder in which all the **xlsx** files you want to combine are saved:
+
+```r
+setwd("C:/Users/username/location/foldername")
+```
+
+Then, create a list of all the **xlsx** files stored in your working directory:
+
+```r
+xslxfiles <- list.files (pattern= "*.xlsx")
+```
+
+You can then import all the **xlsx** files in the list:
+
+```r
+xlsx.df.list <- lapply (xslxfiles, read_excel)
+```
+
+Finally, the imported **xlsx** files can then be combined into a single data frame:
+```r
+combinedFiles <-rbindlist(xlsx.df.list)
+```
+
+The data frame created can also be exported later as a **.csv** file.
+
+```r
+write.csv (combinedFiles, "combinedFiles.csv", row.names=FALSE)
+```
 
 ***************************************************************************************************************************************
 
