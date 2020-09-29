@@ -1600,6 +1600,27 @@ Note that for categorical variables to be plotted in **R** with the **ggplot2** 
 
 
 
+The `group` argument can also be used to draw multiple lines, and then group the points by a variable.
+
+```r
+ggplot(myTibble, aes (variable1, variable2) +
+stat_summary (fun.y = mean, geom = "line", size = 1.5, aes (group = variable3, colour = variable3)) +
+labs (x = "Variable 1 label", y = "Variable 2 label")
+```
+
+
+```r
+ggplot (finalTest, aes (block, rt)) +
+  stat_summary (fun.y = mean, geom = "line", size = 1.5, aes (group = condition, colour = condition))+
+  labs (x = "Block", y = "Reaction Time")
+```
+
+
+
+![](images/linegraph2.PNG)
+
+
+
 #### Bar charts ####
 
 We use bar charts to plot the distribution of a **categorical** variable. To generate a bar chart with **ggplot2**, we can use the function `geom_bar`.
