@@ -234,6 +234,36 @@ str_length (variable1)
 
 ***************************************************************************************************************************************
 
+#### Indexing #####
+
+Elements from a vector, matrix, or data frame can be easily extracted using numeric indexing.
+
+To extract the element at row **2**, column **4**:
+
+```r
+myDataFrame[2,4]
+```
+
+To extract the element at row **1**, and **all columns**:
+
+```r
+myDataFrame[1,]
+```
+
+To extract the elements from all rows, and column **3** only:
+
+```r
+myDataFrame[,3]
+```
+
+To extract the elements from all rows, and a column named **"ColumnName"**:
+
+```r
+myDataFrame[,"ColumnName"]
+```
+
+
+***************************************************************************************************************************************
 
 #### Useful built-in **R** functions ####
 
@@ -297,6 +327,12 @@ runif(numberOfValuesYouWantToGenerate, min = value1, max = value2)
 To **create** or **change** an old variable:
 ```r
 ifelse(conditionalArgument, whatToDoIfTrue, WhatToDoIfFalse)
+```
+
+To **recode** a categorical variable:
+
+```r
+myTibble$newColumn[myTibble$variable == "variableName"] <- "newVariableName"
 ```
 
 To **compute the frequency** of a variable:
@@ -715,6 +751,8 @@ filter(MyTibble, between(column, value1, value2))
 10 chevrolet    c1500 suburban 2wd   5.7  1999     8 auto(l4)   r        13    17 r     suv    
 # ... with 107 more rows
 ```
+
+
 #### Reordering ####
 
 To **reorder** the rows in a dataset (i.e., sort by column) in **ascending order**:
@@ -1093,6 +1131,7 @@ transmute (MyTibble,
 10         1470.        1837.
 # ... with 53,930 more rows
 ```
+
 #### Grouping ####
 
 To **group** the data by a given variable(s):
@@ -1200,7 +1239,6 @@ both %>% filter (!is.na (Modality))
 
 
 
-
 #### Counting ####
 
 To **count** values in a given dataset:
@@ -1260,6 +1298,38 @@ count(variable)
 > 
 ```
 
+#### Recoding categorical variables ####
+
+To **recode a categorical variable**, we can use the `revalue()` function from the **plyr** package.
+
+```r
+myTibble$newColumn <- revalue (myTibble$variable, c("OldVariableName1" = "NewVariableName1", "OldVariableName2" = "NewVariableName2"))
+```
+
+
+#### Summarising data ####
+
+To **summarise** data broken down by group, we can use the `ddply()` function from the **plyr** package.
+
+```r
+newTibble <- ddply (myTibble, c("column1", "column2"), summarise,
+             NewColumn1 = length (column3), # sample size
+             NewColumn2 = mean (column3), # mean
+             NewColumn3 = sd (column3), # sd
+             NewColumn4 = sd/sqrt(NewColumn1) # standard error
+             )
+```
+
+#### Calculating the confidence interval ####
+
+To **calculate the confidence interval**, we can use the `summarySE()` function from the **plyr** package.
+
+```r
+summarySE(myTibble, measurevar = "columnName", groupvars = c("column1", "column2", na.rm = TRUE)
+```
+
+
+
 #### Replacing outliers with NAs ####
 
 To replace outliers with missing values:
@@ -1280,7 +1350,7 @@ diamondsNewDF <- diamonds %>%
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
   50.80   61.00   61.80   61.75   62.50   73.60       6 
 > 
-````
+```
 
 #### Making a dataset narrower and longer ####
 
@@ -1521,6 +1591,9 @@ ggplot (Blocks, aes (block, RT)) +
   labs (x = "Block", y = "Reaction Time")
 ```
 
+The `group = 1` argument makes sure all data points are connnected.
+
+
 ![](images/linegraph.PNG)
 
 Note that for categorical variables to be plotted in **R** with the **ggplot2** package, we need to first convert that variable to a **factor** with the `factor()` function.
@@ -1572,6 +1645,17 @@ geom_bar (mapping = aes (x = variable1, fill = variable1))
 ```
 
 ![](images/barchart3.PNG)
+
+
+A black outline can also be added to bar plots with the `colour` argument:
+
+```r
+ggplot(data = MyTibble, aes (x = variable1, y = variable2, fill = variable1))+
+    geom_bar(colour = "black", stat = "identity")
+```
+
+![](images/barchart7.PNG)
+
 
 
 We can also have a bar chart in which a third variable determines the colors of the bars:
