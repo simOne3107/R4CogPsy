@@ -828,7 +828,6 @@ arrange (MyTibble, desc(column1))
 
 #### Selecting ####
 
-
 To **select** only the **columns**/variables we are interested in:
 
 **Example 1:**
@@ -1141,6 +1140,59 @@ group_by (MyTibble, variable1, variable2, variable3)
 ```
 
 
+#### Calculating the confidence interval ####
+
+To **calculate the confidence interval**, we can use the `summarySE()` function from the **plyr** package.
+
+```r
+summarySE(myTibble, measurevar = "columnName", groupvars = c("column1", "column2", na.rm = TRUE)
+```
+
+```r
+summarySE (final3, measurevar = "rt", groupvars = c("condition", "block"))
+
+>
+   condition block    N       rt       sd       se       ci
+1      LC_CC     1 9270 2091.041 768.6395 7.983307 15.64904
+2      LC_CC     2 9573 2197.047 931.0240 9.515615 18.65262
+3      LC_CC     3 8734 1786.994 694.0754 7.426771 14.55822
+4      LC_CC     4 8783 1816.880 862.4229 9.202352 18.03877
+5      LC_CC     5 8618 1729.510 751.3895 8.093975 15.86613
+6      LC_CC     6 8667 1725.803 594.5603 6.386479 12.51902
+7      LC_CI     1 9698 2334.420 949.0705 9.637345 18.89121
+8      LC_CI     2 9210 2162.496 853.5019 8.893540 17.43331
+9      LC_CI     3 9139 1966.055 807.7119 8.449036 16.56200
+10     LC_CI     4 8404 1643.396 477.1160 5.204523 10.20215
+11     LC_CI     5 8802 1851.314 662.3545 7.059920 13.83909
+12     LC_CI     6 8781 1930.166 719.1952 7.674936 15.04467
+13     LI_CC     1 9148 2159.022 884.0105 9.242604 18.11757
+14     LI_CC     2 9492 2221.094 950.9441 9.760591 19.13285
+15     LI_CC     3 9284 2111.449 906.9037 9.412254 18.45008
+16     LI_CC     4 8839 1911.158 661.5279 7.036337 13.79286
+17     LI_CC     5 8939 1882.178 710.2252 7.511931 14.72511
+18     LI_CC     6 9007 1933.874 683.3105 7.199926 14.11349
+19     LI_CI     1 9499 2053.949 727.8000 7.467464 14.63783
+20     LI_CI     2 9847 2166.824 861.7713 8.684405 17.02321
+21     LI_CI     3 9015 1997.539 841.9811 8.867874 17.38305
+22     LI_CI     4 8970 1881.340 736.5603 7.777000 15.24470
+23     LI_CI     5 8946 1852.977 761.2887 8.048870 15.77763
+24     LI_CI     6 8876 1864.945 724.9816 7.695172 15.08432
+> 
+
+```
+
+```r
+pd <- position_dodge(0.1)
+ggplot (myTibble, aes (x = block, rt, colour = condition, group = condition)) +
+  geom_errorbar(aes (ymin = rt - ci, ymax = rt + ci), colour = "black", width=.1, position = pd) +
+  geom_line(position = pd) +
+  geom_point(position = pd, size = 3)
+```
+
+![](images/linegraph3.PNG)
+
+
+
 #### Collapsing ####
 
 To **collapse** the data from multiple (repeated) rows to a single row:
@@ -1318,14 +1370,6 @@ newTibble <- ddply (myTibble, c("column1", "column2"), summarise,
              NewColumn3 = sd (column3), # sd
              NewColumn4 = sd/sqrt(NewColumn1) # standard error
              )
-```
-
-#### Calculating the confidence interval ####
-
-To **calculate the confidence interval**, we can use the `summarySE()` function from the **plyr** package.
-
-```r
-summarySE(myTibble, measurevar = "columnName", groupvars = c("column1", "column2", na.rm = TRUE)
 ```
 
 
@@ -1540,6 +1584,27 @@ ggplot(data = MyTibble, mapping = aes (x = variable1, y= variable2) +
 ![](images/scatterplot8.PNG)
 
 
+
+We can generate scatterplots with multiple regression lines:
+
+```r
+ggplot(myTibble, aes (x = variable1, y = variable2, color = variable3)) +
+   geom_point()+
+   geom_smooth(method = lm, se = FALSE, fullrange = TRUE)
+```
+
+```r
+summarised <- summarySE (final3, measurevar = "rt", groupvars = c("condition", "block"))
+ggplot (summarised, aes (x= block, y = rt, color = condition)) +
+  geom_point(shape = 1)+
+  scale_colour_hue (l = 60) +
+  geom_smooth(method = lm, se = FALSE, fullrange = TRUE)
+```
+
+![](images/scatterplot9.PNG)
+
+
+
 We can also add a **title**, a **subtitle**, and a **caption** to any plot with the `labs()` function and/or change the default legend titles in the x and/or y axis.
 
 ```r
@@ -1554,6 +1619,10 @@ ggplot(data = MyTibble, mapping = aes (x = variable1, y= variable2) +
     y = "New legend for the y axis"
 ```
 
+Titles can also be added to a plot with the `ggtitle()` function:
+```r
+ggtitle("This is a super long title\split into two lines")
+```
 
 Instead of data points, we can also use the `geom_text() function to have a plot in each labels referring to the data points are added onto the coordinate system:
 
@@ -1877,7 +1946,7 @@ In sum, all statistical procedures are a version of the following equation:
 
 outcome<sub>i</sub> = (model) + error<sub>i</sub>
 
-The **mean**, for instance, can be seen as a model of a given sample/dataset.
+The **mean**, for instance, can be seen as a model of a given sample/dataset. The mean is the value that is closest to all data points.
 
 
 
@@ -1984,7 +2053,11 @@ leveneTest(MyTibble$outcomeVariable, groupingVariable)
 
 #### Correlations ####
 
-The relationship between two variables can be measured using **correlation coeficients**. There are three main functions in **R** which we can use to compute correlation coefficients, namely `cor()`, `cor.test()`, and `rcorr()` (from the **Hmisc** package).
+The relationship between two variables can be measured using **correlation coefficients**. 
+
+The correlation coefficient Pearson's *r* is a standardized metric which indicates how much two given variables are correlated with each other.
+
+There are three main functions in **R** which we can use to compute correlation coefficients, namely `cor()`, `cor.test()`, and `rcorr()` (from the **Hmisc** package).
 
 **Example 1:**
 ```r
@@ -2034,9 +2107,22 @@ In **regression analysis**, we fit a linear model to our data, and use that mode
 
 - residuals **=** observed values **-** fitted values
 
-Note that if a given regression model satisfies the normality assumption, then its residuals will be normally distributed.
+Note that if a given regression model satisfies the normality assumption, then its **residuals** will be normally distributed. It is possible for skewed distributions to have normally distributed residuals.
 
 In regression analysis, each line has a **slope**, which can be positive or negative, and an **intercept**, which is the point at which the line crosses the y axis of the graph (or the point where the line starts on the y axis). The intercept and the slope are **coefficients** of the regression model.
+
+Regression lines could be represented by the following equation:
+
+*y* = b<sub>0</sub> + b<sub>1</sub> * *x* + e
+
+In which, *y* refers to the independent/predictor variable, 
+b<sub>0</sub> refers to the intercept,
+b<sub>1</sub> refers to the slope, 
+*x* refers to the dependent/outcome variable, and
+e refers to the error.
+
+
+
 
 In **simple linear regression**, we model a single continuous variable as a response of a predictor variable.
 
@@ -2081,7 +2167,7 @@ If a given variable is said to significantly predict an outcome, then the beta v
 
 The F-statistic shown in the output above tells us how much variability the model can explain relative to how much the model can't explain.
 
-**R<sup>2</sup>** is a standardized measure of model fit. It measures the variance described by a model. If we have an **R<sup>2</sup>** of `0.68`, for example, then 68% of the variation in the data can be explained by the model, whereas the remainder occurs due to chance. **R<sup>2</sup>** can also be said to be a measure of **effect size**.
+**R<sup>2</sup>** is a standardized measure of model fit. It measures the amount of variance described by a model. If we have an **R<sup>2</sup>** of `0.68`, for example, then 68% of the variation in the data can be explained by the model, whereas the remainder occurs due to chance. **R<sup>2</sup>** can also be said to be a measure of **effect size**. **R<sup>2</sup>** ranges from 0 to 1, and it is a measurement of the strength of the relationship between two variables.
 
 Multiple **R<sup>2</sup>** indicates how well a model predicts the observed data. Large values of multiple **R<sup>2</sup>** represent a large correlation between the predicted and observed values of the outcome (which is the opposite of what is happening in the example above). When the model yields a multiple **R<sup>2</sup>** of 1, then we have a model which perfectly predicts the observed data. In the example above, the model **does not** provide a good description of the data.
 
@@ -2098,6 +2184,53 @@ To run a multiple regression analysis in **R**, we can use the following:
 
 ```r
 MyModel <- lm(outcomeVariable ~ predictorVariable1 + predictorVariable2, data = MyTibble)`
+```
+
+We can get a **coefficient table** with and **summary statistics** for the overall model fit with the `summary()` function:
+
+```r
+summary(MyModel)
+```
+```r
+>  summary(MyModel)
+
+Call:
+lm(formula = rt ~ condition, data = finalTest2)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1869.8  -630.8  -175.8   425.2  2979.4 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)    
+(Intercept)    2064.585      5.214  395.99   <2e-16 ***
+conditionLC_CI   77.893      7.289   10.69   <2e-16 ***
+conditionLI_CC  128.234      7.241   17.71   <2e-16 ***
+conditionLI_CI   74.162      7.283   10.18   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 845.4 on 109759 degrees of freedom
+Multiple R-squared:  0.002883,	Adjusted R-squared:  0.002856 
+F-statistic: 105.8 on 3 and 109759 DF,  p-value: < 2.2e-16
+```
+
+With the `tidy()` function from the **broom** package, we can get a tidy coefficient table:
+
+```r
+tidy(MyModel)
+```
+
+```r
+>  tidy(MyModel)
+# A tibble: 4 x 5
+  term           estimate std.error statistic  p.value
+  <chr>             <dbl>     <dbl>     <dbl>    <dbl>
+1 (Intercept)      2065.       5.21     396.  0.      
+2 conditionLC_CI     77.9      7.29      10.7 1.22e-26
+3 conditionLI_CC    128.       7.24      17.7 4.53e-70
+4 conditionLI_CI     74.2      7.28      10.2 2.43e-24
+>  
 ```
 
 To compare whether different variables have similar degrees of importance in a model, we can use the `lm.beta()` function from the **QuantPsyc** package:
@@ -2162,6 +2295,17 @@ AIC: 14602
 Number of Fisher Scoring iterations: 6
 ```
 In the output above, `null deviance` = deviance of the model that contains no predictors other than the constant, whereas `residual deviance` = the deviance for the model. In general, the value for the residual deviance should be less than the value associated with the null deviance.
+
+***************************************************************************************************************************************
+#### Centering ####
+
+**Centering** is a linear transformation frequently applied to continuous predictor variables. In order to center a predictor variable, you must subtract the mean of that predictor variable from each one of the data points.
+
+***************************************************************************************************************************************
+#### Z-scoring ####
+
+**Z-scoring** is another linear transformation which consists in dividing the centered data by the standard deviation of the sample. With this kind of transformation, we are able to determine **how many standard deviations away from the mean a given value is**. The advantage of this kind of transformation is that if we divide each variable by its standard deviation, assesssing the impact of these variables may be more straightforward as we have gotten ridden of the different metrics of each variable thus rendering the multiple predictors more comparable.
+
 
 ***************************************************************************************************************************************
 
