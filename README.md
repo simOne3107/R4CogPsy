@@ -1982,7 +1982,7 @@ Statistical models, in general, rely on assumptions. The assumptions of parametr
 3. Interval data
 4. Independence
 
-One of the ways in which we can check whether whether our data are normally distributed is through visual inspection. There are two graphs which we can generate to perform visual inspection of our data. The first one is a **histogram**:
+One of the ways in which we can check whether whether our data are normally distributed is through visual inspection. There are three plots which we can generate to perform visual inspection of our data. The first one is a **histogram**:
 
 ```r
 MyHistogram <- ggplot (MyTibble, aes (variable1)) + opts (legend.position = "none") +
@@ -2008,7 +2008,7 @@ hist.depth <- ggplot(data = diamonds, aes (depth)) +
 ![](images/histogram2.PNG)
 
 
-The second graph we can generate to visually inspect whether our data are **normally distributed** is a **Q-Q plot**. In a **Q-Q plot**, any values deviating away from the diagonal of the plot indicate deviations from normality. Ideally, the data points should fall along a straight line.
+The second graph we can generate to visually inspect whether our data are **normally distributed** is a **Quantile-Quantile plot**. In a **Q-Q plot**, any values deviating away from the diagonal of the plot indicate deviations from normality. Ideally, the data points should fall along a straight line.
 
 
 ```r
@@ -2016,6 +2016,19 @@ MyqqPlot <- qplot(sample= MyTibble$variable1, stat = "qq")
 ```
 
 ![](images/qqplot.PNG)
+
+
+
+The third kind of plot which we can use to check whether our data are normally distributed is a **residual plot**. You will notice that, if the constant variance assumption has been satisfied, the spread of the residuals will then be approximately equal across the range of fitted values. Below you will find examples of residual plots of normally distributed data which meet the constant variance assumption:
+
+
+```r
+par(mfrow = c(3,3))
+  for (i in 1:9) plot (rnorm (200), rnorm(200))
+```
+
+![](images/residuals.PNG)
+
 
 We can also look at measures of **skewness** and **kurtosis** to check whether our data are **normally distributed**. Values which are very close to zero suggest that the data come from a normal distribution. We can use the `describe()` function from the **psych** package to get the skew and kurtosis values of a given variable:
 
@@ -2109,7 +2122,7 @@ In **regression analysis**, we fit a linear model to our data, and use that mode
 
 Note that if a given regression model satisfies the normality assumption, then its **residuals** will be normally distributed. It is possible for skewed distributions to have normally distributed residuals.
 
-In regression analysis, each line has a **slope**, which can be positive or negative, and an **intercept**, which is the point at which the line crosses the y axis of the graph (or the point where the line starts on the y axis). The intercept and the slope are **coefficients** of the regression model.
+In regression analysis, each line has a **slope**, which can be positive or negative, and an **intercept**, which is the point at which the line crosses the y axis of the graph (or the point where the line starts on the y axis). The intercept and the slope are **coefficients** of the regression model. The **intercept** is the predicted value when the outcome variable = 0.
 
 Regression lines could be represented by the following equation:
 
@@ -2168,6 +2181,21 @@ The F-statistic shown in the output above tells us how much variability the mode
 
 **R<sup>2</sup>** is a standardized measure of model fit. It measures the amount of variance described by a model. If we have an **R<sup>2</sup>** of `0.68`, for example, then 68% of the variation in the data can be explained by the model, whereas the remainder occurs due to chance. **R<sup>2</sup>** can also be said to be a measure of **effect size**. **R<sup>2</sup>** ranges from 0 to 1, and it is a measurement of the strength of the relationship between two variables.
 
+Adjusted **R<sup>2</sup>** also measure the extent to which the predictors included in a given model describe the variance observed in the response. If an Adjusted **R<sup>2</sup>** is considerably lower than the **R<sup>2</sup>**, then the model is facing an overfitting issue. To check is that is the case, we can use the `glance()` function:
+
+```r
+glance(MyModel)
+```
+
+```r
+> glance(MyModel)
+# A tibble: 1 x 11
+  r.squared adj.r.squared sigma statistic  p.value    df logLik    AIC    BIC deviance df.residual
+      <dbl>         <dbl> <dbl>     <dbl>    <dbl> <int>  <dbl>  <dbl>  <dbl>    <dbl>       <int>
+1    0.0479        0.0471 0.188      62.2 2.37e-51     5  1241. -2471. -2432.     176.        4949
+> 
+```
+
 Multiple **R<sup>2</sup>** indicates how well a model predicts the observed data. Large values of multiple **R<sup>2</sup>** represent a large correlation between the predicted and observed values of the outcome (which is the opposite of what is happening in the example above). When the model yields a multiple **R<sup>2</sup>** of 1, then we have a model which perfectly predicts the observed data. In the example above, the model **does not** provide a good description of the data.
 
 Models can be extended by including several other variables. It is the combination of all these variables that will be used to predict the outcome variable. The more variables we add to a model, the higher the **R<sup>2</sup>** will be. Note that when deciding on which variables to include in a model, we should do our best to prevent two things from happening: 1) **over-fitting**, which essentially means having too many variables in the model that in turn contribute little to predicting the outcome; and 2) **under-fitting**, which is what happens when important predictors are left out of the model.
@@ -2179,10 +2207,10 @@ We can use the `coef()` function To retrieve only the coefficients of a linear m
 coef(myModel)
 ```
 
-To run a multiple regression analysis in **R**, we can use the following:
+In **multiple linear regression**, we model several continuous variables as a response of a predictor variable. When fitting a model in **R**, the predictors should be separated by plus signs:
 
 ```r
-MyModel <- lm(outcomeVariable ~ predictorVariable1 + predictorVariable2, data = MyTibble)`
+MyModel <- lm(outcomeVariable ~ predictorVariable1 + predictorVariable2 + predictorVariable3, data = MyTibble)
 ```
 
 We can get a **coefficient table** with and **summary statistics** for the overall model fit with the `summary()` function:
@@ -2190,6 +2218,7 @@ We can get a **coefficient table** with and **summary statistics** for the overa
 ```r
 summary(MyModel)
 ```
+
 ```r
 >  summary(MyModel)
 
@@ -2254,6 +2283,23 @@ To compare two or more different models, we can use the `anova()` function:
 anova(myModel1,myModel2)
 ```
 
+
+It is also a good idea to check whether a given predictor in the model can be predicted by other predictors (i.e., collinearity) To ascertain whether that is the case, we can use the `vif()` function from the **car** package:
+
+```r
+vif(MyModel)
+```
+
+```r
+> vif(MyModel)
+               location                 context               cLOGBlock                congruencyPreviousLabel 
+               1.001782                1.001361                1.000244                1.002936 
+> 
+```
+
+According to Montgomery and Peck (1992), **V**ariance **I**nflation **F**actors above 10 are an indication of collinearity issues.
+
+
 ***************************************************************************************************************************************
 
 #### Logistic regression ####
@@ -2298,7 +2344,9 @@ In the output above, `null deviance` = deviance of the model that contains no pr
 ***************************************************************************************************************************************
 #### Centering ####
 
-**Centering** is a linear transformation frequently applied to continuous predictor variables. In order to center a predictor variable, you must subtract the mean of that predictor variable from each one of the data points.
+**Centering** is a linear transformation frequently applied to continuous predictor variables. As previously mentioned, the **intercept** is the predicted value when the outcome variable = 0. Since some outcome variables would be meaningless if they equated to zero (e.g., a person cannot weigh 0 kg), it is more informative to center the predictors so that the outcome variable can be based on a meaningful average value, rather than zero.
+
+In order to center a predictor variable, you must subtract the mean of that predictor variable from each one of the data points.
 
 ```r
 myTibble <- myTibble %>%
