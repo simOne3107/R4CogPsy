@@ -2304,7 +2304,8 @@ According to Montgomery and Peck (1992), **V**ariance **I**nflation **F**actors 
 
 #### Logistic regression ####
 
-**Logistic regression** is a type of multiple regression in which the outcome variable is a categorical variable, and the predictor variables are either continuous or categorical variables.
+**Logistic regression** is a type of multiple regression in which the outcome variable is a **categorical variable**, and the predictor variables are either continuous or categorical variables. When the predictors are categorical, the slopes are differences between groups.
+
 We can use log-likelihood statistic to assess the fit of a logistic regression model. The log-likelihood statistic indicates how much unexplained information there is after the model has been fitted in. The larger the value of the log-likelihood, the more unexplained observations there are in the model.
 
 In **R**, we can do logistic regression with the generalized linear model function `glm()`.
@@ -2342,6 +2343,31 @@ Number of Fisher Scoring iterations: 6
 In the output above, `null deviance` = deviance of the model that contains no predictors other than the constant, whereas `residual deviance` = the deviance for the model. In general, the value for the residual deviance should be less than the value associated with the null deviance.
 
 ***************************************************************************************************************************************
+#### Dummy/ treatment coding ####
+
+Dummy coding is the process by which we assign numbers (0 or 1) to categories so that we can add these categories into a regression model. The category to which the value of 0 is assigned is the reference level/intercept of the regression model.
+
+
+***************************************************************************************************************************************
+#### Sum-coding ####
+
+Sum-coding is a coding scheme similar to dummy-coding but which aids interpretation of models which have interactions. In this type of coding, one categorical predictor is assigned the value -1 while the other is assigned the value +1. By doing so, the intercept will be halfway between the two categories.
+
+If you use the `factor()` function to assign codes to a variable, you can then use the `contrasts()` function to check which values were automatically assigned to that variable:
+
+```r
+contrasts(myTibble$variable)
+```
+
+```r
+            congruent
+incongruent         0
+congruent           1
+```
+
+
+***************************************************************************************************************************************
+
 #### Centering ####
 
 **Centering** is a linear transformation frequently applied to continuous predictor variables. As previously mentioned, the **intercept** is the predicted value when the outcome variable = 0. Since some outcome variables would be meaningless if they equated to zero (e.g., a person cannot weigh 0 kg), it is more informative to center the predictors so that the outcome variable can be based on a meaningful average value, rather than zero.
@@ -2380,11 +2406,8 @@ log10(100)
 ```
 
 ```r
->  log10(100)
 [1] 2
-> 
 ```
-
 
 ***************************************************************************************************************************************
 
@@ -2444,6 +2467,13 @@ Below you will find a list of some of the resources I have been using to learn *
 
 
 ***************************************************************************************************************************************
+
+
+# **Useful links**
+
+Below you will find a list of some useful **R** and statistics related links:
+
+- 
 
 
 
