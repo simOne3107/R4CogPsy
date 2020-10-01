@@ -194,7 +194,7 @@ NewVariable
 [1] 4
 ```
 
-We can also perform simple mathematical operations with one or more previously stored `variables`:
+We can also perform simple mathematical operations with one or more previously stored variables:
 
 ```r
 Bananas * 4
@@ -1572,7 +1572,7 @@ ggplot(data = MyTibble, mapping = aes (x = variable1, y= variable2) +
 ![](images/scatterplot7.PNG)
 
 
-With the function `geom_jitter()` we can add some degree of noise to the datapoints:
+With the function `geom_jitter()` we can add some degree of noise to the data points:
 
 ```r
 ggplot(data = MyTibble, mapping = aes (x = variable1, y= variable2) +
@@ -1624,7 +1624,7 @@ Titles can also be added to a plot with the `ggtitle()` function:
 ggtitle("This is a super long title\split into two lines")
 ```
 
-Instead of data points, we can also use the `geom_text() function to have a plot in each labels referring to the data points are added onto the coordinate system:
+Instead of data points, we can also use the `geom_text()` function to have a plot with labels instead:
 
 ```r
 ggplot(data = MyTibble, mapping = aes (x=variable1, y = variable2, label = variable3)) +
