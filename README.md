@@ -2055,7 +2055,7 @@ leveneTest(MyTibble$outcomeVariable, groupingVariable)
 
 The relationship between two variables can be measured using **correlation coefficients**. 
 
-The correlation coefficient Pearson's *r* is a standardized metric which indicates how much two given variables are correlated with each other.
+The correlation coefficient Pearson's *r*, which can be either positive or negative (ranging between -1 and +1), is a standardized metric which indicates how much two given variables are correlated with each other.
 
 There are three main functions in **R** which we can use to compute correlation coefficients, namely `cor()`, `cor.test()`, and `rcorr()` (from the **Hmisc** package).
 
@@ -2120,7 +2120,6 @@ b<sub>0</sub> refers to the intercept,
 b<sub>1</sub> refers to the slope, 
 *x* refers to the dependent/outcome variable, and
 e refers to the error.
-
 
 
 
@@ -2301,15 +2300,47 @@ In the output above, `null deviance` = deviance of the model that contains no pr
 
 **Centering** is a linear transformation frequently applied to continuous predictor variables. In order to center a predictor variable, you must subtract the mean of that predictor variable from each one of the data points.
 
+```r
+myTibble <- myTibble %>%
+  mutate(variable_c = variable - mean(variable))
+```
+
+You can also center a variable with the `scale()` function:
+
+```r
+scale(variable, scale=FALSE)
+```
+
+The argument `scale=FALSE` above ensures that the mean will be subtracted from the variable which, in turn, will **not** be divided by the standard deviation.
+
+
 ***************************************************************************************************************************************
 #### Z-scoring ####
 
 **Z-scoring** is another linear transformation which consists in dividing the centered data by the standard deviation of the sample. With this kind of transformation, we are able to determine **how many standard deviations away from the mean a given value is**. The advantage of this kind of transformation is that if we divide each variable by its standard deviation, assesssing the impact of these variables may be more straightforward as we have gotten ridden of the different metrics of each variable thus rendering the multiple predictors more comparable.
 
+***************************************************************************************************************************************
+
+#### Logarithm ####
+
+The logarithm is a nonlinear transformation which shrinks large numbers, thus compressing the data and changing the shape of the distribution, and can be used to make a regression model adhere more strongly to the assumptions of normality and constant variance.
+
+In **R**, we can use the `log10()` function to log-transform a value:
+
+```r
+log10(100)
+```
+
+```r
+>  log10(100)
+[1] 2
+> 
+```
+
 
 ***************************************************************************************************************************************
 
-#### t-test ####
+#### T-test ####
 
 
 We can use a **t-test** to test whether two group means are different.
@@ -2341,6 +2372,13 @@ We use **ANOVA** to compare the ratio of systematic variance to unsystematic var
 
 
 pg 417
+
+***************************************************************************************************************************************
+#### Miscellaneous ####
+
+
+- "Reaction time data will almost always be skewed, because there is a natural lower limit to how quickly somebody can respond. This limit is determined by how quickly it is physically possible to move one's hand to press a button. As a result of these factors, very short response durations are impossible." (Winter, 2019, p.90)
+
 
 
 ***************************************************************************************************************************************
