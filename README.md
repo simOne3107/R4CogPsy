@@ -301,6 +301,7 @@ sum(is.na(variable))
 ```
 - Note that, in **R**, `NA` stands for "Not Available".
 
+
 To generate a sequence of **repeated** numbers:
 ```r
 rep (numberToRepeat, howManyRepetitions)
@@ -332,24 +333,37 @@ ifelse(conditionalArgument, whatToDoIfTrue, WhatToDoIfFalse)
 To **recode** a categorical variable:
 
 ```r
-myTibble$newColumn[myTibble$variable == "variableName"] <- "newVariableName"
+myTibble$newColumn[MyDataFrame$variable == "variableName"] <- "newVariableName"
 ```
 
 To **compute the frequency** of a variable:
 ```r
-table(MyTibble$variable)
+table(MyDataFrame$variable)
 ```
 
 To **calculate the proportion** of different variables:
 ```r
-FrequencyofVariablesXandY <- table(MyTibble$variable)
+FrequencyofVariablesXandY <- table(MyDataFrame$variable)
 prop.table(FrequencyofVariablesXandY)
 ```
 
 To **check the difference between the minimum and maximum values in a range**:
 ```r
-diff(range(myTibble))
+diff(range(MyDataFrame))
 ```
+
+To **check the unique values** in a given column:
+
+```r
+unique(myDataFrame$variable)
+```
+
+To **count and then sort** the values in a given column:
+
+```r
+sort(table(MyDataFrame$variable))
+```
+
 
 To **check all the files in a given directory**:
 ```r
@@ -2213,7 +2227,24 @@ In **multiple linear regression**, we model several continuous variables as a re
 MyModel <- lm(outcomeVariable ~ predictorVariable1 + predictorVariable2 + predictorVariable3, data = MyTibble)
 ```
 
-We can get a **coefficient table** with and **summary statistics** for the overall model fit with the `summary()` function:
+
+
+To include an **interaction** in the model, you should use an asterisk in the formula as follows:
+
+```r
+MyModel <- lm(outcomeVariable ~ predictorVariable1 * predictorVariable2, data = MyTibble)
+```
+
+Alternatively, **interactions** can be added as follows:
+
+```r
+MyModel <- lm(outcomeVariable ~ predictorVariable1 + predictorVariable2 + predictorVariable1:predictorVariable2, data = MyTibble)
+```
+
+To facilitate the interpretation of interactions, it is generally recommended to [center](https://github.com/simOne3107/R4CogPsy#centering) continuous variables. By doing so, the intercept will be set to the mean.
+
+
+We can get a **coefficient table** and **summary statistics** for the overall model fit with the `summary()` function:
 
 ```r
 summary(MyModel)
@@ -2274,7 +2305,7 @@ If a model is a good fit to the data, that model will have very small confidence
 confint(myModel)
 ```
 
-Confidence intervals give us the range of the difference that we would expect to include the true difference on 95% of the time (i.e., if we were to re-run the experiment 100 times).
+**Confidence intervals** give us the range of the difference that we would expect to include the true difference on 95% of the time (i.e., if we were to re-run the experiment 100 times).
 
 
 To compare two or more different models, we can use the `anova()` function:
@@ -2284,7 +2315,7 @@ anova(myModel1,myModel2)
 ```
 
 
-It is also a good idea to check whether a given predictor in the model can be predicted by other predictors (i.e., collinearity) To ascertain whether that is the case, we can use the `vif()` function from the **car** package:
+It is also a good idea to check whether a given predictor in the model can be predicted by other predictors (i.e., collinearity) To check whether that is the case, we can use the `vif()` function from the **car** package:
 
 ```r
 vif(MyModel)
@@ -2314,7 +2345,7 @@ In **R**, we can do logistic regression with the generalized linear model functi
 myModel <- glm(outcome ~ predictorVariable, data = MyTibble, family = binomial())
 ```
 
-In the example above, other possible values for the `family` argument would be Gaussian, poisson, gamma.
+In the example above, other possible values for the `family` argument would be Gaussian, Poisson, Gamma.
 
 ```r
 Call:
@@ -2343,15 +2374,17 @@ Number of Fisher Scoring iterations: 6
 In the output above, `null deviance` = deviance of the model that contains no predictors other than the constant, whereas `residual deviance` = the deviance for the model. In general, the value for the residual deviance should be less than the value associated with the null deviance.
 
 ***************************************************************************************************************************************
+
 #### Dummy/ treatment coding ####
 
-Dummy coding is the process by which we assign numbers (0 or 1) to categories so that we can add these categories into a regression model. The category to which the value of 0 is assigned is the reference level/intercept of the regression model.
+**Dummy coding** is the process by which we assign numbers (0 or 1) to categories so that we can add these categories into a regression model. The category to which the value of 0 is assigned is the reference level/intercept of the regression model.
 
 
 ***************************************************************************************************************************************
+
 #### Sum-coding ####
 
-Sum-coding is a coding scheme similar to dummy-coding but which aids interpretation of models which have interactions. In this type of coding, one categorical predictor is assigned the value -1 while the other is assigned the value +1. By doing so, the intercept will be halfway between the two categories.
+**Sum-coding** is a coding scheme similar to dummy-coding but which aids interpretation of models which have interactions. In this type of coding, one categorical predictor is assigned the value -1 while the other is assigned the value +1. By doing so, the intercept will be halfway between the two categories.
 
 If you use the `factor()` function to assign codes to a variable, you can then use the `contrasts()` function to check which values were automatically assigned to that variable:
 
@@ -2389,6 +2422,7 @@ The argument `scale=FALSE` above ensures that the mean will be subtracted from t
 
 
 ***************************************************************************************************************************************
+
 #### Z-scoring ####
 
 **Z-scoring** is another linear transformation which consists in dividing the centered data by the standard deviation of the sample. With this kind of transformation, we are able to determine **how many standard deviations away from the mean a given value is**. The advantage of this kind of transformation is that if we divide each variable by its standard deviation, assesssing the impact of these variables may be more straightforward as we have gotten ridden of the different metrics of each variable thus rendering the multiple predictors more comparable.
