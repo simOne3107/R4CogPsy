@@ -2377,7 +2377,7 @@ In the output above, `null deviance` = deviance of the model that contains no pr
 
 #### Dummy/ treatment coding ####
 
-**Dummy coding** is the process by which we assign numbers (0 or 1) to categories so that we can add these categories into a regression model. The category to which the value of 0 is assigned is the reference level/intercept of the regression model.
+When dealing with categorical predictors in linear models, we need to code them numerically before entering them into the models and running any analyses. **Dummy coding** is the process by which we assign numbers (0 or 1) to categories so that we can add these categories into a regression model. The category to which the value of 0 is assigned is the reference level/intercept of the regression model.
 
 
 ***************************************************************************************************************************************
