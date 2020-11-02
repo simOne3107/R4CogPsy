@@ -2525,8 +2525,71 @@ d estimate: 3.315782 (large)
 
 > 
 ```
+
+#### **Power analysis** ####
+
+It is good practice to perform a **power analysis** prior to starting data collection in order to determine the sample size that will be needed to answer our research question(s) (Green & MacLeod, 2016). The `simr` package (Green & MacLeod, 2016) allows us to calculate power for any linear mixed model or generalized linear mixed models. 
+
+Before starting data collection, it is also recommended to make an informed decision regarding the effect size we are interested in. The `fixef()` function from the `simr` package can be used to determine the size of the effect we would like to detect for a given variable.
+
+We can first use that function to check what the effect observed in the pilot data collected is:
+
+```r
+fixef (myModel)["predictorVariable"]
+```
+
+```r
+> fixef (errorBehavModel3)["cLogBlock"]
+ cLogBlock 
+-0.7451811
+```
+
+And we can then change that to the effect size we are expecting to observe in our study:
+
+```r
+fixef (myModel)["predictorVariable"] <- -0.62
+```
+Once we have determined the **effect size**, we can use the `powerSim()` function on our model to run the power analysis:
+
+```r
+powerSim(myModel)
+```
+
+By default, the function will run 1000 simulations. However, that number can be easily changed by adding a `nsim` argument with the desired number of simulations. Similarly, the `powerSim()` function will, by default, test the first fixed effect in a model. To specify the fixed effect we are interested in, we must use the `test` argument.
+
+```r
+> powerSim(errorBehavModel3, test = fixed ("cLogBlock"), nsim = 5)
+Power for predictor 'cLogBlock', (95% confidence interval):=============================================================================================================|
+      80.00% (28.36, 99.49)
+
+Test: z-test
+      Effect size for cLogBlock is -0.62
+
+Based on 5 simulations, (0 warnings, 0 errors)
+alpha = 0.05, nrow = 2994
+
+Time elapsed: 0 h 2 m 42 s
+```
+
+
+The `simr` package also allows us to generate power curve plots so that we can best visualise the number of participants needed to detect an effect of a given size with **80% power**.
+
+```r
+plotName <- powerCurve (myModel, along = "subject")
+plot (plotName)
+```
+
+As above, we can also specify the **fixed effect** we are interested in, and the **number of simulations** we would like to be run:
+
+```r
+powerCurve_cLogBlock <- powerCurve (modelExtended, test = fixed ("cLogBlock"), along = "subject", nsim = 3)
+```
+
+![](images/powerCurve.PNG)
+
+
 ***************************************************************************************************************************************
-#### Miscellaneous ####
+#### **Miscellaneous** ####
 
 
 - "Reaction time data will almost always be skewed, because there is a natural lower limit to how quickly somebody can respond. This limit is determined by how quickly it is physically possible to move one's hand to press a button. As a result of these factors, very short response durations are impossible." (Winter, 2019, p.90)
@@ -2544,7 +2607,10 @@ Below you will find a list of some of the resources I have been using to learn *
 
 [Statistics for Linguists: An Introduction Using R](http://www.bodowinter.com/blog/book-release-statistics-for-linguists)
 
+[SIMR: an R package for power analysis of generalized linear mixed models by simulation] (https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12504)
+
 `library (swirl)` # this is an interactive **R** package that teaches you **R** inside **R**
+
 
 
 ***************************************************************************************************************************************
