@@ -66,6 +66,7 @@ Below is a list of packages which I have been using for data analysis, data wran
 library (broom)
 library (car)
 library (devtools)
+library (effsize)
 library (ggplot2)
 library (Hmisc)
 library (knitr)
@@ -75,6 +76,7 @@ library (powersim)
 library (psych)
 library (QuantPsyc)
 library (rmarkdown)
+library (saccades)
 library (tidyverse)
 ```
 
@@ -1985,6 +1987,7 @@ Means vary from sample to sample. When two samples come from the same population
 
 We can use the **standard error** as an indicator of the variability between sample means (small standard errors = similar means; large standard errors = large differences in sample means). The **standard error** is the standard deviation of the sampling distribution.
 
+
 -----
 
 #### Testing assumptions ####
@@ -2305,9 +2308,12 @@ If a model is a good fit to the data, that model will have very small confidence
 confint(myModel)
 ```
 
-**Confidence intervals** give us the range of the difference that we would expect to include the true difference on 95% of the time (i.e., if we were to re-run the experiment 100 times).
+**Confidence intervals** give us the range of the difference that we would expect to include the true difference on 95% of the time (i.e., if we were to re-run the experiment 100 times). To calculate confidence intervals, we must take the sample mean and then both subtract and add 1.96 times the standard error as follows:
 
-
+```r
+CI_lower_bound = [sample mean - 1.96*SE]
+CI_upper_bound = [sample mean + 1.96*SE]
+```
 To compare two or more different models, we can use the `anova()` function:
 
 ```r
@@ -2467,6 +2473,21 @@ If the data for the different groups are stored in **two columns**, run the foll
 ```r
 newModel <- t.test (group1scores, group2scores, paired = FALSE/TRUE)
 ```
+
+Note that whenever *t*-values are larger than `1.98` or smaller than `-1.98`, *p* will be below `0.05`.
+
+```r
+	Welch Two Sample t-test
+
+data:  rnorm(n, sd = my_sd) and rnorm(n, sd = my_sd) + meandiff
+t = -1.4399, df = 17.594, p-value = 0.1675
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -3.2212667  0.6039315
+sample estimates:
+mean of x mean of y 
+0.3434088 1.6520764 
+```
 ***************************************************************************************************************************************
 
 #### ANOVA ####
@@ -2478,6 +2499,32 @@ We use **ANOVA** to compare the ratio of systematic variance to unsystematic var
 
 pg 417
 
+
+***************************************************************************************************************************************
+
+#### **Cohen's *d*** ####
+
+**Cohen's *d*** is a measurement of the strength of the difference between two means. To get this measure, we first must calculate the difference between the two means, and then divide that by the standard deviation of both groups together. Whenever the observed difference between the two groups means is large or when the standard deviation is small, the **Cohen's *d*** will be large. **Cohen's *d*s** of |0.2|, |0.5|, and |0.8| are considered small, medium, and large effect sizes, respectively.
+
+To calculate **Cohen's *d*** in **R**, we can use the `cohen.d ()` function from the **effsize** package.
+
+
+```r
+cohen.d(outcomeVariable ~ predictorVariable, data = myTibble)
+```
+
+```r
+> cohen.d(y~x, df)
+
+Cohen's d
+
+d estimate: 3.315782 (large)
+95 percent confidence interval:
+   lower    upper 
+2.704218 3.927346 
+
+> 
+```
 ***************************************************************************************************************************************
 #### Miscellaneous ####
 
