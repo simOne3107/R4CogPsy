@@ -2504,7 +2504,7 @@ pg 417
 
 #### **Cohen's *d*** ####
 
-**Cohen's *d*** is a measurement of the strength of the difference between two means. To get this measure, we first must calculate the difference between the two means, and then divide that by the standard deviation of both groups together. Whenever the observed difference between the two groups means is large or when the standard deviation is small, the **Cohen's *d*** will be large. **Cohen's *d*s** of |0.2|, |0.5|, and |0.8| are considered small, medium, and large effect sizes, respectively.
+**Cohen's *d*** is a measurement of the strength of the difference between two means. To get this measure, we first must calculate the difference between the two means, and then divide that by the standard deviation of both groups together. Whenever the observed difference between the two groups means is large or when the standard deviation is small, the **Cohen's *d*** will be large. **Cohen's *d*s** of `|0.2|`, `|0.5|`, and `|0.8|` are considered small, medium, and large effect sizes, respectively.
 
 To calculate **Cohen's *d*** in **R**, we can use the `cohen.d ()` function from the **effsize** package.
 
