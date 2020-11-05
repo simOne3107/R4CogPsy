@@ -1954,7 +1954,7 @@ geom_vline(aes(xintercept = 0, linetype = 2) # linetype=2 makes the line a dashe
 
 ***************************************************************************************************************************************
 
-# Proper Stats #
+# Stats #
 
 Since we can't generally test the entire population, we deal with a subset of the population instead (i.e., samples), and use statistical models to estimate characteristics of the general population which we are interested in. Samples are, therefore, drawn so we can estimate population parameters.
 
@@ -2526,6 +2526,8 @@ d estimate: 3.315782 (large)
 > 
 ```
 
+***************************************************************************************************************************************
+
 #### **Power analysis** ####
 
 It is good practice to perform a **power analysis** prior to starting data collection in order to determine the sample size that will be needed to answer our research question(s) (Green & MacLeod, 2016). The `simr` package (Green & MacLeod, 2016) allows us to calculate power for any linear mixed model or generalized linear mixed models. 
@@ -2555,7 +2557,7 @@ Once we have determined the **effect size**, we can use the `powerSim()` functio
 powerSim(myModel)
 ```
 
-By default, the function will run 1000 simulations. However, that number can be easily changed by adding a `nsim` argument with the desired number of simulations. Similarly, the `powerSim()` function will, by default, test the first fixed effect in a model. To specify the fixed effect we are interested in, we must use the `test` argument.
+By default, the `powerSim()` function will run 1000 simulations. However, that number can be easily changed by adding a `nsim` argument with the desired number of simulations. Similarly, the `powerSim()` function will, by default, test the first fixed effect in a model. To specify the fixed effect we are interested in, we must use the `test` argument.
 
 ```r
 > powerSim(errorBehavModel3, test = fixed ("cLogBlock"), nsim = 5)
@@ -2572,7 +2574,7 @@ Time elapsed: 0 h 2 m 42 s
 ```
 
 
-The `simr` package also allows us to generate power curve plots so that we can best visualise the number of participants needed to detect an effect of a given size with **80% power**.
+The `simr` package also allows us to generate power curve plots so that we can best visualise the number of participants needed to detect an effect of any given size with **80% power**.
 
 ```r
 plotName <- powerCurve (myModel, along = "subject")
@@ -2589,11 +2591,24 @@ powerCurve_cLogBlock <- powerCurve (modelExtended, test = fixed ("cLogBlock"), a
 
 
 ***************************************************************************************************************************************
+#### Errors ####
+
+- **Type I error** - We observe this type of error when we obtain a significant effect even though the null hypothesis is true (i.e., false positive). We should expect to obtain a Type I error 5% of the time.
+- **Type II error** - We observe this type of error when we fail to obtain a significant effect even though the null hypothesis is false (i.e., false negative). We can refer to this a the probability of failing to detect a real effect.
+- **Type M error** - We observe this type of error when we incorrecly estimate the magnitude of an effect.
+- **Type S error** - We observe this type of error when we capture the wrong sign of an effect.
+
+
+![](images/pregnant.jpg)
+
+
+***************************************************************************************************************************************
+
 #### **Miscellaneous** ####
 
 
 - "Reaction time data will almost always be skewed, because there is a natural lower limit to how quickly somebody can respond. This limit is determined by how quickly it is physically possible to move one's hand to press a button. As a result of these factors, very short response durations are impossible." (Winter, 2019, p.90)
-
+- It is generally recommended to report measures of effect size when reporting results of significance tests.
 
 
 ***************************************************************************************************************************************
