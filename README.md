@@ -2636,11 +2636,17 @@ Below you will find a list of some of the resources I have been using to learn *
 Below you will find a list of some useful **R** and statistics related links:
 
 [Linear models and linear mixed effects models in R: Tutorial 1](http://www.bodowinter.com/uploads/1/2/9/3/129362560/bw_lme_tutorial1.pdf)
+
 [A very basic tutorial for performing linear mixed effects analyses: Tutorial 2](http://www.bodowinter.com/uploads/1/2/9/3/129362560/bw_lme_tutorial2.pdf)
+
 [Line graphs with error bars](http://egret.psychol.cam.ac.uk/statistics/R/graphs2.html)
+
 [Summary of Regression Models as HTML Table](https://cran.r-project.org/web/packages/sjPlot/vignettes/tab_model_estimates.html)
+
 [Elegant regression results tables and plots in R: the finalfit package](https://surgicalinformatics.org/elegant-regression-results-tables-and-plots-in-r-the-finalfit-package/)
+
 [paperR package](https://cran.r-project.org/web/packages/papeR/vignettes/papeR_introduction.html)
+
 [Summer School on Statistical Methods for Linguistics and Psychology](https://vasishth.github.io/smlp2020/)
 
-[editor on GitHub](https://github.com/simOne3107/R4CogPsy/edit/master/README.md) 
+
