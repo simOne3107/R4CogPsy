@@ -2649,4 +2649,4 @@ Below you will find a list of some useful **R** and statistics related links:
 
 [Summer School on Statistical Methods for Linguistics and Psychology](https://vasishth.github.io/smlp2020/)
 
-
+[Tools for summarizing and visualizing regression models](https://cran.r-project.org/web/packages/jtools/vignettes/summ.html?fbclid=IwAR3pKQOCOfTF5AWj2cFRRfEESnPS1xWcggmKV6c7l5W9L0WWwyQ_tm1-460)
