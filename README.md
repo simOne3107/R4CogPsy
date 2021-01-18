@@ -395,7 +395,7 @@ sd(variable)
 
 #### Creating our own functions in **R** ####
 
-If there is not a function readily available in **R** or in any of the available packages to do something we need, we can write our own function. The general format for functions is as follows:
+In case there is not a function readily available in **R** or in any of the available packages to do something we need, we can always write our own function. The general format for functions is as follows:
 
 ```r
 nameOfOurNewFunction <- function(inputObject1, inputObject2, etc)
@@ -432,6 +432,10 @@ To run the entire script in one step:
 To generate a `<-`:
 
 **Alt** + **-**
+
+To generate a '%>%':
+
+**Shift** + **Ctrl** + **m**
 
 ***************************************************************************************************************************************
 
@@ -2079,6 +2083,14 @@ The second assumption for the use of parametric tests is **homogeneity of varian
 ```r
 leveneTest(MyTibble$outcomeVariable, groupingVariable)
 ```
+
+
+
+Note that *p* values can sometimes be displayed in base-10 scientific notation. A *p* value of `8.876e-01` = `0.8876`, whereas a *p* value of `8.876e+01` = `8.876`.
+Positive values mean that that number will be multiplied (e.g., `e+02` = multiplied by 10<sup>2</sup>), whereas negative values mean that that number will have to be divided (e.g., `e-02` = divided by 100). 
+
+
+
 ***************************************************************************************************************************************
 
 #### Correlations ####
