@@ -157,7 +157,7 @@ sqrt (9)
 
 **Exponentiation**:
 ```r
-4^4
+4^4 # in this case, the number to the left of the ^ operator is raised to the power of the number located to its right
 ```
 ```r
 [1] 256
