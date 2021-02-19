@@ -264,6 +264,12 @@ To extract the elements from all rows, and a column named **"ColumnName"**:
 myDataFrame[,"ColumnName"]
 ```
 
+To extract only the elements which are `TRUE`:
+
+```r
+checkingIfTrue_DF <- myDataFrame > 0  #this will return TRUE or FALSE for each variable in the vector
+returningOnlyTrue <- myDataFrame[checkingIfTrue_DF]
+```
 
 ***************************************************************************************************************************************
 
@@ -290,6 +296,11 @@ head(MyDataFrame)
 To check the **last six rows** in a dataset:
 ```r
 tail(MyDataFrame)
+```
+
+To calculate the **sum of all elements** of a vector:
+```r
+sum(MyDataFrame)
 ```
 
 To check whether a value is **missing**:
@@ -335,7 +346,7 @@ ifelse(conditionalArgument, whatToDoIfTrue, WhatToDoIfFalse)
 To **recode** a categorical variable:
 
 ```r
-myTibble$newColumn[MyDataFrame$variable == "variableName"] <- "newVariableName"
+MyDataFrame$newColumn[MyDataFrame$variable == "variableName"] <- "newVariableName"
 ```
 
 To **compute the frequency** of a variable:
