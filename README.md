@@ -235,8 +235,25 @@ str_length (variable1)
 ```
 
 ***************************************************************************************************************************************
+#### Creating data frames #####
 
-#### Indexing #####
+In order to manually create a data frame (i.e., two-dimensional objects), we first need to create vectors (i.e., one dimensional arrays), which will be the columns in our data frame containing the different variables:
+
+```r
+Vector1 <- c(variable1, variable2, variable3)
+Vector2 <- c(variable1.1, variable2.1, variable3.1)
+Vector3 <- c(variable1.2, variable2.2, variable3.2)
+```
+
+We should then use the `data.frame()` in order to construct the data frame:
+
+```r
+MyDataFrame <- data.frame(Vector1, Vector2, Vector3)
+```
+
+***************************************************************************************************************************************
+
+#### Indexing and Subsetting #####
 
 Elements from a vector, matrix, or data frame can be easily extracted using numeric indexing.
 
@@ -264,12 +281,25 @@ To extract the elements from all rows, and a column named **"ColumnName"**:
 myDataFrame[,"ColumnName"]
 ```
 
+Alternatively, we can also use the `$` sign to select entire columns:
+
+```r
+MyDataFrame$ColumnName
+```
+
 To extract only the elements which are `TRUE`:
 
 ```r
 checkingIfTrue_DF <- myDataFrame > 0  #this will return TRUE or FALSE for each variable in the vector
 returningOnlyTrue <- myDataFrame[checkingIfTrue_DF]
 ```
+
+To subset a data frame based on a given condition:
+
+```r
+subset(myDataFrame, subset = conditionA
+```
+
 
 ***************************************************************************************************************************************
 
@@ -316,6 +346,7 @@ sum(is.na(variable))
 
 
 To generate a sequence of **repeated** numbers:
+
 ```r
 rep (numberToRepeat, howManyRepetitions)
 ```
@@ -350,17 +381,20 @@ MyDataFrame$newColumn[MyDataFrame$variable == "variableName"] <- "newVariableNam
 ```
 
 To **compute the frequency** of a variable:
+
 ```r
 table(MyDataFrame$variable)
 ```
 
 To **calculate the proportion** of different variables:
+
 ```r
 FrequencyofVariablesXandY <- table(MyDataFrame$variable)
 prop.table(FrequencyofVariablesXandY)
 ```
 
 To **check the difference between the minimum and maximum values in a range**:
+
 ```r
 diff(range(MyDataFrame))
 ```
@@ -379,9 +413,11 @@ sort(table(MyDataFrame$variable))
 
 
 To **check all the files in a given directory**:
+
 ```r
 list.files() # no argument is needed here
 ```
+
 ***************************************************************************************************************************************
 
 #### Useful built-in statistics functions in **R** ####
