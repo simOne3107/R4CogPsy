@@ -437,6 +437,20 @@ median(variable)
 ```r
 sd(variable)
 ```
+***************************************************************************************************************************************
+#### Function documentation ####
+
+To get acquainted with a function we are unfamiliar with and inspect its arguments, we can use the `help()` and the `args()` commands:
+
+```r
+help(mean)
+```
+
+```r
+args(mean)
+```
+
+Note that arguments which have a default value are optional. The default value is used whenever that argument is not explicitly specified.
 
 ***************************************************************************************************************************************
 
