@@ -466,6 +466,77 @@ XmultipliedbyX <- function(variable)
 X multiplied by x =  100
 ```
 
+**else if** statements:
+
+```r
+if (x < 0) {
+   print("x is a negative number")
+}  else if( x == 0) {
+   print ("x is zero")
+}  else {
+   print ("x is a positive number")
+}
+```
+**Note**: `else if` should always come on the same line as the closing bracket of the previous condition.
+
+
+**while loop**
+
+```r
+while (condition) {
+   expr
+}
+```
+
+```r
+i <- 1
+
+while ( i <= 10) {
+  print (3*i)
+  if (( i*3) %% 8 == 0) {
+    break
+  }
+  i <- i +1
+}
+```
+
+Addinng a `break` statement in the `while` loop makes **R**  stop the execution of the code and abandon the loop once it encounters the `break`.
+
+
+**for loop**
+
+```r
+for (var in seq) {
+  expr
+}
+```
+
+```r
+names <- c("Simone", "Daiani", "Shay", "Elizabeth", "Ben")
+
+for (name in names {
+  if(nchar(name) == 7){
+    break
+  }
+  print (city)
+}
+
+```
+
+The two examples below are equivalent:
+
+```r
+for (name in names) {
+  print (name)
+}
+```
+
+```r
+for (i in 1: length (names)) {
+  print (names[i])
+}
+```
+
 
 ***************************************************************************************************************************************
 
