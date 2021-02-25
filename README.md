@@ -466,7 +466,7 @@ nameOfOurNewFunction <- function(inputObject1, inputObject2, etc)
 }
 ```
 
-**Example:**
+**Examples:**
 ```r
 XmultipliedbyX <- function(variable)
 {
@@ -479,6 +479,22 @@ XmultipliedbyX <- function(variable)
 > XmultipliedbyX (10)
 X multiplied by x =  100
 ```
+
+
+```r
+quadruple <- function (x){
+  4 * x
+}
+```
+
+```r
+> quadruple(5)
+[1] 20
+> 
+```
+
+
+
 
 **else if** statements:
 
