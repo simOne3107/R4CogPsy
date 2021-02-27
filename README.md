@@ -548,7 +548,7 @@ for (name in names {
   if(nchar(name) == 7){
     break
   }
-  print (city)
+  print (name)
 }
 
 ```
@@ -565,6 +565,18 @@ for (name in names) {
 for (i in 1: length (names)) {
   print (names[i])
 }
+```
+
+A function which can efficiently substitute **for loops** is `lapply()`:
+
+```r
+myDataFrame <- lapply(vector,function)
+```
+
+The above will return a list with the results. We can use `unlist()` to convert the resulting list into a vector.
+
+```r
+myDataFrame <- unlist(lapply(vector,function))
 ```
 
 
