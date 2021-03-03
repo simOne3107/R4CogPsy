@@ -495,7 +495,6 @@ quadruple <- function (x){
 
 
 
-
 **else if** statements:
 
 ```r
@@ -577,6 +576,12 @@ The above will return a list with the results. We can use `unlist()` to convert 
 
 ```r
 myDataFrame <- unlist(lapply(vector,function))
+```
+
+Another alternative is `sapply()` which returns an unamed vector, rather than separate lists:
+
+```r
+myDataFrame <- sapply(vector,function)
 ```
 
 
