@@ -541,7 +541,7 @@ for (var in seq) {
 ```
 
 ```r
-names <- c("Simone", "Daiani", "Shay", "Elizabeth", "Ben")
+names <- c("Simone", "Daiani", "Shay", "Yoshi", "Ben", "Elizabeth")
 
 for (name in names {
   if(nchar(name) == 7){
@@ -760,6 +760,18 @@ To display text in **bold**, we must enclose the text by two stars `**`
 To display text in **italic**, we must enclose the text by one star `*`
 
 To include **bullet points**, we must begin the text with a hyphen `-`
+
+To include **the date** on which the markdown file has been modified, we can add the following to the YAML header:
+
+```r
+---
+title: "Your title"
+date: "`r format(Sys.time(), `%d %B %Y`)`"
+output: html_document
+---
+
+```
+
 
 ***************************************************************************************************************************************
 
