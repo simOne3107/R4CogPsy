@@ -344,6 +344,12 @@ sum(is.na(variable))
 ```
 - Note that, in **R**, `NA` stands for "Not Available".
 
+To check **how many duplicates** there are in our dataset:
+
+```r
+sum(duplicated(myDataFrame)
+```
+
 
 To generate a sequence of **repeated** numbers:
 
@@ -828,11 +834,6 @@ filter(MyTibble, column == value)
  3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
  4  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
  5  0.2  Premium   E     SI2      60.2    62   345  3.79  3.75  2.27
- 6  0.32 Premium   E     I1       60.9    58   345  4.38  4.42  2.68
- 7  0.23 Very Good E     VS2      63.8    55   352  3.85  3.92  2.48
- 8  0.23 Very Good E     VS1      60.7    59   402  3.97  4.01  2.42
- 9  0.23 Very Good E     VS1      59.5    58   402  4.01  4.06  2.4 
-10  0.23 Good      E     VS1      64.1    59   402  3.83  3.85  2.46
 # ... with 9,787 more rows
 ```
 
@@ -851,11 +852,6 @@ filter(MyTibble, column > value)
  3  0.23 Very Good E     VS1      60.7    59   402  3.97  4.01  2.42
  4  0.23 Very Good E     VS1      59.5    58   402  4.01  4.06  2.4 
  5  0.23 Very Good D     VS1      61.9    58   402  3.92  3.96  2.44
- 6  0.23 Good      F     VS1      58.2    59   402  4.06  4.08  2.37
- 7  0.23 Good      E     VS1      64.1    59   402  3.83  3.85  2.46
- 8  0.31 Good      H     SI1      64      54   402  4.29  4.31  2.75
- 9  0.26 Very Good D     VS2      60.8    59   403  4.13  4.16  2.52
-10  0.33 Ideal     I     SI2      61.8    55   403  4.49  4.51  2.78
 # ... with 53,679 more rows
 ```
 
@@ -892,12 +888,7 @@ filter (MyTibble, columnA >=value1, columnB != value2)
  3  2.04 Premium   H     SI1      58.1    60 18795  8.37  8.28  4.84
  4  2    Premium   I     VS1      60.8    59 18795  8.13  8.02  4.91
  5  2.29 Premium   I     SI1      61.8    59 18797  8.52  8.45  5.24
- 6  2    Very Good H     SI1      62.8    57 18803  7.95  8     5.01
- 7  2.07 Ideal     G     SI2      62.5    55 18804  8.2   8.13  5.11
- 8  1.51 Ideal     G     IF       61.7    55 18806  7.37  7.41  4.56
- 9  2    Very Good G     SI1      63.5    56 18818  7.9   7.97  5.04
-10  2.29 Premium   I     VS2      60.8    60 18823  8.5   8.47  5.16
-```
+ ```
 
 **Example 5:**
 
@@ -915,12 +906,7 @@ filter(MyTibble, column %in% c(value1, value2))
  3  2013     1     1      558            600        -2      753            745         8
  4  2013     1     1      559            600        -1      941            910        31
  5  2013     1     1      602            610        -8      812            820        -8
- 6  2013     1     1      606            610        -4      858            910       -12
- 7  2013     1     1      606            610        -4      837            845        -8
- 8  2013     1     1      615            615         0      833            842        -9
- 9  2013     1     1      623            610        13      920            915         5
-10  2013     1     1      628            630        -2     1137           1140        -3
-# ... with 80,829 more rows, and 10 more variables: carrier <chr>, flight <int>,
+ # ... with 80,829 more rows, and 10 more variables: carrier <chr>, flight <int>,
 #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
 #   minute <dbl>, time_hour <dttm>
 ```
@@ -941,11 +927,6 @@ filter(MyTibble, between(column, value1, value2))
  3 audi         a4                   2.8  1999     6 auto(l5)   f        16    26 p     compact
  4 audi         a4                   2.8  1999     6 manual(m5) f        18    26 p     compact
  5 audi         a4 quattro           1.8  1999     4 manual(m5) 4        18    26 p     compact
- 6 audi         a4 quattro           1.8  1999     4 auto(l5)   4        16    25 p     compact
- 7 audi         a4 quattro           2.8  1999     6 auto(l5)   4        15    25 p     compact
- 8 audi         a4 quattro           2.8  1999     6 manual(m5) 4        17    25 p     compact
- 9 audi         a6 quattro           2.8  1999     6 auto(l5)   4        15    24 p     midsize
-10 chevrolet    c1500 suburban 2wd   5.7  1999     8 auto(l4)   r        13    17 r     suv    
 # ... with 107 more rows
 ```
 
@@ -970,11 +951,6 @@ arrange(MyTibble, column)
  3   0.2 Premium   E     VS2      59      60   367  3.81  3.78  2.24
  4   0.2 Premium   E     VS2      61.1    59   367  3.81  3.78  2.32
  5   0.2 Premium   E     VS2      59.7    62   367  3.84  3.8   2.28
- 6   0.2 Ideal     E     VS2      59.7    55   367  3.86  3.84  2.3 
- 7   0.2 Premium   F     VS2      62.6    59   367  3.73  3.71  2.33
- 8   0.2 Ideal     D     VS2      61.5    57   367  3.81  3.77  2.33
- 9   0.2 Very Good E     VS2      63.4    59   367  3.74  3.71  2.36
-10   0.2 Ideal     E     VS2      62.2    57   367  3.76  3.73  2.33
 # ... with 53,930 more rows
 ```
 
@@ -994,12 +970,7 @@ arrange(MyTibble, column1, column2)
  3   0.2 Ideal   E     VS2      59.7    55   367  3.86  3.84  2.3 
  4   0.2 Premium E     VS2      59.8    62   367  3.79  3.77  2.26
  5   0.2 Premium E     SI2      60.2    62   345  3.79  3.75  2.27
- 6   0.2 Premium E     VS2      61.1    59   367  3.81  3.78  2.32
- 7   0.2 Ideal   D     VS2      61.5    57   367  3.81  3.77  2.33
- 8   0.2 Premium D     VS2      61.7    60   367  3.77  3.72  2.31
- 9   0.2 Ideal   E     VS2      62.2    57   367  3.76  3.73  2.33
-10   0.2 Premium D     VS2      62.3    60   367  3.73  3.68  2.31
-# ... with 53,930 more rows
+ # ... with 53,930 more rows
 > 
 ```
 
@@ -1043,11 +1014,6 @@ select(MyTibble, variable1, variable2, variable3)
  3 0.23  Good      E    
  4 0.290 Premium   I    
  5 0.31  Good      J    
- 6 0.24  Very Good J    
- 7 0.24  Very Good I    
- 8 0.26  Very Good H    
- 9 0.22  Fair      E    
-10 0.23  Very Good H    
 # ... with 53,930 more rows
 > 
 ```
@@ -1068,11 +1034,6 @@ select(MyTibble, variable1:variable10)
  3  2013     1     1      542            540         2      923            850        33
  4  2013     1     1      544            545        -1     1004           1022       -18
  5  2013     1     1      554            600        -6      812            837       -25
- 6  2013     1     1      554            558        -4      740            728        12
- 7  2013     1     1      555            600        -5      913            854        19
- 8  2013     1     1      557            600        -3      709            723       -14
- 9  2013     1     1      557            600        -3      838            846        -8
-10  2013     1     1      558            600        -2      753            745         8
 # ... with 336,766 more rows, and 1 more variable: carrier <chr>
 > 
 ```
@@ -1095,11 +1056,6 @@ select(MyTibble, -column) # this will select all columns but one
  3 0.23  Good      VS1      56.9    65   327  4.05  4.07  2.31
  4 0.290 Premium   VS2      62.4    58   334  4.2   4.23  2.63
  5 0.31  Good      SI2      63.3    58   335  4.34  4.35  2.75
- 6 0.24  Very Good VVS2     62.8    57   336  3.94  3.96  2.48
- 7 0.24  Very Good VVS1     62.3    57   336  3.95  3.98  2.47
- 8 0.26  Very Good SI1      61.9    55   337  4.07  4.11  2.53
- 9 0.22  Fair      VS2      65.1    61   337  3.87  3.78  2.49
-10 0.23  Very Good VS1      59.4    61   338  4     4.05  2.39
 # ... with 53,930 more rows
 > 
 ```
@@ -1120,12 +1076,7 @@ select (MyTibble, -c(variable1, variable2)) # this will select all columns but t
  3 0.23  Good      VS1      56.9    65  4.05  4.07  2.31
  4 0.290 Premium   VS2      62.4    58  4.2   4.23  2.63
  5 0.31  Good      SI2      63.3    58  4.34  4.35  2.75
- 6 0.24  Very Good VVS2     62.8    57  3.94  3.96  2.48
- 7 0.24  Very Good VVS1     62.3    57  3.95  3.98  2.47
- 8 0.26  Very Good SI1      61.9    55  4.07  4.11  2.53
- 9 0.22  Fair      VS2      65.1    61  3.87  3.78  2.49
-10 0.23  Very Good VS1      59.4    61  4     4.05  2.39
-# ... with 53,930 more rows
+ # ... with 53,930 more rows
 > 
 ```
 
@@ -1144,12 +1095,7 @@ select(MyTibble, starts_with("string")
  2 0.21  Premium   E     SI1    
  3 0.23  Good      E     VS1    
  4 0.290 Premium   I     VS2    
- 5 0.31  Good      J     SI2    
- 6 0.24  Very Good J     VVS2   
- 7 0.24  Very Good I     VVS1   
- 8 0.26  Very Good H     SI1    
- 9 0.22  Fair      E     VS2    
-10 0.23  Very Good H     VS1    
+ 5 0.31  Good      J     SI2       
 # ... with 53,930 more rows
 ```
 
@@ -1171,12 +1117,7 @@ rename(flights, departure_time = dep_time)
  3  2013     1     1            542            540         2      923            850        33
  4  2013     1     1            544            545        -1     1004           1022       -18
  5  2013     1     1            554            600        -6      812            837       -25
- 6  2013     1     1            554            558        -4      740            728        12
- 7  2013     1     1            555            600        -5      913            854        19
- 8  2013     1     1            557            600        -3      709            723       -14
- 9  2013     1     1            557            600        -3      838            846        -8
-10  2013     1     1            558            600        -2      753            745         8
-# ... with 336,766 more rows, and 10 more variables: carrier <chr>, flight <int>,
+ # ... with 336,766 more rows, and 10 more variables: carrier <chr>, flight <int>,
 #   tailnum <chr>, origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
 #   minute <dbl>, time_hour <dttm>
 > 
@@ -1201,12 +1142,7 @@ MyTibble2 <- MyTibble %>%
  3 Afghanistan AF    AFG    1997 new_sp_m2534     6 old_sp_m2534
  4 Afghanistan AF    AFG    1997 new_sp_m3544     3 old_sp_m3544
  5 Afghanistan AF    AFG    1997 new_sp_m4554     5 old_sp_m4554
- 6 Afghanistan AF    AFG    1997 new_sp_m5564     2 old_sp_m5564
- 7 Afghanistan AF    AFG    1997 new_sp_m65       0 old_sp_m65  
- 8 Afghanistan AF    AFG    1997 new_sp_f014      5 old_sp_f014 
- 9 Afghanistan AF    AFG    1997 new_sp_f1524    38 old_sp_f1524
-10 Afghanistan AF    AFG    1997 new_sp_f2534    36 old_sp_f2534
-# ... with 76,036 more rows
+ # ... with 76,036 more rows
 > 
 ```
 
@@ -1229,11 +1165,6 @@ select (MyTibble, columntobemoved1, columntobemoved2, everything())
  3  2.31  4.07  4.05 0.23  Good      E     VS1      56.9    65   327
  4  2.63  4.23  4.2  0.290 Premium   I     VS2      62.4    58   334
  5  2.75  4.35  4.34 0.31  Good      J     SI2      63.3    58   335
- 6  2.48  3.96  3.94 0.24  Very Good J     VVS2     62.8    57   336
- 7  2.47  3.98  3.95 0.24  Very Good I     VVS1     62.3    57   336
- 8  2.53  4.11  4.07 0.26  Very Good H     SI1      61.9    55   337
- 9  2.49  3.78  3.87 0.22  Fair      E     VS2      65.1    61   337
-10  2.39  4.05  4    0.23  Very Good H     VS1      59.4    61   338
 # ... with 53,930 more rows
 
 ```
@@ -1261,12 +1192,7 @@ mutate(MyTibble,
  3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31         1422.
  4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63         1152.
  5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75         1081.
- 6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48         1400 
- 7 0.24  Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47         1400 
- 8 0.26  Very Good H     SI1      61.9    55   337  4.07  4.11  2.53         1296.
- 9 0.22  Fair      E     VS2      65.1    61   337  3.87  3.78  2.49         1532.
-10 0.23  Very Good H     VS1      59.4    61   338  4     4.05  2.39         1470.
-# ... with 53,930 more rows
+ # ... with 53,930 more rows
 ```
 
 **Example 2:**
@@ -1289,11 +1215,6 @@ mutate (MyTibble,
  3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31         1422.        1777.
  4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63         1152.        1440.
  5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75         1081.        1351.
- 6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48         1400         1750 
- 7 0.24  Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47         1400         1750 
- 8 0.26  Very Good H     SI1      61.9    55   337  4.07  4.11  2.53         1296.        1620.
- 9 0.22  Fair      E     VS2      65.1    61   337  3.87  3.78  2.49         1532.        1915.
-10 0.23  Very Good H     VS1      59.4    61   338  4     4.05  2.39         1470.        1837.
 # ... with 53,930 more rows
 > 
 ```
@@ -1320,11 +1241,6 @@ transmute (MyTibble,
  3         1422.        1777.
  4         1152.        1440.
  5         1081.        1351.
- 6         1400         1750 
- 7         1400         1750 
- 8         1296.        1620.
- 9         1532.        1915.
-10         1470.        1837.
 # ... with 53,930 more rows
 ```
 
@@ -1355,27 +1271,7 @@ summarySE (final3, measurevar = "rt", groupvars = c("condition", "block"))
 3      LC_CC     3 8734 1786.994 694.0754 7.426771 14.55822
 4      LC_CC     4 8783 1816.880 862.4229 9.202352 18.03877
 5      LC_CC     5 8618 1729.510 751.3895 8.093975 15.86613
-6      LC_CC     6 8667 1725.803 594.5603 6.386479 12.51902
-7      LC_CI     1 9698 2334.420 949.0705 9.637345 18.89121
-8      LC_CI     2 9210 2162.496 853.5019 8.893540 17.43331
-9      LC_CI     3 9139 1966.055 807.7119 8.449036 16.56200
-10     LC_CI     4 8404 1643.396 477.1160 5.204523 10.20215
-11     LC_CI     5 8802 1851.314 662.3545 7.059920 13.83909
-12     LC_CI     6 8781 1930.166 719.1952 7.674936 15.04467
-13     LI_CC     1 9148 2159.022 884.0105 9.242604 18.11757
-14     LI_CC     2 9492 2221.094 950.9441 9.760591 19.13285
-15     LI_CC     3 9284 2111.449 906.9037 9.412254 18.45008
-16     LI_CC     4 8839 1911.158 661.5279 7.036337 13.79286
-17     LI_CC     5 8939 1882.178 710.2252 7.511931 14.72511
-18     LI_CC     6 9007 1933.874 683.3105 7.199926 14.11349
-19     LI_CI     1 9499 2053.949 727.8000 7.467464 14.63783
-20     LI_CI     2 9847 2166.824 861.7713 8.684405 17.02321
-21     LI_CI     3 9015 1997.539 841.9811 8.867874 17.38305
-22     LI_CI     4 8970 1881.340 736.5603 7.777000 15.24470
-23     LI_CI     5 8946 1852.977 761.2887 8.048870 15.77763
-24     LI_CI     6 8876 1864.945 724.9816 7.695172 15.08432
 > 
-
 ```
 
 ```r
@@ -1410,12 +1306,7 @@ NewDataFrame <- group_by (MyTibble, variable1, variable2, variable3)
  3 Fair  D     SI1         4273.
  4 Fair  D     VS2         4513.
  5 Fair  D     VS1         2921.
- 6 Fair  D     VVS2        3607 
- 7 Fair  D     VVS1        4473 
- 8 Fair  D     IF          1620.
- 9 Fair  E     I1          2095.
-10 Fair  E     SI2         4172.
-# ... with 266 more rows
+ # ... with 266 more rows
 ```
 
 Conveniently, 'tidyverse' allows us to perform several operations simultaneously with the so-called **pipe**, `%>%`. A shortcut for the **pipe** is **Ctrl** + **shift** + **m**:
@@ -1450,12 +1341,7 @@ NewDataFrame <- MyTibble %>%
  3 Fair  SI1       408        4208.         63.9
  4 Fair  VS2       261        4175.         63.6
  5 Fair  VS1       170        4165.         62.9
- 6 Fair  VVS2       69        3350.         62.8
- 7 Fair  VVS1       17        3871.         60.4
- 8 Fair  IF          9        1912.         60.1
- 9 Good  I1         96        3597.         62.1
-10 Good  SI2      1081        4580.         62.2
-# ... with 30 more rows
+ # ... with 30 more rows
 > 
 ```
 Please note that if we don't use the `na.rm` argument, we might end up with a lot of missing values in our dataset. Alternatively, we can also remove any **missing values** prior to performing any further operations on our dataset:
@@ -1477,12 +1363,7 @@ both %>% filter (!is.na (Modality))
  3 aching    Verb          0.25  Haptic     2.05 3.67  0.667 0.0476 0.0952
  4 acidic    Adjective     1     Gustatory  2.19 1.14  0.476 4.19   2.90  
  5 acrid     Adjective     0.615 Olfactory  1.12 0.625 0.375 3      3.5   
- 6 adhesive  Noun          1.33  Haptic     3.67 4.33  1.19  0.905  1.76  
- 7 alcoholic Noun          0.417 Gustatory  2.85 0.35  0.75  4.35   4.3   
- 8 alive     Adjective     1.38  Visual     4.57 3.81  4.10  1.57   2.38  
- 9 amber     Noun          0     Visual     4.48 0.524 0.143 0.571  0.857 
-10 angular   Adjective     1.71  Visual     4.29 4.10  0.25  0.0476 0.0476
-# ... with 397 more rows
+ # ... with 397 more rows
 >
 ```
 
@@ -1519,12 +1400,7 @@ NewTibble <- MyTibble %>%
  3 Fair  D     SI1            4273.           58
  4 Fair  D     VS2            4513.           25
  5 Fair  D     VS1            2921.            5
- 6 Fair  D     VVS2           3607             9
- 7 Fair  D     VVS1           4473             3
- 8 Fair  D     IF             1620.            3
- 9 Fair  E     I1             2095.            9
-10 Fair  E     SI2            4172.           78
-# ... with 266 more rows
+ # ... with 266 more rows
 > 
 ```
 
