@@ -2030,8 +2030,12 @@ The **mean**, for instance, can be seen as a model of a given sample/dataset. Th
 - distribution for continuous data, centered symmetrically around the mean;
 - the bulk of data lies close to the mean;
 - distributions with large standard deviations = flatter histograms
+- the area beneath the curve is 1
+- 68% of the area is within 1 standard deviation of the mean
+- 95% of the area falls within 2 standard deviation of the mean
+- 99.7% of the area falls within 3 standard deviations
 
-
+![](images/normalD.png)
 
 **Sampling distributions:**
 
