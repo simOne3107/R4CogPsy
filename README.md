@@ -2049,6 +2049,10 @@ Means vary from sample to sample. When two samples come from the same population
 We can use the **standard error** as an indicator of the variability between sample means (small standard errors = similar means; large standard errors = large differences in sample means). The **standard error** is the standard deviation of the sampling distribution.
 
 
+**Central Limit Theorem**
+
+- a sampling distribution will approach a normal distribution as the number of observations increases if the samples are random and independent from each other (i.e., with replacement). This is true regardless of the original distribution.
+
 -----
 
 #### Testing assumptions ####
