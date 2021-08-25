@@ -2452,6 +2452,20 @@ Number of Fisher Scoring iterations: 6
 ```
 In the output above, `null deviance` = deviance of the model that contains no predictors other than the constant, whereas `residual deviance` = the deviance for the model. In general, the value for the residual deviance should be less than the value associated with the null deviance.
 
+**Odds ratio** is the probability of something happening divided by the probability that it doesn't.
+
+```
+odds_ratio = p/(1-p)
+```
+
+**Accuracy** is the proportion of correct predictions (i.e., the number of true negatives plus the number of true positives, divided by the total number of observations).
+
+**Sensitivity** is the proportion of true positives (i.e., the number of true positives, divided by the sum of false negatives and true positives).
+
+**Specificity** is the proportion of true negatives (i.e., the number of true negatives, divided by the sum of true negatives and false positives).
+
+
+
 ***************************************************************************************************************************************
 
 #### Dummy/ treatment coding ####
@@ -2526,7 +2540,6 @@ log10(100)
 
 #### T-test ####
 
-
 We can use a **t-test** to test whether two group means are different.
 
 - **independent-samples t-test**: used when there are two experimental conditions and different participants assigned to each condition.
@@ -2572,7 +2585,6 @@ We use **ANOVA** to compare the ratio of systematic variance to unsystematic var
 
 pg 417
 
-
 ***************************************************************************************************************************************
 
 #### **Cohen's *d*** ####
@@ -2598,7 +2610,6 @@ d estimate: 3.315782 (large)
 
 > 
 ```
-
 ***************************************************************************************************************************************
 
 #### **Power analysis** ####
