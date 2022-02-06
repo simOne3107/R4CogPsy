@@ -1,6 +1,6 @@
 # Welcome to **R** 4 CogPsy
 
-Here you will find everything I have been learning about **R** and statistics. Even though these are my own personal notes, I hope they can also be useful to other research students who may be struggling with **R** and statistics.
+Here you will find some of the things I have been learning about **R** and statistics. Even though these are my own personal notes, I hope they can also be useful to other research students who are trying to learn **R** and statistics.
 
 ***************************************************************************************************************************************
 
@@ -350,7 +350,6 @@ To check **how many duplicates** there are in our dataset:
 sum(duplicated(myDataFrame)
 ```
 
-
 To generate a sequence of **repeated** numbers:
 
 ```r
@@ -612,13 +611,13 @@ To generate a '%>%':
 
 #### Importing data files ####
 
-You can use the `read_csv()` function from the **readr** package to open **comma delimited files** (.csv) in **R**:
+We can use the `read_csv()` function from the **readr** package to open **comma delimited files** (.csv) in **R**:
 
 ```r
 MyDataFrame <- read_csv("myfile.csv")
 ```
 
-To open a **tab delimited file** (.txt), you can use the `read_tsv()` function:
+To open a **tab delimited file** (.txt), we can use the `read_tsv()` function:
 
 ```r
 MyDataFrame <- read_tsv ("myfile.txt")
@@ -630,7 +629,7 @@ We can also use the `read.table()` function to open a **.txt** file:
 MyDataFrame <- read.table ("myfile.txt", sep = "\t", header = TRUE)
 ```
 
-To open **files with any delimiter**, you can use the `read_delim()` function:
+To open **files with any delimiter**, we can use the `read_delim()` function:
 
 ```r
 MyDataFrame <- read_delim ("myfile.txt")
@@ -638,9 +637,9 @@ MyDataFrame <- read_delim ("myfile.txt")
 
 If our data file does not contain any column names, by adding `col_names = FALSE` to our line of code, the first row in the data frame will not be treated as a heading.
 
-In case you have not created a project directory with all the files you will be using in your analysis, you need to make sure to specify the whole path where the file(s) you want to open is/are (e.g., "C:/Users/username/Documents/folder/myfile.csv").
+In case we have not created a project directory with all the files we will be using in your analysis, we need to make sure to specify the whole path where the file(s) we want to open is/are (e.g., "C:/Users/username/Documents/folder/myfile.csv").
 
-If you do not wish to use **readr** to import files, **R** also has built-in functions which allow us to open files with any delimiter:
+If we do not wish to use **readr** to import files, **R** also has built-in functions which allow us to open files with any delimiter:
 
 ```r
 MyDataFrame <- read.csv("myfile.csv", header = TRUE)
@@ -649,6 +648,23 @@ MyDataFrame <- read.csv("myfile.csv", header = TRUE)
 ```r
 MyDataFrame <- read.delim ("myfile.txt", header = TRUE)
 ```
+
+Another useful package which can be used to import data into **R** is `readxl`. With the line of code below, we can find out the names of all tabs in a given spreadsheet:
+
+```r
+excel_sheets("fileName.xlsx")
+```
+
+In order to import a specific sheet from an xlsx file that contains multiple tabs, we can use the `read_excel()` function with the `sheet` argument as follows:
+
+```r
+dataframeName <- read_excel("fileName.xlsx", sheet = "sheetName")
+```
+
+```r
+dataframeName <- read_excel("fileName.xlsx", sheet = sheetNumber)
+```
+
 
 ***************************************************************************************************************************************
 
