@@ -1,6 +1,6 @@
 # Welcome to **R** 4 CogPsy
 
-Here you will find some of the things I have been learning about **R** and statistics. Even though these are my own personal notes, I hope they can also be useful to other research students who are trying to learn **R** and statistics.
+Here you will find some of the things I have been learning about **R** and statistics. Even though these are my own personal notes, I hope they can also be useful to other research students who are also trying to learn **R** and statistics.
 
 ***************************************************************************************************************************************
 
@@ -297,7 +297,7 @@ returningOnlyTrue <- myDataFrame[checkingIfTrue_DF]
 To subset a data frame based on a given condition:
 
 ```r
-subset(myDataFrame, subset = conditionA
+subset(myDataFrame, subset = conditionA)
 ```
 
 
@@ -306,39 +306,47 @@ subset(myDataFrame, subset = conditionA
 #### Useful built-in **R** functions ####
 
 To make regular **sequences** of numbers:
+
 ```r
 seq (10,30)
 ```
+
 ```r
 [1] 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
 ```
 
 To **view** an entire dataset:
+
 ```r
 View(MyDataFrame) # note the capitalized V in this function
 ```
 
 To check the **first six rows** in a dataset:
+
 ```r
 head(MyDataFrame)
 ```
 
 To check the **last six rows** in a dataset:
+
 ```r
 tail(MyDataFrame)
 ```
 
 To calculate the **sum of all elements** of a vector:
+
 ```r
 sum(MyDataFrame)
 ```
 
 To check whether a value is **missing**:
+
 ```r
 is.na(variable)
 ```
 
 To check **how many** values are **missing**:
+
 ```r
 sum(is.na(variable))
 ```
@@ -375,6 +383,7 @@ runif(numberOfValuesYouWantToGenerate, min = value1, max = value2)
 ```
 
 To **create** or **change** an old variable:
+
 ```r
 ifelse(conditionalArgument, whatToDoIfTrue, WhatToDoIfFalse)
 ```
@@ -655,7 +664,7 @@ Another useful package which can be used to import data into **R** is `readxl`. 
 excel_sheets("fileName.xlsx")
 ```
 
-In order to import a specific sheet from an xlsx file that contains multiple tabs, we can use the `read_excel()` function with the `sheet` argument as follows:
+In order to import a specific sheet from an **.xlsx** file that contains multiple tabs, we can use the `read_excel()` function with the `sheet` argument as follows:
 
 ```r
 dataframeName <- read_excel("fileName.xlsx", sheet = "sheetName")
@@ -663,6 +672,25 @@ dataframeName <- read_excel("fileName.xlsx", sheet = "sheetName")
 
 ```r
 dataframeName <- read_excel("fileName.xlsx", sheet = sheetNumber)
+```
+
+If we need to add extra sheets to an existing file, the `XLConnect` package has a function for that:
+
+```r
+existingDataframe <- loadWorkbook("existingFile.xlsx")
+createSheet(existingDataframe,name ="newTab")
+```
+
+Similarly, sheet names can be renamed with the renameSheet() function from the `XLConnect` package:
+
+```r
+renameSheet(existingDataFrame,sheet = 4, newName = "newSheetName")
+```
+
+And the entire workbook, with the additional tabs, can be saved into a new **.xlsx** file.
+
+```r
+saveWorkbook(existingDataFrame,"DataFrameRenamed.xlsx")
 ```
 
 
