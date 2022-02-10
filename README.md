@@ -2,6 +2,7 @@
 
 Here you will find some of the things I have been learning about **R** and statistics. Even though these are my own personal notes, I hope they can also be useful to other research students who are also trying to learn **R** and statistics.
 
+
 ***************************************************************************************************************************************
 
 # Basics #
